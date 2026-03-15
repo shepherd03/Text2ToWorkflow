@@ -1,0 +1,14 @@
+﻿file_name,task_description,total_score,action_score,parameter_score,logic_score,schema_score,gt_action_count,gen_action_count
+wf_0001.yaml,"Create a workflow for 'Claude3 Code Translation' that involves: LLM-生成目标代码签名, Code - 抽取类/函数签名, Itera...",40.0,50.0,0.0,50,100,5,3
+wf_0002.yaml,"Create a workflow for '运营一条龙' that involves: ImgRender - 1, 小红书 / 微博封面图的基本设置, 小红书 / 微博封面图的文本, 小红书 / ...",27.272727272727273,18.18181818181818,0.0,50,100,18,4
+wf_0003.yaml,"可以自动化生成全套教程。
+开始时输入想要生成的教程名称。
+Key steps involved: LLM 生成课程大纲, 转换成JSON, 迭代生成课程, LLM生成课程, 转object, 整合",28.888888888888893,22.222222222222225,0.0,50,100,5,4
+wf_0004.yaml,"Create a workflow for 'document chat' that involves: Question Classifier, LLM 2, IF/ELSE, Template, ...",30.0,25.0,0.0,50,100,5,3
+wf_0005.yaml,"中译英，分2步进行翻译。1、传统的翻译引擎翻译；2、LLM模型指出错误、3、意译。即节省了token，也提高翻译准确性。
+Key steps involved: DuckDuckGo 翻译, LLM",60.0,100.0,0.0,50,100,2,2
+wf_0006.yaml,"Create a workflow for 'File_read' that involves: 获取文件路径, 读取csv",40.0,50.0,0.0,50,100,2,2
+wf_0007.yaml,"Create a workflow for 'Jina Reader Jinja' that involves: TavilySearch, Code, Iteration, JinaReader, ...",38.46153846153847,46.15384615384615,0.0,50,100,5,8
+wf_0008.yaml,Create a workflow for 'json-repair' that involves: 代码执行,60.0,100.0,0.0,50,100,1,1
+wf_0009.yaml,"Create a workflow for 'json_translate' that involves: 抽取, 迭代, 解析, 翻译, 合并, 组装",37.777777777777786,44.44444444444445,0.0,50,100,5,4
+wf_0010.yaml,"Create a workflow for '三语一致性检查' that involves: 英文, 日文, 英文检查, 中文, 中文检查, 日文检查, 基准语言设置, 处理中文, 处理英文, 处理日...",27.272727272727273,18.181818181818183,0.0,50,100,10,1

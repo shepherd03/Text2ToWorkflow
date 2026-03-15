@@ -1,0 +1,23 @@
+{
+  "allowed_types": [
+    "string",
+    "number",
+    "boolean",
+    "list",
+    "object"
+  ],
+  "patterns": {
+    "email": "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+    "url": "https?://[A-Za-z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=%]+",
+    "number": "\\d+(?:\\.\\d+)?",
+    "boolean": "(开启|关闭|是|否|true|false)",
+    "json_like": "\\{[^\\}]+\\}|\\[[^\\]]+\\]"
+  },
+  "bool_true_values": [
+    "开启",
+    "是",
+    "true"
+  ],
+  "fallback_raw_text_name": "raw_text",
+  "structured_input_name": "structured_input"
+}
