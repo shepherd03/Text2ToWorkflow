@@ -44,8 +44,8 @@ def main():
     with open(dataset_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
-    # Limit to 20 for demo purposes, or process all if desired (comment out slice)
-    lines = lines[:20] 
+    # Limit to 5 for fast testing
+    lines = lines[:5] 
 
     for line in tqdm(lines, desc="Evaluating dataset"):
         if not line.strip():

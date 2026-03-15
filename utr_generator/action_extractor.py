@@ -26,25 +26,41 @@ class ActionExtractor:
     def _extract_by_llm(self, text: str) -> list[Action]:
         result = self.llm_client.chat_json(
             system_prompt=(
-                "你是工作流动作抽取引擎。"
-                "只输出一个JSON对象，不要输出解释、不要markdown、不要代码块。"
+                "你是高级工作流架构师。你的任务是将用户的简短自然语言指令，扩展、拆解为生产级（Production-Grade）的详细工作流步骤。\n"
+                "用户指令通常是高层次的（例如'把代码翻译成另一种语言'），但真实的工作流需要处理多步逻辑，例如：接收输入 -> 验证/预处理 -> 执行核心操作（如LLM生成） -> 后处理（如代码提取/清理） -> 输出结果。\n"
+                "请你运用 Chain-of-Thought 思考，想象在一个真实的类似 Dify 的工作流引擎中，需要哪些具体节点来稳健地完成这个任务。补充缺失的必要环节，使工作流变得完整、健壮。只输出一个JSON对象，不要输出解释、不要markdown、不要代码块。"
             ),
             user_prompt=(
-                "任务：从下面中文描述提取按执行顺序排列的动作序列，并提取每个动作的参数（args）。\n"
+                "任务：从下面中文描述提取按执行顺序排列的动作序列，并提取每个动作的参数（args）。你需要把简单任务扩展为完整的生产级工作流。\n\n"
                 "输出格式必须是：\n"
-                '{"actions":[{"action_name":"string","description":"string","order":1,"args":{"key":"value"}}]}\n'
-                "约束：\n"
+                '{"actions":[{"action_name":"string","description":"string","order":1,"args":{"key":"value"}}]}\n\n'
+                "【Few-Shot 示例 1 - 简单任务复杂化】\n"
+                "用户指令: \"我想把一种编程语言的代码翻译成另一种语言。\"\n"
+                "你的输出:\n"
+                '{"actions": [\n'
+                '  {"action_name": "variable_assignment", "description": "定义源语言、目标语言和输入代码的变量", "order": 1, "args": {"variables": ["source_lang", "target_lang", "code"]}},\n'
+                '  {"action_name": "llm_generation", "description": "调用大模型进行代码翻译", "order": 2, "args": {"prompt_template": "将以下{{source_lang}}代码翻译为{{target_lang}}:\\n{{code}}", "model_config": "gpt-4"}},\n'
+                '  {"action_name": "code_execution", "description": "使用Python脚本从大模型回复中提取纯代码块", "order": 3, "args": {"script": "def main(llm_output): return extract_code(llm_output)"}}\n'
+                ']}\n\n'
+                "【Few-Shot 示例 2 - 包含工具调用和后处理】\n"
+                "用户指令: \"我想做一个能自动读取CSV文件内容的工具。\"\n"
+                "你的输出:\n"
+                '{"actions": [\n'
+                '  {"action_name": "variable_assignment", "description": "接收用户输入的文件路径或文件对象", "order": 1, "args": {"variables": ["file_path"]}},\n'
+                '  {"action_name": "code_execution", "description": "执行Python脚本读取CSV文件并解析为JSON数组", "order": 2, "args": {"script": "import pandas as pd\\ndef main(file_path): return pd.read_csv(file_path).to_dict(orient=\'records\')"}},\n'
+                '  {"action_name": "condition_branch", "description": "检查CSV数据是否为空", "order": 3, "args": {"condition": "len(csv_data) > 0"}}\n'
+                ']}\n\n'
+                "【约束】\n"
                 "1) action_name必须是英文snake_case，只能包含小写字母、数字、下划线。\n"
-                "2) 推荐使用标准动作名称：web_search, image_generation, llm_generation, code_execution, http_request, translation, email_service, web_scraper。\n"
-                "3) 禁止出现中文action_name，禁止空字符串。\n"
-                "4) order从1开始连续递增，不要跳号。\n"
-                "5) description使用中文简短描述该动作做什么，不超过20字。\n"
-                "6) 仅保留可执行动作，不要把条件语句本身当动作。\n"
-                "7) 动作去重，语义重复只保留一次。\n"
-                "8) args 字段必须是对象，尽可能从描述中提取参数键值对，若无参数则为空对象。\n"
-                "9) 若无法判断，使用task_step_n作为action_name。\n"
-                f"任务描述：{text}"
+                "2) 推荐使用标准动作名称：llm_generation, code_execution, http_request, knowledge_retrieval, web_search, variable_assignment, condition_branch, image_generation, list_operation。\n"
+                "3) 极力避免生造工具（如 web_scraper 读取本地文件是错误的，应该用 code_execution 写代码读取）。\n"
+                "4) order从1开始连续递增。\n"
+                "5) description使用中文详细描述该动作做什么。\n"
+                "6) args 字段必须是对象，尽可能详细地推断参数（如 prompt_template, script, url 等），若无参数则为空对象。\n"
+                "7) 思考：这个任务在真实世界中可能会遇到什么异常？是否需要前置变量定义？是否需要后置数据格式化？把这些思考转化为额外的 action。\n\n"
+                f"当前任务描述：{text}"
             ),
+            temperature=0.3
         )
         items = result.get("actions", [])
         actions: list[Action] = []
