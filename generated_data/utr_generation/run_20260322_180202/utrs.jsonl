@@ -1,0 +1,83 @@
+{
+  "id": "wf_0075",
+  "instruction": "我想把英文的提示词翻译成中文，并且让它更通顺一些。",
+  "utr": {
+    "task_id": "94dd9cc1-a95e-4bd9-816c-cde87759890a",
+    "task_desc": "我想把英文的提示词翻译成中文，并且让它更通顺一些。",
+    "metadata": {
+      "task_goal": "将英文提示词翻译成中文并使其更通顺",
+      "core_actions": [
+        {
+          "action_id": "act_1",
+          "action_name": "translate_english_to_chinese",
+          "description": "将英文提示词翻译成中文",
+          "inputs": [
+            "english_prompt"
+          ],
+          "outputs": [
+            "translated_chinese_prompt"
+          ]
+        },
+        {
+          "action_id": "act_2",
+          "action_name": "improve_chinese_fluency",
+          "description": "使中文翻译更通顺",
+          "inputs": [
+            "translated_chinese_prompt"
+          ],
+          "outputs": [
+            "improved_chinese_prompt"
+          ]
+        }
+      ],
+      "core_resources": [
+        {
+          "resource_id": "res_1",
+          "name": "英文提示词",
+          "type": "data",
+          "description": "需要翻译的英文文本"
+        },
+        {
+          "resource_id": "res_2",
+          "name": "翻译工具或服务",
+          "type": "service",
+          "description": "用于执行翻译的工具或服务"
+        },
+        {
+          "resource_id": "res_3",
+          "name": "语言处理工具或服务",
+          "type": "service",
+          "description": "用于改进中文流畅度的工具或服务"
+        }
+      ],
+      "core_variables": [
+        {
+          "var_id": "var_1",
+          "name": "english_prompt",
+          "type": "string",
+          "source": "用户提供的英文提示词"
+        },
+        {
+          "var_id": "var_2",
+          "name": "translated_chinese_prompt",
+          "type": "string",
+          "source": "从翻译动作输出的中文翻译"
+        },
+        {
+          "var_id": "var_3",
+          "name": "improved_chinese_prompt",
+          "type": "string",
+          "source": "从改进动作输出的通顺中文"
+        }
+      ],
+      "implicit_dependencies": [
+        {
+          "from": "act_1",
+          "to": "act_2",
+          "reason": "改进流畅度需要先有翻译后的中文文本作为输入"
+        }
+      ]
+    },
+    "create_time": "2026-03-22T18:02:19.280061"
+  }
+}

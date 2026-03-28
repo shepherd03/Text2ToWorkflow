@@ -1,0 +1,111 @@
+{
+  "id": "wf_0103",
+  "instruction": "我想做一个能根据用户发来的图片或链接，自动判断他想问什么并给出合适回复的助手。",
+  "utr": {
+    "task_id": "2cee94c9-dc80-4a80-a856-ce0ca1ef2818",
+    "task_desc": "我想做一个能根据用户发来的图片或链接，自动判断他想问什么并给出合适回复的助手。",
+    "metadata": {
+      "task_goal": "根据用户提供的图片或链接，自动判断用户意图并生成合适的回复",
+      "core_actions": [
+        {
+          "action_id": "act_1",
+          "action_name": "receive_input",
+          "description": "接收用户输入的图片或链接",
+          "inputs": [
+            "user_input"
+          ],
+          "outputs": [
+            "input_data"
+          ]
+        },
+        {
+          "action_id": "act_2",
+          "action_name": "analyze_content",
+          "description": "分析输入内容以判断用户意图",
+          "inputs": [
+            "input_data"
+          ],
+          "outputs": [
+            "intent"
+          ]
+        },
+        {
+          "action_id": "act_3",
+          "action_name": "generate_response",
+          "description": "根据意图生成合适的回复",
+          "inputs": [
+            "intent"
+          ],
+          "outputs": [
+            "response"
+          ]
+        }
+      ],
+      "core_resources": [
+        {
+          "resource_id": "res_1",
+          "name": "image_processing_tool",
+          "type": "tool",
+          "description": "用于处理和分析图片的工具"
+        },
+        {
+          "resource_id": "res_2",
+          "name": "link_processing_tool",
+          "type": "tool",
+          "description": "用于处理和分析链接的工具"
+        },
+        {
+          "resource_id": "res_3",
+          "name": "intent_classification_model",
+          "type": "service",
+          "description": "用于分类用户意图的模型或服务"
+        },
+        {
+          "resource_id": "res_4",
+          "name": "response_generation_model",
+          "type": "service",
+          "description": "用于生成回复的模型或服务"
+        }
+      ],
+      "core_variables": [
+        {
+          "var_id": "var_1",
+          "name": "user_input",
+          "type": "string",
+          "source": "用户提供的图片或链接"
+        },
+        {
+          "var_id": "var_2",
+          "name": "input_data",
+          "type": "object",
+          "source": "从用户输入中提取的数据"
+        },
+        {
+          "var_id": "var_3",
+          "name": "intent",
+          "type": "string",
+          "source": "分析输入内容后得到的用户意图"
+        },
+        {
+          "var_id": "var_4",
+          "name": "response",
+          "type": "string",
+          "source": "根据意图生成的回复"
+        }
+      ],
+      "implicit_dependencies": [
+        {
+          "from": "act_1",
+          "to": "act_2",
+          "reason": "需要先接收用户输入才能进行分析"
+        },
+        {
+          "from": "act_2",
+          "to": "act_3",
+          "reason": "需要先判断用户意图才能生成回复"
+        }
+      ]
+    },
+    "create_time": "2026-03-22T18:00:09.214601"
+  }
+}

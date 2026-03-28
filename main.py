@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from utr_generator.pipeline import UTRGenerationPipeline
+from src.utr_generation.pipeline import UTRGenerationPipeline
 
 
 def parse_args() -> argparse.Namespace:

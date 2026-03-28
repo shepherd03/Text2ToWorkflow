@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from utr_generator.pipeline import PipelineOutput, UTRGenerationPipeline
+from src.utr_generation.pipeline import UTRGenerationPipeline
+from src.core.schema import PipelineOutput
 
 app = FastAPI(title="UTR Generator", version="1.0.0")
 pipeline = UTRGenerationPipeline()
