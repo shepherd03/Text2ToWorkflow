@@ -3,42 +3,13 @@ from typing import List, Union, Optional, Any
 from pydantic import BaseModel, Field
 import json
 
-from src.core.schema import Action, UTR
+from src.core.schema import Action, UTR, Block, ActionSlot, SequentialBlock, ParallelBlock, ConditionalBlock, LoopBlock, BlockType
 from src.core.config import load_settings
 from src.core.llm_client import DeepSeekClient
 
-class Block(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    type: str
-
-class ActionSlot(Block):
-    type: str = "ActionSlot"
-    action_id: str
-    action_name: str = ""
-
-class SequentialBlock(Block):
-    type: str = "Sequential"
-    children: List['BlockType'] = Field(default_factory=list)
-
-class ParallelBlock(Block):
-    type: str = "Parallel"
-    branches: List[SequentialBlock] = Field(default_factory=list)
-
-class ConditionalBlock(Block):
-    type: str = "Conditional"
-    condition_description: str = ""
-    branches: dict[str, SequentialBlock] = Field(default_factory=dict)
-
-class LoopBlock(Block):
-    type: str = "Loop"
-    loop_condition: str = ""
-    body: SequentialBlock = Field(default_factory=SequentialBlock)
-
-BlockType = Union[ActionSlot, SequentialBlock, ParallelBlock, ConditionalBlock, LoopBlock]
-
 class SkeletonPlanner:
     """
-    步骤2：工作流骨架规划 (Workflow Skeleton Planning)
+    工作流骨架规划 (Workflow Skeleton Planning)
     采用“算法主导拓扑，大模型辅助判断”的混合校验架构 (LLM-Assisted Validation):
     1. 拓扑维护（算法端）：基于图遍历与拓扑排序算法，维护骨架树，控制最大嵌套深度。
     2. 条件判定（模型端）：遍历 UTR 时，根据动作的输入输出依赖，向大模型发起局部查询（True/False）。
@@ -108,11 +79,12 @@ class SkeletonPlanner:
                     if in_degree[neighbor] == 0:
                         queue.append(neighbor)
                         
-        # 兜底：处理循环依赖导致的未入队节点，防止死循环
+        # 兜底：处理循环依赖导致的未入队节点，抛出明确异常以保证健壮性
         processed = {a.action_id for layer in layers for a in layer}
         unprocessed = [a for a in actions if a.action_id not in processed]
         if unprocessed:
-            layers.append(unprocessed)
+            unprocessed_ids = [a.action_id for a in unprocessed]
+            raise ValueError(f"检测到动作之间存在循环依赖，无法构建无环骨架树。涉及的动作: {', '.join(unprocessed_ids)}")
             
         return layers
 

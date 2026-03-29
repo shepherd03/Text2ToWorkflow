@@ -1,5 +1,6 @@
+import uuid
 from enum import Enum
-from typing import Any
+from typing import Any, List, Union, Optional
 
 from pydantic import BaseModel, Field
 
@@ -71,3 +72,34 @@ class PipelineOutput(BaseModel):
     utr: UTR
     report: UTRValidationReport
     meta: dict[str, str | bool]
+
+
+class Block(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    type: str
+
+class ActionSlot(Block):
+    type: str = "ActionSlot"
+    action_id: str
+    action_name: str = ""
+
+class SequentialBlock(Block):
+    type: str = "Sequential"
+    children: List['BlockType'] = Field(default_factory=list)
+
+class ParallelBlock(Block):
+    type: str = "Parallel"
+    branches: List[SequentialBlock] = Field(default_factory=list)
+
+class ConditionalBlock(Block):
+    type: str = "Conditional"
+    condition_description: str = ""
+    branches: dict[str, SequentialBlock] = Field(default_factory=dict)
+
+class LoopBlock(Block):
+    type: str = "Loop"
+    loop_condition: str = ""
+    body: SequentialBlock = Field(default_factory=SequentialBlock)
+
+BlockType = Union[ActionSlot, SequentialBlock, ParallelBlock, ConditionalBlock, LoopBlock]
+
