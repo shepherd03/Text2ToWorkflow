@@ -1,0 +1,44 @@
+{
+  "train_count": 348,
+  "valid_count": 118,
+  "test_count": 121,
+  "hard_count": 0,
+  "train_distribution": {
+    "code": 64,
+    "http-request": 14,
+    "if-else": 49,
+    "iteration": 9,
+    "llm": 118,
+    "parameter-extractor": 7,
+    "template-transform": 25,
+    "tool": 54,
+    "variable-aggregator": 8
+  },
+  "valid_distribution": {
+    "code": 22,
+    "http-request": 5,
+    "if-else": 16,
+    "iteration": 3,
+    "llm": 40,
+    "parameter-extractor": 3,
+    "template-transform": 8,
+    "tool": 18,
+    "variable-aggregator": 3
+  },
+  "test_distribution": {
+    "code": 22,
+    "http-request": 5,
+    "if-else": 17,
+    "iteration": 3,
+    "llm": 40,
+    "parameter-extractor": 3,
+    "template-transform": 9,
+    "tool": 19,
+    "variable-aggregator": 3
+  },
+  "hard_distribution": {},
+  "dataset_path": "generated_data\\dify_external_dataset\\dataset.jsonl",
+  "output_dir": "generated_data\\dsl_generation\\dify_external_node_mapping_eval_from_dataset",
+  "sample_mode": "full",
+  "hard_enabled": false
+}

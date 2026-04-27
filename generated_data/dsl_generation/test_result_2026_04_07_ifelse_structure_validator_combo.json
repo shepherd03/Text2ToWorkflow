@@ -1,0 +1,25 @@
+{
+  "round": "2026-04-07-ifelse-structure-validator-combo",
+  "task_scope": [
+    "improve_if_else_condition_structuring",
+    "strengthen_validator_field_combinations",
+    "export_stage3_demo_output"
+  ],
+  "test_command": "python -m pytest e:\\Desktop\\论文\\工作流\\utr\\tests\\test_dsl_compiler.py -q",
+  "result_summary": "5 passed in 1.83s",
+  "passed": true,
+  "test_file": "tests/test_dsl_compiler.py",
+  "artifacts": [
+    "src/dsl_generation/compiler.py",
+    "src/dsl_generation/workflow_validator.py",
+    "generated_data/dsl_generation/stage3_demo_output_2026_04_07.json"
+  ],
+  "output_evidence": {
+    "stage3_demo": "generated_data/dsl_generation/stage3_demo_output_2026_04_07.json"
+  },
+  "improvement_basis": [
+    "if-else conditions now carry selector/operator/value/varType together",
+    "validator now checks llm model internals, code outputs schema, and if-else condition field combinations",
+    "next iteration should read the exported demo output and align more closely with Dify node semantics"
+  ]
+}

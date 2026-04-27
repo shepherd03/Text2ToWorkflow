@@ -9,19 +9,21 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.utr_generation.pipeline import UTRGenerationPipeline
 from src.core.config import load_settings
-from src.core.utils import format_json_for_readability
 
 def generate_utrs():
     print("Starting UTR Generation Batch Process...")
     settings = load_settings()
     pipeline = UTRGenerationPipeline(settings)
+    sample_size = int(os.getenv("UTR_SAMPLE_SIZE", "50"))
+    latest_file = os.getenv("UTR_OUTPUT_FILE", os.path.join("generated_data", "utr_generation", "utrs.jsonl"))
+    latest_error_file = os.getenv("UTR_ERROR_FILE", os.path.join("generated_data", "utr_generation", "utr_errors.jsonl"))
     
     # Use timestamp for unique output directory
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = os.path.join("generated_data", "utr_generation", f"run_{timestamp}")
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "utrs.jsonl")
-    latest_file = os.path.join("generated_data", "utr_generation", "utrs.jsonl")
+    error_file = os.path.join(output_dir, "errors.jsonl")
     
     print(f"Output will be saved to: {output_file} and {latest_file}")
     
@@ -38,18 +40,28 @@ def generate_utrs():
     # Filter dataset for these specific IDs, and add a few random ones if needed
     sampled_data = [d for d in all_data if d["id"] in target_ids]
     
-    # Fill up to 50 with random items if we have less than 50
-    remaining_count = 50 - len(sampled_data)
+    # Fill up to the requested sample size with random items if needed
+    remaining_count = sample_size - len(sampled_data)
     if remaining_count > 0:
         other_data = [d for d in all_data if d["id"] not in target_ids]
         sampled_data.extend(random.sample(other_data, min(remaining_count, len(other_data))))
+    elif remaining_count < 0:
+        sampled_data = sampled_data[:sample_size]
         
-    print(f"Selected {len(sampled_data)} records for processing (including {len(target_ids)} target cases).")
+    print(f"Selected {len(sampled_data)} records for processing (sample_size={sample_size}, target_cases={min(len(target_ids), len(sampled_data))}).")
     
     # Clear the latest file if it exists
     if os.path.exists(latest_file):
         os.remove(latest_file)
+    if os.path.exists(latest_error_file):
+        os.remove(latest_error_file)
+
+    os.makedirs(os.path.dirname(latest_file), exist_ok=True)
+    os.makedirs(os.path.dirname(latest_error_file), exist_ok=True)
     
+    success_count = 0
+    error_count = 0
+
     for data in sampled_data:
         record_id = data["id"]
         instruction = data["instruction"]
@@ -73,9 +85,25 @@ def generate_utrs():
             with open(latest_file, "a", encoding="utf-8") as latest_f:
                 latest_f.write(json_str + "\n")
                 
+            success_count += 1
             print(f"[OK] Saved {record_id}")
         except Exception as e:
-            print(f"Error extracting core elements: {e}")
+            error_count += 1
+            error_record = {
+                "id": record_id,
+                "instruction": instruction,
+                "error": str(e),
+            }
+            error_json = json.dumps(error_record, ensure_ascii=False, separators=(',', ': '))
+            with open(error_file, "a", encoding="utf-8") as err_f:
+                err_f.write(error_json + "\n")
+            with open(latest_error_file, "a", encoding="utf-8") as latest_err_f:
+                latest_err_f.write(error_json + "\n")
+            print(f"[ERROR] Failed {record_id}: {e}")
+
+    print(f"Completed. Success: {success_count}, Errors: {error_count}")
+    print(f"Success file: {output_file}")
+    print(f"Error file: {error_file}")
 
 if __name__ == "__main__":
     generate_utrs()

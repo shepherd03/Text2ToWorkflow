@@ -1,0 +1,710 @@
+{
+  "utr": {
+    "task_id": "task_stage_demo_20260407",
+    "task_desc": "根据风险等级决定摘要策略并输出结果",
+    "metadata": {
+      "task_goal": "按风险等级选择处理分支",
+      "core_actions": [
+        {
+          "action_id": "act_high",
+          "action_name": "generate_risk_summary",
+          "description": "生成高风险摘要",
+          "inputs": [
+            "article_text"
+          ],
+          "outputs": [
+            "risk_summary"
+          ]
+        },
+        {
+          "action_id": "act_low",
+          "action_name": "transform_safe_result",
+          "description": "转换低风险结构化结果",
+          "inputs": [
+            "article_text"
+          ],
+          "outputs": [
+            "safe_result"
+          ]
+        }
+      ],
+      "core_resources": [],
+      "core_variables": [
+        {
+          "var_id": "var_1",
+          "name": "article_text",
+          "type": "string",
+          "source": "user"
+        },
+        {
+          "var_id": "var_2",
+          "name": "risk_level",
+          "type": "number",
+          "source": "system"
+        }
+      ],
+      "implicit_dependencies": []
+    },
+    "create_time": "2026-04-07T12:00:00Z"
+  },
+  "skeleton": {
+    "id": "73a8ca5a-bc06-4b59-a165-86e9a9c85829",
+    "type": "Sequential",
+    "children": [
+      {
+        "id": "93120779-00ad-4f74-af03-926bed91524a",
+        "type": "ActionSlot",
+        "action_id": "start_node",
+        "action_name": "start"
+      },
+      {
+        "id": "9c492a19-aff3-4183-bc15-0487b38d8713",
+        "type": "Conditional",
+        "condition_description": "如果风险分数大于等于 80 走高风险分支，否则走低风险分支",
+        "branches": {
+          "high": {
+            "id": "43f1287d-484b-4945-9dea-8ff5131f493b",
+            "type": "Sequential",
+            "children": [
+              {
+                "id": "e1f0efc6-ab3b-4592-80a5-432a57fcee83",
+                "type": "ActionSlot",
+                "action_id": "act_high",
+                "action_name": "generate_risk_summary"
+              }
+            ]
+          },
+          "else": {
+            "id": "9e6f861d-4a1b-408a-b7bd-85b66e21c113",
+            "type": "Sequential",
+            "children": [
+              {
+                "id": "0fc336ed-7630-450d-9572-a6cbdf54f6d0",
+                "type": "ActionSlot",
+                "action_id": "act_low",
+                "action_name": "transform_safe_result"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "54f3a756-c746-4702-b7a3-9af8c5f68a61",
+        "type": "ActionSlot",
+        "action_id": "end_node",
+        "action_name": "end"
+      }
+    ]
+  },
+  "compile_report": {
+    "success": true,
+    "errors": [],
+    "warnings": [],
+    "issues": []
+  },
+  "compiled_graph": {
+    "nodes": [
+      {
+        "id": "start_93120779-00ad-4f74-af03-926bed91524a",
+        "node_type": "start",
+        "title": "Start",
+        "desc": "Workflow start node",
+        "data": {
+          "type": "start",
+          "title": "Start",
+          "desc": "Workflow start node",
+          "selected": false,
+          "variables": [
+            {
+              "label": "article_text",
+              "variable": "article_text",
+              "type": "paragraph",
+              "required": false,
+              "max_length": 48000
+            },
+            {
+              "label": "risk_level",
+              "variable": "risk_level",
+              "type": "text-input",
+              "required": false,
+              "max_length": 48000
+            }
+          ]
+        },
+        "position": {
+          "x": 0.0,
+          "y": 120.0
+        }
+      },
+      {
+        "id": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "node_type": "if-else",
+        "title": "Condition",
+        "desc": "如果风险分数大于等于 80 走高风险分支，否则走低风险分支",
+        "data": {
+          "type": "if-else",
+          "title": "Condition",
+          "desc": "如果风险分数大于等于 80 走高风险分支，否则走低风险分支",
+          "selected": false,
+          "cases": [
+            {
+              "case_id": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713_case_0",
+              "logical_operator": "and",
+              "conditions": [
+                {
+                  "variable_selector": [
+                    "start",
+                    "risk_level"
+                  ],
+                  "comparison_operator": ">=",
+                  "value": "80",
+                  "varType": "number"
+                }
+              ]
+            }
+          ]
+        },
+        "position": {
+          "x": 320.0,
+          "y": 120.0
+        }
+      },
+      {
+        "id": "node_act_high",
+        "node_type": "code",
+        "title": "generate_risk_summary",
+        "desc": "生成高风险摘要",
+        "data": {
+          "type": "code",
+          "title": "generate_risk_summary",
+          "desc": "生成高风险摘要",
+          "selected": false,
+          "variables": [
+            {
+              "variable": "article_text",
+              "value_selector": [
+                "start",
+                "article_text"
+              ]
+            }
+          ],
+          "code_language": "python3",
+          "code": "def main(**kwargs):\n    return {'risk_summary': 'TODO'}",
+          "outputs": {
+            "risk_summary": {
+              "type": "string",
+              "children": null
+            }
+          }
+        },
+        "position": {
+          "x": 640.0,
+          "y": 120.0
+        }
+      },
+      {
+        "id": "node_act_low",
+        "node_type": "code",
+        "title": "transform_safe_result",
+        "desc": "转换低风险结构化结果",
+        "data": {
+          "type": "code",
+          "title": "transform_safe_result",
+          "desc": "转换低风险结构化结果",
+          "selected": false,
+          "variables": [
+            {
+              "variable": "article_text",
+              "value_selector": [
+                "start",
+                "article_text"
+              ]
+            }
+          ],
+          "code_language": "python3",
+          "code": "def main(**kwargs):\n    return {'safe_result': 'TODO'}",
+          "outputs": {
+            "safe_result": {
+              "type": "string",
+              "children": null
+            }
+          }
+        },
+        "position": {
+          "x": 640.0,
+          "y": 300.0
+        }
+      },
+      {
+        "id": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "node_type": "code",
+        "title": "Conditional Join",
+        "desc": "Merge conditional branch outputs",
+        "data": {
+          "type": "code",
+          "title": "Conditional Join",
+          "desc": "Merge conditional branch outputs",
+          "selected": false,
+          "variables": [],
+          "code_language": "python3",
+          "code": "def main(**kwargs):\n    return {'result': kwargs}",
+          "outputs": {
+            "result": {
+              "type": "object",
+              "children": null
+            }
+          }
+        },
+        "position": {
+          "x": 960.0,
+          "y": 210.0
+        }
+      },
+      {
+        "id": "end_54f3a756-c746-4702-b7a3-9af8c5f68a61",
+        "node_type": "end",
+        "title": "End",
+        "desc": "Workflow end node",
+        "data": {
+          "type": "end",
+          "title": "End",
+          "desc": "Workflow end node",
+          "outputs": [
+            {
+              "variable": "result",
+              "value_selector": [
+                "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+                "result"
+              ]
+            }
+          ]
+        },
+        "position": {
+          "x": 640.0,
+          "y": 120.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge_0_ifelse_9c492a19-aff3-4183-bc15-0487b38d8713_node_act_high",
+        "source": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "target": "node_act_high",
+        "source_handle": "case-high",
+        "target_handle": "target",
+        "data": {
+          "sourceType": "if-else",
+          "targetType": "code",
+          "isInIteration": false,
+          "isInLoop": false
+        }
+      },
+      {
+        "id": "edge_1_ifelse_9c492a19-aff3-4183-bc15-0487b38d8713_node_act_low",
+        "source": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "target": "node_act_low",
+        "source_handle": "case-else",
+        "target_handle": "target",
+        "data": {
+          "sourceType": "if-else",
+          "targetType": "code",
+          "isInIteration": false,
+          "isInLoop": false
+        }
+      },
+      {
+        "id": "edge_2_node_act_high_conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "source": "node_act_high",
+        "target": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "source_handle": "source",
+        "target_handle": "target",
+        "data": {
+          "sourceType": "code",
+          "targetType": "code",
+          "isInIteration": false,
+          "isInLoop": false
+        }
+      },
+      {
+        "id": "edge_3_node_act_low_conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "source": "node_act_low",
+        "target": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "source_handle": "source",
+        "target_handle": "target",
+        "data": {
+          "sourceType": "code",
+          "targetType": "code",
+          "isInIteration": false,
+          "isInLoop": false
+        }
+      },
+      {
+        "id": "edge_4_start_93120779-00ad-4f74-af03-926bed91524a_ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "source": "start_93120779-00ad-4f74-af03-926bed91524a",
+        "target": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "source_handle": "source",
+        "target_handle": "target",
+        "data": {
+          "sourceType": "start",
+          "targetType": "if-else",
+          "isInIteration": false,
+          "isInLoop": false
+        }
+      },
+      {
+        "id": "edge_5_conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713_end_54f3a756-c746-4702-b7a3-9af8c5f68a61",
+        "source": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+        "target": "end_54f3a756-c746-4702-b7a3-9af8c5f68a61",
+        "source_handle": "source",
+        "target_handle": "target",
+        "data": {
+          "sourceType": "code",
+          "targetType": "end",
+          "isInIteration": false,
+          "isInLoop": false
+        }
+      }
+    ]
+  },
+  "workflow": {
+    "app": {
+      "name": "task_stage_demo_20260407",
+      "description": "根据风险等级决定摘要策略并输出结果",
+      "icon": "🤖",
+      "icon_background": "#EFF1F5",
+      "mode": "workflow",
+      "use_icon_as_answer_icon": false
+    },
+    "workflow": {
+      "conversation_variables": [],
+      "environment_variables": [],
+      "features": {},
+      "graph": {
+        "nodes": [
+          {
+            "id": "start_93120779-00ad-4f74-af03-926bed91524a",
+            "type": "custom",
+            "position": {
+              "x": 0.0,
+              "y": 120.0
+            },
+            "positionAbsolute": {
+              "x": 0.0,
+              "y": 120.0
+            },
+            "width": 244,
+            "height": 96,
+            "selected": false,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "data": {
+              "type": "start",
+              "title": "Start",
+              "desc": "Workflow start node",
+              "selected": false,
+              "variables": [
+                {
+                  "label": "article_text",
+                  "variable": "article_text",
+                  "type": "paragraph",
+                  "required": false,
+                  "max_length": 48000
+                },
+                {
+                  "label": "risk_level",
+                  "variable": "risk_level",
+                  "type": "text-input",
+                  "required": false,
+                  "max_length": 48000
+                }
+              ]
+            }
+          },
+          {
+            "id": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "type": "custom",
+            "position": {
+              "x": 320.0,
+              "y": 120.0
+            },
+            "positionAbsolute": {
+              "x": 320.0,
+              "y": 120.0
+            },
+            "width": 244,
+            "height": 96,
+            "selected": false,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "data": {
+              "type": "if-else",
+              "title": "Condition",
+              "desc": "如果风险分数大于等于 80 走高风险分支，否则走低风险分支",
+              "selected": false,
+              "cases": [
+                {
+                  "case_id": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713_case_0",
+                  "logical_operator": "and",
+                  "conditions": [
+                    {
+                      "variable_selector": [
+                        "start",
+                        "risk_level"
+                      ],
+                      "comparison_operator": ">=",
+                      "value": "80",
+                      "varType": "number"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "node_act_high",
+            "type": "custom",
+            "position": {
+              "x": 640.0,
+              "y": 120.0
+            },
+            "positionAbsolute": {
+              "x": 640.0,
+              "y": 120.0
+            },
+            "width": 244,
+            "height": 96,
+            "selected": false,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "data": {
+              "type": "code",
+              "title": "generate_risk_summary",
+              "desc": "生成高风险摘要",
+              "selected": false,
+              "variables": [
+                {
+                  "variable": "article_text",
+                  "value_selector": [
+                    "start",
+                    "article_text"
+                  ]
+                }
+              ],
+              "code_language": "python3",
+              "code": "def main(**kwargs):\n    return {'risk_summary': 'TODO'}",
+              "outputs": {
+                "risk_summary": {
+                  "type": "string",
+                  "children": null
+                }
+              }
+            }
+          },
+          {
+            "id": "node_act_low",
+            "type": "custom",
+            "position": {
+              "x": 640.0,
+              "y": 300.0
+            },
+            "positionAbsolute": {
+              "x": 640.0,
+              "y": 300.0
+            },
+            "width": 244,
+            "height": 96,
+            "selected": false,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "data": {
+              "type": "code",
+              "title": "transform_safe_result",
+              "desc": "转换低风险结构化结果",
+              "selected": false,
+              "variables": [
+                {
+                  "variable": "article_text",
+                  "value_selector": [
+                    "start",
+                    "article_text"
+                  ]
+                }
+              ],
+              "code_language": "python3",
+              "code": "def main(**kwargs):\n    return {'safe_result': 'TODO'}",
+              "outputs": {
+                "safe_result": {
+                  "type": "string",
+                  "children": null
+                }
+              }
+            }
+          },
+          {
+            "id": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "type": "custom",
+            "position": {
+              "x": 960.0,
+              "y": 210.0
+            },
+            "positionAbsolute": {
+              "x": 960.0,
+              "y": 210.0
+            },
+            "width": 244,
+            "height": 96,
+            "selected": false,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "data": {
+              "type": "code",
+              "title": "Conditional Join",
+              "desc": "Merge conditional branch outputs",
+              "selected": false,
+              "variables": [],
+              "code_language": "python3",
+              "code": "def main(**kwargs):\n    return {'result': kwargs}",
+              "outputs": {
+                "result": {
+                  "type": "object",
+                  "children": null
+                }
+              }
+            }
+          },
+          {
+            "id": "end_54f3a756-c746-4702-b7a3-9af8c5f68a61",
+            "type": "custom",
+            "position": {
+              "x": 640.0,
+              "y": 120.0
+            },
+            "positionAbsolute": {
+              "x": 640.0,
+              "y": 120.0
+            },
+            "width": 244,
+            "height": 96,
+            "selected": false,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "data": {
+              "type": "end",
+              "title": "End",
+              "desc": "Workflow end node",
+              "outputs": [
+                {
+                  "variable": "result",
+                  "value_selector": [
+                    "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+                    "result"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_0_ifelse_9c492a19-aff3-4183-bc15-0487b38d8713_node_act_high",
+            "type": "custom",
+            "source": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "target": "node_act_high",
+            "sourceHandle": "case-high",
+            "targetHandle": "target",
+            "selected": false,
+            "data": {
+              "sourceType": "if-else",
+              "targetType": "code",
+              "isInIteration": false,
+              "isInLoop": false
+            },
+            "zIndex": 0
+          },
+          {
+            "id": "edge_1_ifelse_9c492a19-aff3-4183-bc15-0487b38d8713_node_act_low",
+            "type": "custom",
+            "source": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "target": "node_act_low",
+            "sourceHandle": "case-else",
+            "targetHandle": "target",
+            "selected": false,
+            "data": {
+              "sourceType": "if-else",
+              "targetType": "code",
+              "isInIteration": false,
+              "isInLoop": false
+            },
+            "zIndex": 0
+          },
+          {
+            "id": "edge_2_node_act_high_conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "type": "custom",
+            "source": "node_act_high",
+            "target": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "sourceHandle": "source",
+            "targetHandle": "target",
+            "selected": false,
+            "data": {
+              "sourceType": "code",
+              "targetType": "code",
+              "isInIteration": false,
+              "isInLoop": false
+            },
+            "zIndex": 0
+          },
+          {
+            "id": "edge_3_node_act_low_conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "type": "custom",
+            "source": "node_act_low",
+            "target": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "sourceHandle": "source",
+            "targetHandle": "target",
+            "selected": false,
+            "data": {
+              "sourceType": "code",
+              "targetType": "code",
+              "isInIteration": false,
+              "isInLoop": false
+            },
+            "zIndex": 0
+          },
+          {
+            "id": "edge_4_start_93120779-00ad-4f74-af03-926bed91524a_ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "type": "custom",
+            "source": "start_93120779-00ad-4f74-af03-926bed91524a",
+            "target": "ifelse_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "sourceHandle": "source",
+            "targetHandle": "target",
+            "selected": false,
+            "data": {
+              "sourceType": "start",
+              "targetType": "if-else",
+              "isInIteration": false,
+              "isInLoop": false
+            },
+            "zIndex": 0
+          },
+          {
+            "id": "edge_5_conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713_end_54f3a756-c746-4702-b7a3-9af8c5f68a61",
+            "type": "custom",
+            "source": "conditional_join_0_9c492a19-aff3-4183-bc15-0487b38d8713",
+            "target": "end_54f3a756-c746-4702-b7a3-9af8c5f68a61",
+            "sourceHandle": "source",
+            "targetHandle": "target",
+            "selected": false,
+            "data": {
+              "sourceType": "code",
+              "targetType": "end",
+              "isInIteration": false,
+              "isInLoop": false
+            },
+            "zIndex": 0
+          }
+        ]
+      }
+    },
+    "kind": "app",
+    "version": "0.2.0"
+  }
+}

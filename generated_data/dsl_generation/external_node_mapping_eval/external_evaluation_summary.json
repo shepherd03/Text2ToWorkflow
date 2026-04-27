@@ -1,0 +1,47 @@
+{
+  "backend": "tfidf",
+  "sample_count": 45,
+  "accuracy": 1.0,
+  "macro_f1": 1.0,
+  "degradation_accuracy": null,
+  "per_label_accuracy": {
+    "code": 1.0,
+    "http-request": 1.0,
+    "if-else": 1.0,
+    "iteration": 1.0,
+    "llm": 1.0,
+    "parameter-extractor": 1.0,
+    "template-transform": 1.0,
+    "tool": 1.0,
+    "variable-aggregator": 1.0
+  },
+  "confusion_matrix": {
+    "code": {
+      "code": 5
+    },
+    "http-request": {
+      "http-request": 5
+    },
+    "if-else": {
+      "if-else": 5
+    },
+    "iteration": {
+      "iteration": 5
+    },
+    "llm": {
+      "llm": 5
+    },
+    "parameter-extractor": {
+      "parameter-extractor": 5
+    },
+    "template-transform": {
+      "template-transform": 5
+    },
+    "tool": {
+      "tool": 5
+    },
+    "variable-aggregator": {
+      "variable-aggregator": 5
+    }
+  }
+}

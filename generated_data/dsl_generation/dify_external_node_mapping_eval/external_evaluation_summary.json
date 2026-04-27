@@ -1,0 +1,54 @@
+{
+  "backend": "tfidf",
+  "sample_count": 587,
+  "accuracy": 0.9829642248722317,
+  "macro_f1": 0.9728741620701857,
+  "degradation_accuracy": 0.0,
+  "per_label_accuracy": {
+    "code": 1.0,
+    "http-request": 0.9583333333333334,
+    "if-else": 1.0,
+    "iteration": 1.0,
+    "llm": 0.9747474747474747,
+    "parameter-extractor": 0.9230769230769231,
+    "template-transform": 0.9523809523809523,
+    "tool": 1.0,
+    "variable-aggregator": 0.9285714285714286
+  },
+  "confusion_matrix": {
+    "code": {
+      "code": 108
+    },
+    "http-request": {
+      "code": 1,
+      "http-request": 23
+    },
+    "if-else": {
+      "if-else": 82
+    },
+    "iteration": {
+      "iteration": 15
+    },
+    "llm": {
+      "code": 1,
+      "if-else": 4,
+      "llm": 193
+    },
+    "parameter-extractor": {
+      "code": 1,
+      "parameter-extractor": 12
+    },
+    "template-transform": {
+      "iteration": 1,
+      "template-transform": 40,
+      "variable-aggregator": 1
+    },
+    "tool": {
+      "tool": 91
+    },
+    "variable-aggregator": {
+      "code": 1,
+      "variable-aggregator": 13
+    }
+  }
+}

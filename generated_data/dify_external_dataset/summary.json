@@ -1,0 +1,11 @@
+{
+  "output_dataset_path": "generated_data\\dify_external_dataset\\dataset.jsonl",
+  "workflow_count": 102,
+  "target_workflow_count": 120,
+  "sources": {
+    "github_issue": 15,
+    "gist_raw": 21,
+    "github_repo_raw": 66
+  },
+  "total_supported_nodes": 587
+}

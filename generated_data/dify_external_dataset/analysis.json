@@ -1,0 +1,25 @@
+{
+  "workflow_count": 102,
+  "source_distribution": {
+    "gist_raw": 21,
+    "github_issue": 15,
+    "github_repo_raw": 66
+  },
+  "node_distribution": {
+    "code": 108,
+    "http-request": 24,
+    "if-else": 82,
+    "iteration": 15,
+    "llm": 198,
+    "parameter-extractor": 13,
+    "template-transform": 42,
+    "tool": 91,
+    "variable-aggregator": 14
+  },
+  "total_supported_nodes": 587,
+  "instruction_length": {
+    "min": 18,
+    "max": 48,
+    "avg": 29.69607843137255
+  }
+}

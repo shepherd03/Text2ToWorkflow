@@ -1,0 +1,25 @@
+{
+  "round": "2026-04-07-report-example-refresh",
+  "task_scope": [
+    "rerun_dsl_compiler_tests",
+    "reexport_stage3_demo_output",
+    "prepare_real_example_for_group_report"
+  ],
+  "test_command": "python -m pytest e:\\Desktop\\论文\\工作流\\utr\\tests\\test_dsl_compiler.py -q",
+  "result_summary": "6 passed in 2.61s",
+  "passed": true,
+  "test_file": "tests/test_dsl_compiler.py",
+  "artifacts": [
+    "src/dsl_generation/compiler.py",
+    "src/dsl_generation/node_mapper.py",
+    "src/dsl_generation/workflow_validator.py",
+    "generated_data/dsl_generation/stage3_demo_output_2026_04_07.json"
+  ],
+  "output_evidence": {
+    "stage3_demo": "generated_data/dsl_generation/stage3_demo_output_2026_04_07.json"
+  },
+  "notes": [
+    "本轮为组会报告补充真实例子，重新执行测试并重新导出 demo 输出",
+    "当前测试总数为 6，包含条件分支 end 绑定 join 输出的校验"
+  ]
+}

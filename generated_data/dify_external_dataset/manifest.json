@@ -1,0 +1,1693 @@
+{
+  "issue_workflow_candidates": 16,
+  "gist_workflow_candidates": 24,
+  "repo_workflow_candidates": 71,
+  "selected_sources": [
+    {
+      "id": "dify_ext_0001",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/Deep%20Researcher%20On%20Dify%20.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 71,
+      "edge_count": 53,
+      "supported_node_type_counts": {
+        "llm": 13,
+        "if-else": 3,
+        "parameter-extractor": 6,
+        "template-transform": 1,
+        "iteration": 4,
+        "tool": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/Deep Researcher On Dify .yml"
+    },
+    {
+      "id": "dify_ext_0002",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E8%AE%B0%E5%BF%86%E6%B5%8B%E8%AF%95.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 38,
+      "edge_count": 46,
+      "supported_node_type_counts": {
+        "code": 5,
+        "if-else": 6,
+        "llm": 14,
+        "variable-aggregator": 1,
+        "tool": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/记忆测试.yml"
+    },
+    {
+      "id": "dify_ext_0003",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/simple-kimi.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 38,
+      "edge_count": 40,
+      "supported_node_type_counts": {
+        "llm": 8,
+        "tool": 5,
+        "if-else": 2,
+        "code": 8,
+        "template-transform": 5
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/simple-kimi.yml"
+    },
+    {
+      "id": "dify_ext_0004",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/70-%E6%96%B0%E9%97%BB%E5%AE%9A%E6%97%B6%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.9545454545454546,
+      "node_count": 24,
+      "edge_count": 31,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "if-else": 1,
+        "tool": 10,
+        "code": 8,
+        "variable-aggregator": 1,
+        "template-transform": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/70-新闻定时推送系统.yml"
+    },
+    {
+      "id": "dify_ext_0005",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/35-%E5%A4%9A%E5%B9%B3%E5%8F%B0%E7%83%AD%E7%82%B9%E8%81%9A%E5%90%88.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.95,
+      "node_count": 22,
+      "edge_count": 29,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "if-else": 1,
+        "tool": 9,
+        "code": 8,
+        "variable-aggregator": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/35-多平台热点聚合.yml"
+    },
+    {
+      "id": "dify_ext_0006",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E5%AE%8C%E8%9B%8B%EF%BC%81%E6%88%91%E8%A2%ABLLM%E5%8C%85%E5%9B%B4%E4%BA%86%EF%BC%81%EF%BC%88%E6%88%98%E7%BB%A9%E6%8E%92%E8%A1%8C%E7%89%88%EF%BC%89.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 32,
+      "edge_count": 40,
+      "supported_node_type_counts": {
+        "if-else": 6,
+        "code": 2,
+        "llm": 3,
+        "tool": 1,
+        "variable-aggregator": 1,
+        "template-transform": 3
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/完蛋！我被LLM包围了！（战绩排行版）.yml"
+    },
+    {
+      "id": "dify_ext_0007",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E5%AE%8C%E8%9B%8B%EF%BC%81%E6%88%91%E8%A2%ABLLM%E5%8C%85%E5%9B%B4%E4%BA%86%EF%BC%81%20.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 30,
+      "edge_count": 38,
+      "supported_node_type_counts": {
+        "if-else": 6,
+        "code": 2,
+        "llm": 3,
+        "template-transform": 3,
+        "variable-aggregator": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/完蛋！我被LLM包围了！ .yml"
+    },
+    {
+      "id": "dify_ext_0008",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/9-%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2%EF%BC%88%E6%99%BA%E8%83%BD%E8%A7%A3%E6%9E%90%E7%89%88%EF%BC%89.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.9230769230769231,
+      "node_count": 22,
+      "edge_count": 20,
+      "supported_node_type_counts": {
+        "tool": 5,
+        "llm": 2,
+        "code": 4,
+        "iteration": 1,
+        "if-else": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/9-学生成绩查询（智能解析版）.yml"
+    },
+    {
+      "id": "dify_ext_0009",
+      "source_url": "https://gist.github.com/tsudo1327/52dee1d05907c54c19612669b0d3d059/raw/2a71fcd8c5c298c6f45e5fa339bede1f49dbc2b2/Dify%2520Jinja2%25E5%25AE%259F%25E8%25B7%25B5.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 28,
+      "edge_count": 27,
+      "supported_node_type_counts": {
+        "if-else": 8,
+        "template-transform": 3,
+        "code": 1,
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0010",
+      "source_url": "https://gist.github.com/tumf/131c407074bc3b90737761278aecca3e/raw/bbe6433a0913a32878cc2f0e21bb49f90628853d/DeepResearch.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 0.9166666666666666,
+      "node_count": 24,
+      "edge_count": 19,
+      "supported_node_type_counts": {
+        "iteration": 1,
+        "llm": 2,
+        "tool": 4,
+        "if-else": 1,
+        "template-transform": 2,
+        "variable-aggregator": 1,
+        "code": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0011",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/15-%E6%95%B0%E5%AD%A6%E5%90%8C%E7%B1%BB%E9%A2%98%E7%94%9F%E6%88%90.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.9166666666666666,
+      "node_count": 18,
+      "edge_count": 17,
+      "supported_node_type_counts": {
+        "code": 5,
+        "tool": 3,
+        "if-else": 1,
+        "template-transform": 1,
+        "iteration": 1,
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/15-数学同类题生成.yml"
+    },
+    {
+      "id": "dify_ext_0012",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E6%90%9C%E7%B4%A2%E5%A4%A7%E5%B8%88.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.9166666666666666,
+      "node_count": 14,
+      "edge_count": 11,
+      "supported_node_type_counts": {
+        "llm": 2,
+        "code": 2,
+        "iteration": 2,
+        "template-transform": 2,
+        "http-request": 1,
+        "if-else": 1,
+        "tool": 2
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/搜索大师.yml"
+    },
+    {
+      "id": "dify_ext_0013",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/80-%E8%82%A1%E7%A5%A8%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E7%89%88.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 19,
+      "edge_count": 16,
+      "supported_node_type_counts": {
+        "if-else": 2,
+        "http-request": 1,
+        "code": 2,
+        "llm": 4,
+        "tool": 1,
+        "parameter-extractor": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/80-股票分析系统优化版.yml"
+    },
+    {
+      "id": "dify_ext_0014",
+      "source_url": "https://gist.github.com/keroro520/bbce7ebcc01ce950d58e76ec5e31e658/raw/4c56ba8ca09c3dfde22afc075b2c461734df776e/dify.app.dsl.yaml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 0.9090909090909091,
+      "node_count": 23,
+      "edge_count": 17,
+      "supported_node_type_counts": {
+        "iteration": 1,
+        "llm": 2,
+        "tool": 3,
+        "code": 1,
+        "if-else": 1,
+        "template-transform": 2,
+        "variable-aggregator": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0015",
+      "source_url": "https://gist.github.com/utaaiwork-ops/3c1b6a93017a3cc813b26700805f5958/raw/eebd59968177ce3647a8cf3b8f5d10ea54635ba4/%25E8%25A9%25A6%25E7%25AE%2597%25E8%25A1%25A8%25E4%25BD%259C%25E6%2588%2590%25E3%2583%25BB%25E5%2588%2586%25E6%259E%2590_v2.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 20,
+      "edge_count": 20,
+      "supported_node_type_counts": {
+        "if-else": 3,
+        "llm": 3,
+        "code": 3,
+        "http-request": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0016",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/77-%E5%8F%91%E7%A5%A8%E4%BF%A1%E6%81%AF%E8%81%9A%E5%90%88%E5%B7%A5%E5%85%B7.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.9,
+      "node_count": 14,
+      "edge_count": 19,
+      "supported_node_type_counts": {
+        "llm": 8,
+        "if-else": 1,
+        "variable-aggregator": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/77-发票信息聚合工具.yml"
+    },
+    {
+      "id": "dify_ext_0017",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/14-%E6%95%B0%E5%AD%A6%E9%94%99%E9%A2%98%E6%94%B6%E9%9B%86.yml",
+      "source_type": "github_repo_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想做一个能自动收集和整理中小学数学错题的工具，支持图片和PDF输入，并按题型分类输出结构化错题本。"
+    },
+    {
+      "id": "dify_ext_0018",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/81-%E8%82%A1%E7%A5%A8%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%89%88.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 16,
+      "edge_count": 14,
+      "supported_node_type_counts": {
+        "if-else": 2,
+        "http-request": 1,
+        "code": 2,
+        "llm": 4
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/81-股票分析系统基础版.yml"
+    },
+    {
+      "id": "dify_ext_0019",
+      "source_url": "https://gist.github.com/chikupen2896/be87d4c8e25f1dc4061bc82a78672030/raw/1f7f458c87eff7e2edc4a92bf9b74b6d2d93aa1b/WebContentSearch_Summarize_SaveToNotion_wf.yml",
+      "source_type": "gist_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想做一个能根据我输入的主题，自动搜索网页内容、总结并保存到Notion的工具。"
+    },
+    {
+      "id": "dify_ext_0020",
+      "source_url": "https://gist.github.com/developersdigest/7d75c8dc8447865eef217c398b4916ef/raw/b899893c88ecc92d96cf3c4a30d9d8add1566966/Text-to-Deployed-Website%2520(1).yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 11,
+      "edge_count": 10,
+      "supported_node_type_counts": {
+        "llm": 3,
+        "tool": 2,
+        "http-request": 1,
+        "code": 2
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0021",
+      "source_url": "https://gist.github.com/liyuankui/a89192dd36b9f746a20a1526cbe73cdb/raw/c22999c206f4f873824819a8ccc5ac51647d6032/try-flow.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 10,
+      "edge_count": 12,
+      "supported_node_type_counts": {
+        "llm": 8
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0022",
+      "source_url": "https://gist.github.com/tamon0987/15ee223dafa425b3a6b6689b2540ca6c/raw/6d756aab3401e7e01b122f9d252ae22e7c8796f0/%25E3%2580%2590%25E9%259B%259B%25E5%25BD%25A2%25E3%2580%2591RAGOps.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 17,
+      "edge_count": 15,
+      "supported_node_type_counts": {
+        "llm": 5,
+        "tool": 1,
+        "if-else": 2
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0023",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/19-36%E6%B0%AA%E7%83%AD%E6%A6%9C%E6%8A%93%E5%8F%96.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 12,
+      "edge_count": 9,
+      "supported_node_type_counts": {
+        "http-request": 2,
+        "llm": 2,
+        "code": 1,
+        "iteration": 1,
+        "template-transform": 2
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/19-36氪热榜抓取.yml"
+    },
+    {
+      "id": "dify_ext_0024",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/44-%E6%96%87%E7%94%9F%E5%9B%BE%E6%99%BA%E8%83%BD%E4%BD%93.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 16,
+      "edge_count": 14,
+      "supported_node_type_counts": {
+        "llm": 3,
+        "tool": 2,
+        "code": 2,
+        "if-else": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/44-文生图智能体.yml"
+    },
+    {
+      "id": "dify_ext_0025",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/68-%E5%A4%9A%E6%A8%A1%E6%80%81%E5%86%85%E5%AE%B9%E7%94%9F%E6%88%90%E5%99%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 21,
+      "edge_count": 21,
+      "supported_node_type_counts": {
+        "if-else": 4,
+        "tool": 2,
+        "code": 2
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/68-多模态内容生成器.yml"
+    },
+    {
+      "id": "dify_ext_0026",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/98-%E8%AF%97%E5%8F%A5%E5%B0%81%E9%9D%A2%E7%94%9F%E6%88%90%E5%99%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 10,
+      "edge_count": 10,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "http-request": 1,
+        "code": 3,
+        "template-transform": 1,
+        "tool": 2
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/98-诗句封面生成器.yml"
+    },
+    {
+      "id": "dify_ext_0027",
+      "source_url": "https://gist.github.com/the-quell-weaver/79e10c7e8fd9eb1043c477387fa46f21/raw/64f8a5e4a07f49ff5dbbdfb7950536b57e71b5a8/dify_workflow_dsl_example.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 0.875,
+      "node_count": 19,
+      "edge_count": 16,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "if-else": 1,
+        "iteration": 1,
+        "code": 1,
+        "template-transform": 1,
+        "variable-aggregator": 1,
+        "parameter-extractor": 1,
+        "http-request": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0028",
+      "source_url": "https://gist.github.com/Syuparn/73f8ab15734b9d550fc74a1111ae9f16/raw/9b66466d73e1a0dfe65aae1981c985fc2b6bf691/yadokarify.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 9,
+      "edge_count": 8,
+      "supported_node_type_counts": {
+        "http-request": 1,
+        "parameter-extractor": 1,
+        "template-transform": 1,
+        "code": 4
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0029",
+      "source_url": "https://gist.github.com/pavel-voronin/eccc4f59b2335254df42508441ec9680/raw/393121a9ea3d2b37929516e5ab0e24c4fac07800/storyteller.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 15,
+      "edge_count": 13,
+      "supported_node_type_counts": {
+        "code": 3,
+        "llm": 3,
+        "if-else": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0030",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/69-%E6%96%87%E7%94%9F%E5%9B%BE%E4%B8%8E%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 12,
+      "edge_count": 11,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "llm": 3,
+        "tool": 3
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/69-文生图与视频生成.yml"
+    },
+    {
+      "id": "dify_ext_0031",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/71-%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE%E5%83%8F%E7%BC%96%E8%BE%91.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 12,
+      "edge_count": 11,
+      "supported_node_type_counts": {
+        "tool": 3,
+        "code": 3,
+        "if-else": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/71-多模态图像编辑.yml"
+    },
+    {
+      "id": "dify_ext_0032",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/llm2o1.cn.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 10,
+      "edge_count": 8,
+      "supported_node_type_counts": {
+        "llm": 3,
+        "parameter-extractor": 1,
+        "iteration": 1,
+        "code": 1,
+        "template-transform": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/llm2o1.cn.yml"
+    },
+    {
+      "id": "dify_ext_0033",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/83-%E8%8B%B1%E8%AF%AD%E4%BD%9C%E6%96%87%E8%AF%84%E5%88%86.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.8571428571428571,
+      "node_count": 10,
+      "edge_count": 10,
+      "supported_node_type_counts": {
+        "llm": 3,
+        "template-transform": 1,
+        "if-else": 1,
+        "tool": 1,
+        "variable-aggregator": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/83-英语作文评分.yml"
+    },
+    {
+      "id": "dify_ext_0034",
+      "source_url": "https://gist.github.com/RSR-YAMAKOSHI-NOBUHIKO/b417221be8afaa73bd99510d00ba865d/raw/c7e2cb57209f43f82a83ba6bfd4a78940b1d1098/Dify_%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E8%25A8%25AD%25E8%25A8%2588_%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E7%2594%259F%25E6%2588%2590.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 24,
+      "edge_count": 23,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "llm": 5
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0035",
+      "source_url": "https://gist.github.com/utaaiwork-ops/a9bcec2a8a1d052cbe04ed209e2bdd23/raw/ce5e668d4811ba12c82f2cc124248e983ad26383/trial_balance_v2.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 15,
+      "edge_count": 14,
+      "supported_node_type_counts": {
+        "if-else": 2,
+        "llm": 3,
+        "code": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0036",
+      "source_url": "https://github.com/langgenius/dify/issues/25898#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 8,
+      "edge_count": 10,
+      "supported_node_type_counts": {
+        "llm": 6
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0037",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/1-%E6%96%87%E7%94%9F%E8%A7%86%E9%A2%91%E5%92%8C%E8%AF%AD%E9%9F%B3%E6%92%AD%E6%8A%A5.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 9,
+      "edge_count": 8,
+      "supported_node_type_counts": {
+        "code": 2,
+        "http-request": 2,
+        "llm": 2
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/1-文生视频和语音播报.yml"
+    },
+    {
+      "id": "dify_ext_0038",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/103-%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%94%9F%E6%88%90%E5%99%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 12,
+      "edge_count": 11,
+      "supported_node_type_counts": {
+        "llm": 5,
+        "if-else": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/103-提示词生成器.yml"
+    },
+    {
+      "id": "dify_ext_0039",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/42-%E5%A4%9A%E6%A8%A1%E6%80%81%E7%BB%98%E7%94%BB%E6%9C%BA%E5%99%A8%E4%BA%BA.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 9,
+      "edge_count": 7,
+      "supported_node_type_counts": {
+        "llm": 2,
+        "code": 3,
+        "tool": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/42-多模态绘画机器人.yml"
+    },
+    {
+      "id": "dify_ext_0040",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/6-%E5%B0%8F%E7%BA%A2%E4%B9%A6%E8%BF%90%E8%90%A5%E5%85%A8%E6%B5%81%E7%A8%8B.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 8,
+      "edge_count": 7,
+      "supported_node_type_counts": {
+        "llm": 3,
+        "http-request": 1,
+        "code": 1,
+        "template-transform": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/6-小红书运营全流程.yml"
+    },
+    {
+      "id": "dify_ext_0041",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/8-%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2%EF%BC%88%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%EF%BC%89.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 11,
+      "edge_count": 11,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "if-else": 1,
+        "code": 3,
+        "tool": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/8-学生成绩查询（数据库版）.yml"
+    },
+    {
+      "id": "dify_ext_0042",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/82-%E6%B5%B7%E6%8A%A5%E5%B0%81%E9%9D%A2%E7%94%9F%E6%88%90%E5%99%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.8333333333333334,
+      "node_count": 10,
+      "edge_count": 10,
+      "supported_node_type_counts": {
+        "code": 1,
+        "if-else": 1,
+        "template-transform": 3,
+        "variable-aggregator": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/82-海报封面生成器.yml"
+    },
+    {
+      "id": "dify_ext_0043",
+      "source_url": "https://gist.github.com/utaaiwork-ops/26655620b49b24f9999c0c00eb0d4a76/raw/290e0bacd60c8c83ff36c441c69c4875056d237b/%25E5%25BF%2597%25E5%25A4%25AA3%25E5%25B8%2582_%25E3%2581%2597%25E3%2581%2594%25E3%2581%25A8%25E7%259B%25B8%25E8%25AB%2587AI_v2_fixed.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 15,
+      "edge_count": 16,
+      "supported_node_type_counts": {
+        "parameter-extractor": 1,
+        "if-else": 1,
+        "llm": 3
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0044",
+      "source_url": "https://gist.github.com/utaaiwork-ops/26655620b49b24f9999c0c00eb0d4a76/raw/290e0bacd60c8c83ff36c441c69c4875056d237b/%25E5%25BF%25973%25E5%25B8%2582%2520%25E3%2581%2597%25E3%2581%2594%25E3%2581%25A8%25E7%259B%25B8%25E8%25AB%2587AI%2520v2.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 15,
+      "edge_count": 17,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "llm": 4
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0045",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/25-%E6%AF%8F%E6%97%A5%E6%96%B0%E9%97%BB%E8%AF%AD%E9%9F%B3%E6%92%AD%E6%8A%A5.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 8,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "code": 2,
+        "llm": 1,
+        "tool": 1,
+        "template-transform": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/25-每日新闻语音播报.yml"
+    },
+    {
+      "id": "dify_ext_0046",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/87-AI%E7%BB%98%E7%94%BB%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 8,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "http-request": 1,
+        "code": 2,
+        "tool": 2
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/87-AI绘画集成系统.yml"
+    },
+    {
+      "id": "dify_ext_0047",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E5%B0%8F%E6%94%AF%E4%BB%98-DEMO.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 11,
+      "edge_count": 10,
+      "supported_node_type_counts": {
+        "tool": 2,
+        "if-else": 2,
+        "llm": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/小支付-DEMO.yml"
+    },
+    {
+      "id": "dify_ext_0048",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E7%9E%8E%E8%AF%B4%E6%96%B0%E8%AF%ADv2.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "llm": 2,
+        "code": 2,
+        "template-transform": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/瞎说新语v2.yml"
+    },
+    {
+      "id": "dify_ext_0049",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/Form%E8%A1%A8%E5%8D%95%E8%81%8A%E5%A4%A9Demo.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 10,
+      "edge_count": 9,
+      "supported_node_type_counts": {
+        "template-transform": 1,
+        "llm": 1,
+        "code": 1,
+        "if-else": 2
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/Form表单聊天Demo.yml"
+    },
+    {
+      "id": "dify_ext_0050",
+      "source_url": "https://github.com/langgenius/dify/issues/15700#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 0.8,
+      "node_count": 10,
+      "edge_count": 11,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "variable-aggregator": 2,
+        "llm": 2
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0051",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/93-PDF%E5%8F%91%E7%A5%A8%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.8,
+      "node_count": 8,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "iteration": 1,
+        "tool": 2,
+        "llm": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/93-PDF发票批量处理.yml"
+    },
+    {
+      "id": "dify_ext_0052",
+      "source_url": "https://gist.github.com/utaaiwork-ops/26655620b49b24f9999c0c00eb0d4a76/raw/290e0bacd60c8c83ff36c441c69c4875056d237b/chatflow_v2.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 13,
+      "edge_count": 14,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "llm": 3
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0053",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/10-%E8%8B%B1%E8%AF%AD%E5%8F%A3%E8%AF%AD%E7%BB%83%E4%B9%A0.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "llm": 2,
+        "parameter-extractor": 1,
+        "tool": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/10-英语口语练习.yml"
+    },
+    {
+      "id": "dify_ext_0054",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/104-%E9%80%9A%E7%94%A8%E5%90%88%E5%90%8C%E5%AE%A1%E6%9F%A5.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "llm": 2,
+        "tool": 2
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/104-通用合同审查.yml"
+    },
+    {
+      "id": "dify_ext_0055",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/67-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E7%AE%80%E5%8E%86%E4%BC%98%E5%8C%96.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 9,
+      "edge_count": 8,
+      "supported_node_type_counts": {
+        "llm": 2,
+        "template-transform": 1,
+        "if-else": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/67-计算机专业简历优化.yml"
+    },
+    {
+      "id": "dify_ext_0056",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/74-%E5%84%BF%E7%AB%A5%E7%BB%98%E6%9C%AC%E5%88%B6%E4%BD%9C.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "llm": 2,
+        "http-request": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/74-儿童绘本制作.yml"
+    },
+    {
+      "id": "dify_ext_0057",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/85-%E8%B4%A2%E6%8A%A5%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A%E7%94%9F%E6%88%90.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "tool": 1,
+        "llm": 1,
+        "parameter-extractor": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/85-财报分析报告生成.yml"
+    },
+    {
+      "id": "dify_ext_0058",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/26-API%E6%96%87%E6%A1%A3%E8%BD%AC%E4%BB%A3%E7%A0%81.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 0.75,
+      "node_count": 8,
+      "edge_count": 7,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "variable-aggregator": 1,
+        "if-else": 1,
+        "tool": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/26-API文档转代码.yml"
+    },
+    {
+      "id": "dify_ext_0059",
+      "source_url": "https://gist.github.com/deemeetree/f1892efca3ce0a146c64a3f7b05f39d0/raw/f076261ba1dcc95e5ac85f52eb1c74449be51224/InfraNodus_KB_Dify.yml",
+      "source_type": "gist_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想做一个能根据用户问题，从知识库中查找并回答关于InfraNodus功能的助手。"
+    },
+    {
+      "id": "dify_ext_0060",
+      "source_url": "https://gist.github.com/eva-wanxin-git/8ecb6bf6073dc00ba9e5e809bf91c17e/raw/18d7438389332639fa0c709cd54b74329050e9c6/jobs-2.0-workflow-complete.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 7,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "llm": 2
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0061",
+      "source_url": "https://gist.github.com/utaaiwork-ops/26655620b49b24f9999c0c00eb0d4a76/raw/290e0bacd60c8c83ff36c441c69c4875056d237b/shida-chatbot.dsl.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 8,
+      "edge_count": 7,
+      "supported_node_type_counts": {
+        "llm": 3
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0062",
+      "source_url": "https://gist.github.com/wanghaEMQ/e97b009db6363d4689b2d5a6dcf3d9f5/raw/5c94c3b9743dd2b10a8d7625b19b52d12a0e218e/MQTT-Tools-Flow-Example.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "code": 1,
+        "tool": 2
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0063",
+      "source_url": "https://github.com/langgenius/dify/issues/12068#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "template-transform": 1,
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0064",
+      "source_url": "https://github.com/langgenius/dify/issues/13264#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "if-else": 2
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0065",
+      "source_url": "https://github.com/langgenius/dify/issues/13264#dsl-1",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "if-else": 2,
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0066",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/76-%E7%81%AB%E8%BD%A6%E7%A5%A8%E5%8F%91%E7%A5%A8%E6%AF%94%E5%AF%B9.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "llm": 3
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/76-火车票发票比对.yml"
+    },
+    {
+      "id": "dify_ext_0067",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/78-%E9%A3%9E%E4%B9%A6%E8%A1%A8%E6%A0%BC%E5%A4%84%E7%90%86.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 4,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "tool": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/78-飞书表格处理.yml"
+    },
+    {
+      "id": "dify_ext_0068",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/91-%E5%85%8D%E8%B4%B9%E6%96%87%E7%94%9F%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 4,
+      "supported_node_type_counts": {
+        "code": 1,
+        "http-request": 1,
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/91-免费文生视频工具.yml"
+    },
+    {
+      "id": "dify_ext_0069",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/96-%E8%BD%AF%E4%BB%B6%E5%90%88%E5%90%8C%E5%AE%A1%E6%9F%A5.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "tool": 2
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/96-软件合同审查.yml"
+    },
+    {
+      "id": "dify_ext_0070",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/97-%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81%E7%94%9F%E6%88%90%E5%99%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "tool": 2,
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/97-会议纪要生成器.yml"
+    },
+    {
+      "id": "dify_ext_0071",
+      "source_url": "https://github.com/langgenius/dify/issues/20217#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 0.6666666666666666,
+      "node_count": 6,
+      "edge_count": 4,
+      "supported_node_type_counts": {
+        "iteration": 1,
+        "llm": 1,
+        "tool": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0072",
+      "source_url": "https://gist.github.com/sdyubo/9c7b1388ebc21ae885e32394e6ee327e/raw/657edd0be2b74a04610ffcb37cb8a2c5dde3fbfa/workflow.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 4,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "http-request": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0073",
+      "source_url": "https://gist.github.com/tictaqqn/deac2889353023b7df42445d09dda8d6/raw/0a59c1aab7fb1ef247bf7eaa0b76b0ad91d1c1f3/research.yml",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "tool": 1,
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0074",
+      "source_url": "https://github.com/langgenius/dify/issues/14275#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "http-request": 1,
+        "tool": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0075",
+      "source_url": "https://github.com/langgenius/dify/issues/17771#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "tool": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0076",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/13-%E4%B8%AD%E5%9B%BD%E5%8E%86%E5%8F%B2%E6%92%AD%E5%AE%A2%E5%88%B6%E4%BD%9C.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "tool": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/13-中国历史播客制作.yml"
+    },
+    {
+      "id": "dify_ext_0077",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/21-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "http-request": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/21-自定义语音合成.yml"
+    },
+    {
+      "id": "dify_ext_0078",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/38-%E8%A1%A8%E6%A0%BC%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96.yml",
+      "source_type": "github_repo_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想根据上传的Excel表格数据，自动生成ECharts图表来展示近5日上证指数走势。"
+    },
+    {
+      "id": "dify_ext_0079",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/40-%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E6%9E%84%E9%80%A0%E5%99%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想根据上传的文件内容，自动生成日常问答的JSONL格式微调数据集。"
+    },
+    {
+      "id": "dify_ext_0080",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/41-AI%E7%BB%98%E7%94%BB%E6%9C%BA%E5%99%A8%E4%BA%BA.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/41-AI绘画机器人.yml"
+    },
+    {
+      "id": "dify_ext_0081",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/66-%E8%A1%A8%E6%A0%BC%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 4,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/66-表格数据解析与可视化.yml"
+    },
+    {
+      "id": "dify_ext_0082",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/73-%E5%84%BF%E7%AB%A5%E7%BB%98%E6%9C%ACPPT%E7%94%9F%E6%88%90.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1,
+        "tool": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/73-儿童绘本PPT生成.yml"
+    },
+    {
+      "id": "dify_ext_0083",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/75-%E5%84%BF%E7%AB%A5%E7%BB%98%E6%9C%AC%E8%A7%86%E9%A2%91%E7%89%88.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "http-request": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/75-儿童绘本视频版.yml"
+    },
+    {
+      "id": "dify_ext_0084",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/88-AI%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E7%89%88.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "http-request": 1,
+        "code": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/88-AI绘画基础版.yml"
+    },
+    {
+      "id": "dify_ext_0085",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/95-%E5%A4%B4%E5%83%8F%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "code": 1,
+        "http-request": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/95-头像风格迁移.yml"
+    },
+    {
+      "id": "dify_ext_0086",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E6%97%85%E8%A1%8CDemo.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "template-transform": 2
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/旅行Demo.yml"
+    },
+    {
+      "id": "dify_ext_0087",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/Demo-tod_agent.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 6,
+      "edge_count": 5,
+      "supported_node_type_counts": {
+        "if-else": 1,
+        "llm": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/Demo-tod_agent.yml"
+    },
+    {
+      "id": "dify_ext_0088",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/chart_demo.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "http-request": 1,
+        "code": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/chart_demo.yml"
+    },
+    {
+      "id": "dify_ext_0089",
+      "source_url": "https://gist.github.com/Alterxyz-d/dbb6ef8f190517e5adf9d31c1a326510/raw/b237d107a08a393aa57a691a7476ae469827a52b/workflow-1756826320186.yml",
+      "source_type": "gist_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想做一个能输出“Hello, world”的简单流程。"
+    },
+    {
+      "id": "dify_ext_0090",
+      "source_url": "https://gist.github.com/bohnen/6ddde697a2037945507e7eacab0b281c/raw/fc264cd8c6bfde8549859d98f933bb24b1ba237a/Simple%2520Knowledge%2520Workflow",
+      "source_type": "gist_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0091",
+      "source_url": "https://github.com/langgenius/dify/issues/10298#dsl-0",
+      "source_type": "github_issue",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想做一个根据文字描述自动生成图片的工作流，输入提示词就能得到图片。"
+    },
+    {
+      "id": "dify_ext_0092",
+      "source_url": "https://github.com/langgenius/dify/issues/13159#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "tool": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0093",
+      "source_url": "https://github.com/langgenius/dify/issues/20661#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "template-transform": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0094",
+      "source_url": "https://github.com/langgenius/dify/issues/21767#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0095",
+      "source_url": "https://github.com/langgenius/dify/issues/25823#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0096",
+      "source_url": "https://github.com/langgenius/dify/issues/30831#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 8,
+      "supported_node_type_counts": {
+        "if-else": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0097",
+      "source_url": "https://github.com/langgenius/dify/issues/8792#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "tool": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0098",
+      "source_url": "https://github.com/langgenius/dify/issues/9294#dsl-0",
+      "source_type": "github_issue",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": null,
+      "repo_path": null
+    },
+    {
+      "id": "dify_ext_0099",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/0-YouTube%E5%8D%9A%E4%B8%BB%E5%92%8C%E8%87%AA%E5%AA%92%E4%BD%93%E8%BF%90%E8%90%A5%E4%B8%93%E5%AE%B6.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/0-YouTube博主和自媒体运营专家.yml"
+    },
+    {
+      "id": "dify_ext_0100",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/105-%E7%BD%91%E9%A1%B5%E6%B8%B8%E6%88%8F%E7%94%9F%E6%88%90%E5%99%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 7,
+      "edge_count": 6,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/105-网页游戏生成器.yml"
+    },
+    {
+      "id": "dify_ext_0101",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/11-%E5%8F%91%E7%A5%A8%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96%E5%B7%A5%E5%85%B7.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/11-发票信息提取工具.yml"
+    },
+    {
+      "id": "dify_ext_0102",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/12-%E7%9F%A5%E8%AF%86%E5%BA%93%E6%A3%80%E7%B4%A2%E7%B3%BB%E7%BB%9F.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 5,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/12-知识库检索系统.yml"
+    },
+    {
+      "id": "dify_ext_0103",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/17-%E6%99%BA%E8%83%BD%E8%BE%85%E5%8A%A9%E7%BF%BB%E8%AF%91.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/17-智能辅助翻译.yml"
+    },
+    {
+      "id": "dify_ext_0104",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/20-%E8%BE%B9%E7%BC%98%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "tool": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/20-边缘语音合成.yml"
+    },
+    {
+      "id": "dify_ext_0105",
+      "source_url": "https://raw.githubusercontent.com/bingyue/Dify-Workflow-DSL/main/dsl/3-%E6%96%87%E7%94%9FWord%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "http-request": 1
+      },
+      "repo_id": "bingyue/Dify-Workflow-DSL",
+      "repo_path": "dsl/3-文生Word接口调用.yml"
+    },
+    {
+      "id": "dify_ext_0106",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E5%9B%BE%E6%96%87%E7%9F%A5%E8%AF%86%E5%BA%93/%E5%9B%BE%E6%96%87%E7%9F%A5%E8%AF%86%E5%BA%93.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/图文知识库/图文知识库.yml"
+    },
+    {
+      "id": "dify_ext_0107",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/%E6%80%9D%E8%80%83%E5%8A%A9%E6%89%8B.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 4,
+      "edge_count": 3,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/思考助手.yml"
+    },
+    {
+      "id": "dify_ext_0108",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/Artifact.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "llm": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/Artifact.yml"
+    },
+    {
+      "id": "dify_ext_0109",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/Python%20Coding%20Prompt.yml",
+      "source_type": "github_repo_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想做一个专门帮我写Python代码的聊天机器人。"
+    },
+    {
+      "id": "dify_ext_0110",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/jieba.yml",
+      "source_type": "github_repo_raw",
+      "status": "accepted",
+      "novel_ratio": 1.0,
+      "node_count": 3,
+      "edge_count": 2,
+      "supported_node_type_counts": {
+        "code": 1
+      },
+      "repo_id": "svcvit/Awesome-Dify-Workflow",
+      "repo_path": "DSL/jieba.yml"
+    },
+    {
+      "id": "dify_ext_0111",
+      "source_url": "https://raw.githubusercontent.com/svcvit/Awesome-Dify-Workflow/main/DSL/matplotlib.yml",
+      "source_type": "github_repo_raw",
+      "status": "instruction_failed",
+      "error": "LLM 返回的 instruction 不合规: 我想做一个能根据我的问题自动生成matplotlib图表并返回base64图片的流程。"
+    }
+  ]
+}

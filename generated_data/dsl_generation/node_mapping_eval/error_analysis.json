@@ -1,0 +1,140 @@
+{
+  "tfidf": {
+    "test": {
+      "if-else": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "iteration": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "parameter-extractor": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "variable-aggregator": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      }
+    },
+    "hard": {
+      "if-else": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "iteration": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "parameter-extractor": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "variable-aggregator": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      }
+    }
+  },
+  "embedding-local": {
+    "test": {
+      "if-else": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "iteration": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "parameter-extractor": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "variable-aggregator": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      }
+    },
+    "hard": {
+      "if-else": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "iteration": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "parameter-extractor": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "variable-aggregator": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      }
+    }
+  },
+  "hybrid-local": {
+    "test": {
+      "if-else": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "iteration": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "parameter-extractor": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "variable-aggregator": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      }
+    },
+    "hard": {
+      "if-else": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "iteration": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "parameter-extractor": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      },
+      "variable-aggregator": {
+        "error_count": 0,
+        "top_confusions": {},
+        "examples": []
+      }
+    }
+  }
+}

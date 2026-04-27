@@ -152,5 +152,16 @@ cython_debug/
 # IDEs
 .idea/
 .vscode/
+.cursor/
+.cursor/skills/
 *.swp
 *.swo
+
+# Project-local generated caches
+generated_data/semantic_cache/
+generated_data/dify_external_dataset/cache/
+generated_data/utr_generation/run_*/
+
+# One-off local patch helpers
+generated_data/dsl_generation/patch_*.py
+generated_data/dsl_generation/test_append_snippet.py

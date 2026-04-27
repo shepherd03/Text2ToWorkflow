@@ -1,0 +1,1777 @@
+{
+  "experiment": "cn_semantic_ablation",
+  "description": "中文语义方法消融实验结构化数据",
+  "methods": [
+    {
+      "name": "tfidf",
+      "env": {
+        "SEMANTIC_BACKEND": "tfidf",
+        "SEMANTIC_EMBEDDING_PROVIDER": "local-hash",
+        "SEMANTIC_EMBEDDING_API_KEY": "dummy"
+      },
+      "description": "仅使用词法语义检索。"
+    },
+    {
+      "name": "embedding-local",
+      "env": {
+        "SEMANTIC_BACKEND": "embedding",
+        "SEMANTIC_EMBEDDING_PROVIDER": "local-hash",
+        "SEMANTIC_EMBEDDING_API_KEY": "dummy"
+      },
+      "description": "使用本地哈希向量 provider 模拟 embedding 检索。"
+    },
+    {
+      "name": "hybrid-local",
+      "env": {
+        "SEMANTIC_BACKEND": "hybrid",
+        "SEMANTIC_EMBEDDING_PROVIDER": "local-hash",
+        "SEMANTIC_EMBEDDING_API_KEY": "dummy"
+      },
+      "description": "将 TF-IDF 与本地哈希向量检索融合。"
+    }
+  ],
+  "cases": [
+    {
+      "id": "cn_llm_1",
+      "name": "生成摘要",
+      "category": "llm",
+      "description": "请根据文章内容生成摘要",
+      "expected": "llm",
+      "note": "典型中文生成任务，规则和语义都应支持。"
+    },
+    {
+      "id": "cn_http_1",
+      "name": "调用天气接口",
+      "category": "http-request",
+      "description": "调用天气API，使用url和get方法获取结果",
+      "expected": "http-request",
+      "note": "中文接口调用，且关键参数齐全。"
+    },
+    {
+      "id": "cn_template_1",
+      "name": "套用模板生成通知",
+      "category": "template-transform",
+      "description": "根据模板生成通知文本",
+      "expected": "template-transform",
+      "note": "规则命中较弱，适合观察语义层贡献。"
+    },
+    {
+      "id": "cn_iteration_1",
+      "name": "遍历文件列表",
+      "category": "iteration",
+      "description": "遍历文件列表并逐个处理",
+      "expected": "iteration",
+      "note": "结构上下文与中文规则共同作用。"
+    },
+    {
+      "id": "cn_if_1",
+      "name": "条件判断分流",
+      "category": "if-else",
+      "description": "根据 conditions 条件判断是否进入告警分支",
+      "expected": "if-else",
+      "note": "显式补充 conditions，用于测试中文条件分支在参数齐全时的识别能力。"
+    },
+    {
+      "id": "cn_tool_1",
+      "name": "调用搜索工具",
+      "category": "tool",
+      "description": "调用搜索工具查询资料",
+      "expected": "tool",
+      "note": "显式补充 provider_id / tool_name，观察工具节点在中文下的语义竞争。"
+    },
+    {
+      "id": "cn_doc_1",
+      "name": "解析合同文件",
+      "category": "doc-extractor",
+      "description": "读取合同PDF并提取正文内容",
+      "expected": "doc-extractor",
+      "note": "中文文档抽取任务。"
+    },
+    {
+      "id": "cn_param_1",
+      "name": "抽取用户意图和槽位",
+      "category": "parameter-extractor",
+      "description": "从用户消息中抽取意图、实体和参数字段",
+      "expected": "parameter-extractor",
+      "note": "中文参数抽取任务。"
+    },
+    {
+      "id": "cn_agg_1",
+      "name": "合并多路结果",
+      "category": "variable-aggregator",
+      "description": "聚合多个分支输出结果",
+      "expected": "variable-aggregator",
+      "note": "中文聚合任务。"
+    },
+    {
+      "id": "cn_http_missing_1",
+      "name": "请求外部服务",
+      "category": "degrade-case",
+      "description": "调用外部接口返回数据",
+      "expected": "code",
+      "note": "缺少 url/method，预期最终发生降级。"
+    }
+  ],
+  "method_summary": [
+    {
+      "method": "tfidf",
+      "correct": 10,
+      "total": 10,
+      "accuracy": 1.0,
+      "degraded_count": 1,
+      "avg_chosen_score": 0.7159714088288164,
+      "avg_margin": 0.48300349057657066
+    },
+    {
+      "method": "embedding-local",
+      "correct": 9,
+      "total": 10,
+      "accuracy": 0.9,
+      "degraded_count": 0,
+      "avg_chosen_score": 0.7388513430999001,
+      "avg_margin": 0.273337310916629
+    },
+    {
+      "method": "hybrid-local",
+      "correct": 10,
+      "total": 10,
+      "accuracy": 1.0,
+      "degraded_count": 1,
+      "avg_chosen_score": 0.713499079951766,
+      "avg_margin": 0.3496169023366114
+    }
+  ],
+  "hard_cases": [
+    {
+      "case_id": "cn_http_missing_1",
+      "case_name": "请求外部服务",
+      "expected": "code",
+      "correctness": {
+        "tfidf": true,
+        "embedding-local": false,
+        "hybrid-local": true
+      }
+    }
+  ],
+  "category_matrix": {
+    "llm": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "http-request": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "template-transform": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "iteration": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "if-else": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "tool": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "doc-extractor": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "parameter-extractor": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "variable-aggregator": {
+      "tfidf": 1,
+      "embedding-local": 1,
+      "hybrid-local": 1
+    },
+    "degrade-case": {
+      "tfidf": 1,
+      "embedding-local": 0,
+      "hybrid-local": 1
+    }
+  },
+  "results": {
+    "tfidf": [
+      {
+        "case_id": "cn_llm_1",
+        "case_name": "生成摘要",
+        "category": "llm",
+        "description": "请根据文章内容生成摘要",
+        "expected_node": "llm",
+        "predicted_node": "llm",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.6450409137053548,
+        "runner_up_score": 0.203,
+        "decision_reason": "two-stage rank selected llm",
+        "trace": [
+          "stage1:rule-hit count=1 preview=生成摘要",
+          "stage2:semantic-candidates backend=tfidf llm=0.122",
+          "stage2:ranking llm=0.645, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "llm",
+            "rule_score": 1.0,
+            "semantic_score": 0.12200285532923355,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.6450409137053548
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_http_1",
+        "case_name": "调用天气接口",
+        "category": "http-request",
+        "description": "调用天气API，使用url和get方法获取结果",
+        "expected_node": "http-request",
+        "predicted_node": "http-request",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.9053352367471447,
+        "runner_up_score": 0.203,
+        "decision_reason": "two-stage rank selected http-request",
+        "trace": [
+          "stage1:rule-hit count=1 preview=调用天气接口",
+          "stage2:semantic-candidates backend=tfidf http-request=0.889",
+          "stage2:ranking http-request=0.905, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "http-request",
+            "rule_score": 1.0,
+            "semantic_score": 0.8885476148348272,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.9053352367471447
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_template_1",
+        "case_name": "套用模板生成通知",
+        "category": "template-transform",
+        "description": "根据模板生成通知文本",
+        "expected_node": "template-transform",
+        "predicted_node": "template-transform",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.6954233694099936,
+        "runner_up_score": 0.203,
+        "decision_reason": "two-stage rank selected template-transform",
+        "trace": [
+          "stage1:no-rule-hit",
+          "stage2:semantic-candidates backend=tfidf template-transform=1.492",
+          "stage2:ranking template-transform=0.695, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 1.4919480294062297,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.6954233694099936
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_iteration_1",
+        "case_name": "遍历文件列表",
+        "category": "iteration",
+        "description": "遍历文件列表并逐个处理",
+        "expected_node": "iteration",
+        "predicted_node": "iteration",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.7971525964995296,
+        "runner_up_score": 0.203,
+        "decision_reason": "two-stage rank selected iteration",
+        "trace": [
+          "stage1:rule-hit count=2 preview=遍历, 遍历文件",
+          "stage2:semantic-candidates backend=tfidf iteration=0.477",
+          "stage2:ranking iteration=0.797, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "iteration",
+            "rule_score": 1.0,
+            "semantic_score": 0.47703936406103004,
+            "coverage_score": 1.0,
+            "context_score": 0.35,
+            "priority_bonus": 0.9,
+            "total_score": 0.7971525964995296
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_if_1",
+        "case_name": "条件判断分流",
+        "category": "if-else",
+        "description": "根据 conditions 条件判断是否进入告警分支",
+        "expected_node": "if-else",
+        "predicted_node": "if-else",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.6425000000000001,
+        "runner_up_score": 0.203,
+        "decision_reason": "two-stage rank selected if-else",
+        "trace": [
+          "stage1:rule-hit count=2 preview=条件, 判断",
+          "stage2:ranking if-else=0.643, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "if-else",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.25,
+            "priority_bonus": 1.0,
+            "total_score": 0.6425000000000001
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_tool_1",
+        "case_name": "调用搜索工具",
+        "category": "tool",
+        "description": "调用搜索工具查询资料",
+        "expected_node": "tool",
+        "predicted_node": "tool",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 1.0180711584520983,
+        "runner_up_score": 0.2454699148121677,
+        "decision_reason": "two-stage rank selected tool",
+        "trace": [
+          "stage1:rule-hit count=1 preview=调用搜索工具",
+          "stage2:semantic-candidates backend=tfidf tool=1.236, http-request=0.678",
+          "stage2:ranking tool=1.018, http-request=0.245, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "tool",
+            "rule_score": 1.0,
+            "semantic_score": 1.236159870162807,
+            "coverage_score": 1.0,
+            "context_score": 0.15,
+            "priority_bonus": 0.5,
+            "total_score": 1.0180711584520983
+          },
+          {
+            "node_type": "http-request",
+            "rule_score": 0.0,
+            "semantic_score": 0.6780309837880241,
+            "coverage_score": 0.0,
+            "context_score": 0.15,
+            "priority_bonus": 0.7,
+            "total_score": 0.2454699148121677
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_doc_1",
+        "case_name": "解析合同文件",
+        "category": "doc-extractor",
+        "description": "读取合同PDF并提取正文内容",
+        "expected_node": "doc-extractor",
+        "predicted_node": "doc-extractor",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.8102611954342447,
+        "runner_up_score": 0.203,
+        "decision_reason": "two-stage rank selected doc-extractor",
+        "trace": [
+          "stage1:rule-hit count=2 preview=读取合同, 解析合同",
+          "stage2:semantic-candidates backend=tfidf doc-extractor=0.620",
+          "stage2:ranking doc-extractor=0.810, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "doc-extractor",
+            "rule_score": 1.0,
+            "semantic_score": 0.6195662357320143,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.4,
+            "total_score": 0.8102611954342447
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_param_1",
+        "case_name": "抽取用户意图和槽位",
+        "category": "parameter-extractor",
+        "description": "从用户消息中抽取意图、实体和参数字段",
+        "expected_node": "parameter-extractor",
+        "predicted_node": "parameter-extractor",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.6090000000000001,
+        "runner_up_score": 0.203,
+        "decision_reason": "two-stage rank selected parameter-extractor",
+        "trace": [
+          "stage1:rule-hit count=1 preview=抽取意图",
+          "stage2:semantic-candidates backend=tfidf template-transform=0.341",
+          "stage2:ranking parameter-extractor=0.609, code=0.203, template-transform=0.127",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.6090000000000001
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          },
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.34104835474681033,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.1271354735189793
+          }
+        ]
+      },
+      {
+        "case_id": "cn_agg_1",
+        "case_name": "合并多路结果",
+        "category": "variable-aggregator",
+        "description": "聚合多个分支输出结果",
+        "expected_node": "variable-aggregator",
+        "predicted_node": "variable-aggregator",
+        "correct": true,
+        "degraded": false,
+        "confidence": "medium",
+        "chosen_score": 0.5458024856759637,
+        "runner_up_score": 0.3910130947726568,
+        "decision_reason": "two-stage rank selected variable-aggregator",
+        "trace": [
+          "stage1:rule-hit count=3 preview=聚合, 合并结果, 合并结果",
+          "stage2:semantic-candidates backend=tfidf variable-aggregator=0.172, code=0.171",
+          "stage2:ranking variable-aggregator=0.546, code=0.391",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "variable-aggregator",
+            "rule_score": 0.6666666666666666,
+            "semantic_score": 0.17229943440405313,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.8,
+            "total_score": 0.5458024856759637
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.3333333333333333,
+            "semantic_score": 0.17087425449788568,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.3910130947726568
+          }
+        ]
+      },
+      {
+        "case_id": "cn_http_missing_1",
+        "case_name": "请求外部服务",
+        "category": "degrade-case",
+        "description": "调用外部接口返回数据",
+        "expected_node": "code",
+        "predicted_node": "code",
+        "correct": true,
+        "degraded": true,
+        "confidence": "low",
+        "chosen_score": 0.49112713236383454,
+        "runner_up_score": 0.27219617293763354,
+        "decision_reason": "reranked type missing params, fallback to code",
+        "trace": [
+          "stage1:rule-hit count=2 preview=请求外部服务, 调用外部接口",
+          "stage2:semantic-candidates backend=tfidf http-request=0.219, code=0.216",
+          "stage2:ranking http-request=0.491, code=0.272",
+          "landing-check:failed missing required params: url, method",
+          "fallback:code"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "http-request",
+            "rule_score": 1.0,
+            "semantic_score": 0.2191472886369828,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.49112713236383454
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.2162380404301048,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.27219617293763354
+          }
+        ]
+      }
+    ],
+    "embedding-local": [
+      {
+        "case_id": "cn_llm_1",
+        "case_name": "生成摘要",
+        "category": "llm",
+        "description": "请根据文章内容生成摘要",
+        "expected_node": "llm",
+        "predicted_node": "llm",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.8355787048086527,
+        "runner_up_score": 0.4699171364715948,
+        "decision_reason": "two-stage rank selected llm",
+        "trace": [
+          "stage1:rule-hit count=1 preview=生成摘要",
+          "stage2:semantic-candidates backend=remote-embedding parameter-extractor=0.815, if-else=0.762, llm=0.717, code=0.387",
+          "stage2:ranking llm=0.836, parameter-extractor=0.470, code=0.327, if-else=0.274",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "llm",
+            "rule_score": 1.0,
+            "semantic_score": 0.7174334525270398,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.8355787048086527
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.8153660514737336,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.4699171364715948
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.3867062398027523,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.32674599673688076
+          },
+          {
+            "node_type": "if-else",
+            "rule_score": 0.0,
+            "semantic_score": 0.7619150488287358,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 1.0,
+            "total_score": 0.27381281562519544
+          }
+        ]
+      },
+      {
+        "case_id": "cn_http_1",
+        "case_name": "调用天气接口",
+        "category": "http-request",
+        "description": "调用天气API，使用url和get方法获取结果",
+        "expected_node": "http-request",
+        "predicted_node": "http-request",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.8691773109686852,
+        "runner_up_score": 0.46782768326251234,
+        "decision_reason": "two-stage rank selected http-request",
+        "trace": [
+          "stage1:rule-hit count=1 preview=调用天气接口",
+          "stage2:semantic-candidates backend=remote-embedding parameter-extractor=0.809, http-request=0.776, llm=0.668, if-else=0.630",
+          "stage2:ranking http-request=0.869, parameter-extractor=0.468, llm=0.420, code=0.358",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "http-request",
+            "rule_score": 1.0,
+            "semantic_score": 0.775554096777141,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.8691773109686852
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.808836510195351,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.46782768326251234
+          },
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 0.6677831785511013,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.4196906171363524
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.48292326979949796,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.35753544633583934
+          }
+        ]
+      },
+      {
+        "case_id": "cn_template_1",
+        "case_name": "套用模板生成通知",
+        "category": "template-transform",
+        "description": "根据模板生成通知文本",
+        "expected_node": "template-transform",
+        "predicted_node": "template-transform",
+        "correct": true,
+        "degraded": false,
+        "confidence": "medium",
+        "chosen_score": 0.5340948435930348,
+        "runner_up_score": 0.45215214754486377,
+        "decision_reason": "two-stage rank selected template-transform",
+        "trace": [
+          "stage1:no-rule-hit",
+          "stage2:semantic-candidates backend=remote-embedding template-transform=0.988, if-else=0.803, code=0.779, http-request=0.678",
+          "stage2:ranking template-transform=0.534, code=0.452, if-else=0.287",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.9877963862282337,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.5340948435930348
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.7786004610776991,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.45215214754486377
+          },
+          {
+            "node_type": "if-else",
+            "rule_score": 0.0,
+            "semantic_score": 0.802882230434269,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 1.0,
+            "total_score": 0.28692231373896604
+          }
+        ]
+      },
+      {
+        "case_id": "cn_iteration_1",
+        "case_name": "遍历文件列表",
+        "category": "iteration",
+        "description": "遍历文件列表并逐个处理",
+        "expected_node": "iteration",
+        "predicted_node": "iteration",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 1.0056870767357662,
+        "runner_up_score": 0.4346129098722785,
+        "decision_reason": "two-stage rank selected iteration",
+        "trace": [
+          "stage1:rule-hit count=2 preview=遍历, 遍历文件",
+          "stage2:semantic-candidates backend=remote-embedding iteration=1.129, parameter-extractor=0.705, http-request=0.549, template-transform=0.512",
+          "stage2:ranking iteration=1.006, parameter-extractor=0.435, code=0.203, http-request=0.197",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "iteration",
+            "rule_score": 1.0,
+            "semantic_score": 1.1287096147992695,
+            "coverage_score": 1.0,
+            "context_score": 0.35,
+            "priority_bonus": 0.9,
+            "total_score": 1.0056870767357662
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.7050403433508702,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.4346129098722785
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          },
+          {
+            "node_type": "http-request",
+            "rule_score": 0.0,
+            "semantic_score": 0.5486343608878003,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.1965629954840961
+          }
+        ]
+      },
+      {
+        "case_id": "cn_if_1",
+        "case_name": "条件判断分流",
+        "category": "if-else",
+        "description": "根据 conditions 条件判断是否进入告警分支",
+        "expected_node": "if-else",
+        "predicted_node": "if-else",
+        "correct": true,
+        "degraded": false,
+        "confidence": "medium",
+        "chosen_score": 0.6425000000000001,
+        "runner_up_score": 0.5879922094708997,
+        "decision_reason": "two-stage rank selected if-else",
+        "trace": [
+          "stage1:rule-hit count=2 preview=条件, 判断",
+          "stage2:semantic-candidates backend=remote-embedding code=1.203, iteration=0.702, template-transform=0.700, doc-extractor=0.637",
+          "stage2:ranking if-else=0.643, code=0.588, iteration=0.252, template-transform=0.242",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "if-else",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.25,
+            "priority_bonus": 1.0,
+            "total_score": 0.6425000000000001
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 1.2031006545965612,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.5879922094708997
+          },
+          {
+            "node_type": "iteration",
+            "rule_score": 0.0,
+            "semantic_score": 0.7023493979162471,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.9,
+            "total_score": 0.2517518073331991
+          },
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.6998948307971671,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.24196634585509347
+          }
+        ]
+      },
+      {
+        "case_id": "cn_tool_1",
+        "case_name": "调用搜索工具",
+        "category": "tool",
+        "description": "调用搜索工具查询资料",
+        "expected_node": "tool",
+        "predicted_node": "tool",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.940602171702202,
+        "runner_up_score": 0.49150244531732323,
+        "decision_reason": "two-stage rank selected tool",
+        "trace": [
+          "stage1:rule-hit count=1 preview=调用搜索工具",
+          "stage2:semantic-candidates backend=remote-embedding tool=0.994, code=0.902, llm=0.836, variable-aggregator=0.302",
+          "stage2:ranking tool=0.941, code=0.492, llm=0.474",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "tool",
+            "rule_score": 1.0,
+            "semantic_score": 0.9940692865693809,
+            "coverage_score": 1.0,
+            "context_score": 0.15,
+            "priority_bonus": 0.5,
+            "total_score": 0.940602171702202
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.901570141616635,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.49150244531732323
+          },
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 0.8364328747728201,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.47365851992730246
+          }
+        ]
+      },
+      {
+        "case_id": "cn_doc_1",
+        "case_name": "解析合同文件",
+        "category": "doc-extractor",
+        "description": "读取合同PDF并提取正文内容",
+        "expected_node": "doc-extractor",
+        "predicted_node": "doc-extractor",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.8689437489902572,
+        "runner_up_score": 0.44605075726448207,
+        "decision_reason": "two-stage rank selected doc-extractor",
+        "trace": [
+          "stage1:rule-hit count=2 preview=读取合同, 解析合同",
+          "stage2:semantic-candidates backend=remote-embedding doc-extractor=0.803, code=0.760, template-transform=0.569, llm=0.566",
+          "stage2:ranking doc-extractor=0.869, code=0.446, template-transform=0.200",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "doc-extractor",
+            "rule_score": 1.0,
+            "semantic_score": 0.8029492155945535,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.4,
+            "total_score": 0.8689437489902572
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.7595336164515065,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.44605075726448207
+          },
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.5689128291887746,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.20005210534040788
+          }
+        ]
+      },
+      {
+        "case_id": "cn_param_1",
+        "case_name": "抽取用户意图和槽位",
+        "category": "parameter-extractor",
+        "description": "从用户消息中抽取意图、实体和参数字段",
+        "expected_node": "parameter-extractor",
+        "predicted_node": "parameter-extractor",
+        "correct": true,
+        "degraded": false,
+        "confidence": "medium",
+        "chosen_score": 0.6090000000000001,
+        "runner_up_score": 0.5477516992954237,
+        "decision_reason": "two-stage rank selected parameter-extractor",
+        "trace": [
+          "stage1:rule-hit count=1 preview=抽取意图",
+          "stage2:semantic-candidates backend=remote-embedding llm=1.068, tool=0.799, doc-extractor=0.652, if-else=0.386",
+          "stage2:ranking parameter-extractor=0.609, llm=0.548, tool=0.271, doc-extractor=0.221, code=0.203",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.6090000000000001
+          },
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 1.0679740602981989,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.5477516992954237
+          },
+          {
+            "node_type": "tool",
+            "rule_score": 0.0,
+            "semantic_score": 0.7994261932098972,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.5,
+            "total_score": 0.2708163818271671
+          },
+          {
+            "node_type": "doc-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.6520607942484217,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.4,
+            "total_score": 0.22065945415949495
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          }
+        ]
+      },
+      {
+        "case_id": "cn_agg_1",
+        "case_name": "合并多路结果",
+        "category": "variable-aggregator",
+        "description": "聚合多个分支输出结果",
+        "expected_node": "variable-aggregator",
+        "predicted_node": "variable-aggregator",
+        "correct": true,
+        "degraded": false,
+        "confidence": "medium",
+        "chosen_score": 0.4906666666666667,
+        "runner_up_score": 0.3363333333333334,
+        "decision_reason": "two-stage rank selected variable-aggregator",
+        "trace": [
+          "stage1:rule-hit count=3 preview=聚合, 合并结果, 合并结果",
+          "stage2:semantic-candidates backend=remote-embedding template-transform=0.780, doc-extractor=0.631, iteration=0.617, tool=0.490",
+          "stage2:ranking variable-aggregator=0.491, code=0.336, template-transform=0.267, iteration=0.224, doc-extractor=0.214",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "variable-aggregator",
+            "rule_score": 0.6666666666666666,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.8,
+            "total_score": 0.4906666666666667
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.3333333333333333,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.3363333333333334
+          },
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.7795794042684265,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.2674654093658965
+          },
+          {
+            "node_type": "iteration",
+            "rule_score": 0.0,
+            "semantic_score": 0.6167376173896196,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.9,
+            "total_score": 0.22435603756467828
+          },
+          {
+            "node_type": "doc-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.6309324134826031,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.4,
+            "total_score": 0.213898372314433
+          }
+        ]
+      },
+      {
+        "case_id": "cn_http_missing_1",
+        "case_name": "请求外部服务",
+        "category": "degrade-case",
+        "description": "调用外部接口返回数据",
+        "expected_node": "code",
+        "predicted_node": "llm",
+        "correct": false,
+        "degraded": false,
+        "confidence": "medium",
+        "chosen_score": 0.5922629075337362,
+        "runner_up_score": 0.42100000000000004,
+        "decision_reason": "two-stage rank selected llm",
+        "trace": [
+          "stage1:rule-hit count=2 preview=请求外部服务, 调用外部接口",
+          "stage2:semantic-candidates backend=remote-embedding llm=1.207, code=0.670, parameter-extractor=0.441, doc-extractor=0.408",
+          "stage2:ranking llm=0.592, http-request=0.421, code=0.417, parameter-extractor=0.350",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 1.2070715860429257,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.5922629075337362
+          },
+          {
+            "node_type": "http-request",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.42100000000000004
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.6696743993055151,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.41729580777776487
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.44058301840505343,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.34998656588961713
+          }
+        ]
+      }
+    ],
+    "hybrid-local": [
+      {
+        "case_id": "cn_llm_1",
+        "case_name": "生成摘要",
+        "category": "llm",
+        "description": "请根据文章内容生成摘要",
+        "expected_node": "llm",
+        "predicted_node": "llm",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.7498366988121687,
+        "runner_up_score": 0.3525044250593772,
+        "decision_reason": "two-stage rank selected llm",
+        "trace": [
+          "stage1:rule-hit count=1 preview=生成摘要",
+          "stage2:semantic-candidates backend=hybrid llm=0.449, parameter-extractor=0.448, if-else=0.419, code=0.213",
+          "stage2:ranking llm=0.750, parameter-extractor=0.353, code=0.271, if-else=0.164",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "llm",
+            "rule_score": 1.0,
+            "semantic_score": 0.44948968378802706,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.7498366988121687
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.44845132831055357,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.3525044250593772
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.2126884318915138,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.27106029820528443
+          },
+          {
+            "node_type": "if-else",
+            "rule_score": 0.0,
+            "semantic_score": 0.41905327685580473,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 1.0,
+            "total_score": 0.16409704859385751
+          }
+        ]
+      },
+      {
+        "case_id": "cn_http_1",
+        "case_name": "调用天气接口",
+        "category": "http-request",
+        "description": "调用天气API，使用url和get方法获取结果",
+        "expected_node": "http-request",
+        "predicted_node": "http-request",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.885448377568992,
+        "runner_up_score": 0.35135522579438183,
+        "decision_reason": "two-stage rank selected http-request",
+        "trace": [
+          "stage1:rule-hit count=1 preview=调用天气接口",
+          "stage2:semantic-candidates backend=hybrid http-request=0.826, parameter-extractor=0.445, llm=0.367, if-else=0.346",
+          "stage2:ranking http-request=0.885, parameter-extractor=0.351, llm=0.324, code=0.288",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "http-request",
+            "rule_score": 1.0,
+            "semantic_score": 0.8264011799030999,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.885448377568992
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.4448600806074431,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.35135522579438183
+          },
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 0.36728074820310574,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.32352983942499386
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.26560779838972387,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.2879944954847117
+          }
+        ]
+      },
+      {
+        "case_id": "cn_template_1",
+        "case_name": "套用模板生成通知",
+        "category": "template-transform",
+        "description": "根据模板生成通知文本",
+        "expected_node": "template-transform",
+        "predicted_node": "template-transform",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.6066926802106662,
+        "runner_up_score": 0.340033681149675,
+        "decision_reason": "two-stage rank selected template-transform",
+        "trace": [
+          "stage1:no-rule-hit",
+          "stage2:semantic-candidates backend=hybrid template-transform=1.215, if-else=0.442, code=0.428, http-request=0.373",
+          "stage2:ranking template-transform=0.607, code=0.340, if-else=0.171",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 1.214664625658332,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.6066926802106662
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.42823025359273453,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.340033681149675
+          },
+          {
+            "node_type": "if-else",
+            "rule_score": 0.0,
+            "semantic_score": 0.441585226738848,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 1.0,
+            "total_score": 0.17130727255643136
+          }
+        ]
+      },
+      {
+        "case_id": "cn_iteration_1",
+        "case_name": "遍历文件列表",
+        "category": "iteration",
+        "description": "遍历文件列表并逐个处理",
+        "expected_node": "iteration",
+        "predicted_node": "iteration",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.9118465606294597,
+        "runner_up_score": 0.3330871004297532,
+        "decision_reason": "two-stage rank selected iteration",
+        "trace": [
+          "stage1:rule-hit count=2 preview=遍历, 遍历文件",
+          "stage2:semantic-candidates backend=hybrid iteration=0.835, parameter-extractor=0.388, http-request=0.302, template-transform=0.282",
+          "stage2:ranking iteration=0.912, parameter-extractor=0.333, code=0.203, http-request=0.118",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "iteration",
+            "rule_score": 1.0,
+            "semantic_score": 0.8354580019670618,
+            "coverage_score": 1.0,
+            "context_score": 0.35,
+            "priority_bonus": 0.9,
+            "total_score": 0.9118465606294597
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.38777218884297865,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.3330871004297532
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          },
+          {
+            "node_type": "http-request",
+            "rule_score": 0.0,
+            "semantic_score": 0.3017488984882902,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.11755964751625286
+          }
+        ]
+      },
+      {
+        "case_id": "cn_if_1",
+        "case_name": "条件判断分流",
+        "category": "if-else",
+        "description": "根据 conditions 条件判断是否进入告警分支",
+        "expected_node": "if-else",
+        "predicted_node": "if-else",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.6425000000000001,
+        "runner_up_score": 0.41474571520899484,
+        "decision_reason": "two-stage rank selected if-else",
+        "trace": [
+          "stage1:rule-hit count=2 preview=条件, 判断",
+          "stage2:semantic-candidates backend=hybrid code=0.662, iteration=0.386, template-transform=0.385, doc-extractor=0.351",
+          "stage2:ranking if-else=0.643, code=0.415, iteration=0.151, template-transform=0.141",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "if-else",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.25,
+            "priority_bonus": 1.0,
+            "total_score": 0.6425000000000001
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.6617053600281088,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.41474571520899484
+          },
+          {
+            "node_type": "iteration",
+            "rule_score": 0.0,
+            "semantic_score": 0.3862921688539359,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.9,
+            "total_score": 0.1506134940332595
+          },
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.3849421569384419,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.1411814902203014
+          }
+        ]
+      },
+      {
+        "case_id": "cn_tool_1",
+        "case_name": "调用搜索工具",
+        "category": "tool",
+        "description": "调用搜索工具查询资料",
+        "expected_node": "tool",
+        "predicted_node": "tool",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.9754632157396552,
+        "runner_up_score": 0.36167634492452777,
+        "decision_reason": "two-stage rank selected tool",
+        "trace": [
+          "stage1:rule-hit count=1 preview=调用搜索工具",
+          "stage2:semantic-candidates backend=hybrid tool=1.103, code=0.496, llm=0.460, http-request=0.305",
+          "stage2:ranking tool=0.975, code=0.362, llm=0.353",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "tool",
+            "rule_score": 1.0,
+            "semantic_score": 1.1030100491864228,
+            "coverage_score": 1.0,
+            "context_score": 0.15,
+            "priority_bonus": 0.5,
+            "total_score": 0.9754632157396552
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.49586357788914925,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.36167634492452777
+          },
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 0.4600380811250511,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.35321218596001636
+          }
+        ]
+      },
+      {
+        "case_id": "cn_doc_1",
+        "case_name": "解析合同文件",
+        "category": "doc-extractor",
+        "description": "读取合同PDF并提取正文内容",
+        "expected_node": "doc-extractor",
+        "predicted_node": "doc-extractor",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.8425365998900516,
+        "runner_up_score": 0.3366779164954652,
+        "decision_reason": "two-stage rank selected doc-extractor",
+        "trace": [
+          "stage1:rule-hit count=2 preview=读取合同, 解析合同",
+          "stage2:semantic-candidates backend=hybrid doc-extractor=0.720, code=0.418, template-transform=0.313, llm=0.311",
+          "stage2:ranking doc-extractor=0.843, code=0.337, template-transform=0.118",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "doc-extractor",
+            "rule_score": 1.0,
+            "semantic_score": 0.7204268746564109,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.4,
+            "total_score": 0.8425365998900516
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.41774348904832864,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.3366779164954652
+          },
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.31290205605382604,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.11812865793722434
+          }
+        ]
+      },
+      {
+        "case_id": "cn_param_1",
+        "case_name": "抽取用户意图和槽位",
+        "category": "parameter-extractor",
+        "description": "从用户消息中抽取意图、实体和参数字段",
+        "expected_node": "parameter-extractor",
+        "predicted_node": "parameter-extractor",
+        "correct": true,
+        "degraded": false,
+        "confidence": "high",
+        "chosen_score": 0.6090000000000001,
+        "runner_up_score": 0.39396343461248307,
+        "decision_reason": "two-stage rank selected parameter-extractor",
+        "trace": [
+          "stage1:rule-hit count=1 preview=抽取意图",
+          "stage2:semantic-candidates backend=hybrid llm=0.587, tool=0.440, doc-extractor=0.359, if-else=0.212",
+          "stage2:ranking parameter-extractor=0.609, llm=0.394, code=0.203, tool=0.156, doc-extractor=0.127",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.6090000000000001
+          },
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 0.5873857331640094,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.39396343461248307
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.203
+          },
+          {
+            "node_type": "tool",
+            "rule_score": 0.0,
+            "semantic_score": 0.4396844062654435,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.5,
+            "total_score": 0.1556990100049419
+          },
+          {
+            "node_type": "doc-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.35863343683663196,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.4,
+            "total_score": 0.12676269978772223
+          }
+        ]
+      },
+      {
+        "case_id": "cn_agg_1",
+        "case_name": "合并多路结果",
+        "category": "variable-aggregator",
+        "description": "聚合多个分支输出结果",
+        "expected_node": "variable-aggregator",
+        "predicted_node": "variable-aggregator",
+        "correct": true,
+        "degraded": false,
+        "confidence": "medium",
+        "chosen_score": 0.4906666666666667,
+        "runner_up_score": 0.3363333333333334,
+        "decision_reason": "two-stage rank selected variable-aggregator",
+        "trace": [
+          "stage1:rule-hit count=3 preview=聚合, 合并结果, 合并结果",
+          "stage2:semantic-candidates backend=hybrid template-transform=0.429, doc-extractor=0.347, iteration=0.339, tool=0.269",
+          "stage2:ranking variable-aggregator=0.491, code=0.336, template-transform=0.155, iteration=0.136, doc-extractor=0.123",
+          "landing-check:passed"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "variable-aggregator",
+            "rule_score": 0.6666666666666666,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.8,
+            "total_score": 0.4906666666666667
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.3333333333333333,
+            "semantic_score": 0.0,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.3363333333333334
+          },
+          {
+            "node_type": "template-transform",
+            "rule_score": 0.0,
+            "semantic_score": 0.4287686723476346,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.6,
+            "total_score": 0.15520597515124307
+          },
+          {
+            "node_type": "iteration",
+            "rule_score": 0.0,
+            "semantic_score": 0.3392056895642908,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.9,
+            "total_score": 0.13554582066057305
+          },
+          {
+            "node_type": "doc-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.3470128274154317,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.4,
+            "total_score": 0.12304410477293815
+          }
+        ]
+      },
+      {
+        "case_id": "cn_http_missing_1",
+        "case_name": "请求外部服务",
+        "category": "degrade-case",
+        "description": "调用外部接口返回数据",
+        "expected_node": "code",
+        "predicted_node": "code",
+        "correct": true,
+        "degraded": true,
+        "confidence": "low",
+        "chosen_score": 0.42100000000000004,
+        "runner_up_score": 0.418444599143555,
+        "decision_reason": "reranked type missing params, fallback to code",
+        "trace": [
+          "stage1:rule-hit count=2 preview=请求外部服务, 调用外部接口",
+          "stage2:semantic-candidates backend=hybrid llm=0.664, code=0.466, parameter-extractor=0.242, doc-extractor=0.225",
+          "stage2:ranking http-request=0.421, llm=0.418, code=0.352, parameter-extractor=0.287",
+          "landing-check:failed missing required params: url, method",
+          "fallback:code"
+        ],
+        "candidate_scores": [
+          {
+            "node_type": "http-request",
+            "rule_score": 1.0,
+            "semantic_score": 0.0,
+            "coverage_score": 0.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.7,
+            "total_score": 0.42100000000000004
+          },
+          {
+            "node_type": "llm",
+            "rule_score": 0.0,
+            "semantic_score": 0.6638893723236092,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.19999999999999996,
+            "total_score": 0.418444599143555
+          },
+          {
+            "node_type": "code",
+            "rule_score": 0.0,
+            "semantic_score": 0.46562803781158046,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.09999999999999998,
+            "total_score": 0.35200097209970577
+          },
+          {
+            "node_type": "parameter-extractor",
+            "rule_score": 0.0,
+            "semantic_score": 0.24232066012277942,
+            "coverage_score": 1.0,
+            "context_score": 0.0,
+            "priority_bonus": 0.30000000000000004,
+            "total_score": 0.2865426112392894
+          }
+        ]
+      }
+    ]
+  }
+}

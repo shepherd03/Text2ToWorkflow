@@ -1,6 +1,7 @@
 import uuid
 import datetime
 import json
+from typing import Any
 from src.core.schema import UTR, UTRMetadata, Action, Resource, Variable
 from src.core.llm_client import DeepSeekClient
 from src.core.config import Settings, load_settings
@@ -23,6 +24,41 @@ class UTRGenerator:
             metadata=metadata,
             create_time=datetime.datetime.now().isoformat()
         )
+
+    def _normalize_dependencies(
+        self,
+        actions: list[Action],
+        deps: list[dict[str, str]],
+    ) -> list[dict[str, str]]:
+        valid_action_ids = {action.action_id for action in actions if action.action_id}
+        normalized: list[dict[str, str]] = []
+        seen_pairs: set[tuple[str, str]] = set()
+
+        for dep in deps:
+            from_id = str(dep.get("from", "")).strip()
+            to_id = str(dep.get("to", "")).strip()
+            reason = str(dep.get("reason", "")).strip()
+
+            # Drop malformed, dangling, or self-referential edges before planning.
+            if not from_id or not to_id:
+                continue
+            if from_id not in valid_action_ids or to_id not in valid_action_ids:
+                continue
+            if from_id == to_id:
+                continue
+
+            pair = (from_id, to_id)
+            if pair in seen_pairs:
+                continue
+
+            seen_pairs.add(pair)
+            normalized.append({
+                "from": from_id,
+                "to": to_id,
+                "reason": reason,
+            })
+
+        return normalized
 
     def _extract_core_elements(self, task_desc: str) -> UTRMetadata:
         if not self.llm_client:
@@ -74,7 +110,7 @@ class UTRGenerator:
             actions = [Action(**act) for act in result.get("core_actions", [])]
             resources = [Resource(**res) for res in result.get("core_resources", [])]
             variables = [Variable(**var) for var in result.get("core_variables", [])]
-            deps = result.get("implicit_dependencies", [])
+            deps = self._normalize_dependencies(actions, result.get("implicit_dependencies", []))
 
             return UTRMetadata(
                 task_goal=result.get("task_goal", ""),
@@ -84,5 +120,4 @@ class UTRGenerator:
                 implicit_dependencies=deps
             )
         except Exception as e:
-            print(f"Error extracting core elements: {e}")
-            return UTRMetadata(task_goal="error", core_actions=[], core_resources=[], core_variables=[], implicit_dependencies=[])
+            raise RuntimeError(f"Error extracting core elements: {e}") from e

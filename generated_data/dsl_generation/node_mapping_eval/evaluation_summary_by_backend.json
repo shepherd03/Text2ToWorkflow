@@ -1,0 +1,596 @@
+{
+  "comparison": {
+    "valid": {
+      "tfidf": {
+        "accuracy": 0.8387096774193549,
+        "macro_f1": 0.8497354497354497,
+        "degradation_accuracy": null,
+        "seen_accuracy": 1.0,
+        "unseen_accuracy": 0.6666666666666666
+      },
+      "embedding-local": {
+        "accuracy": 0.6129032258064516,
+        "macro_f1": 0.645679012345679,
+        "degradation_accuracy": null,
+        "seen_accuracy": 0.9375,
+        "unseen_accuracy": 0.26666666666666666
+      },
+      "hybrid-local": {
+        "accuracy": 0.8387096774193549,
+        "macro_f1": 0.8497354497354497,
+        "degradation_accuracy": null,
+        "seen_accuracy": 1.0,
+        "unseen_accuracy": 0.6666666666666666
+      }
+    },
+    "test": {
+      "tfidf": {
+        "accuracy": 0.9393939393939394,
+        "macro_f1": 0.9312169312169313,
+        "degradation_accuracy": null,
+        "seen_accuracy": 1.0,
+        "unseen_accuracy": 0.8571428571428571
+      },
+      "embedding-local": {
+        "accuracy": 0.7575757575757576,
+        "macro_f1": 0.7497354497354497,
+        "degradation_accuracy": null,
+        "seen_accuracy": 0.8421052631578947,
+        "unseen_accuracy": 0.6428571428571429
+      },
+      "hybrid-local": {
+        "accuracy": 0.8787878787878788,
+        "macro_f1": 0.8756613756613756,
+        "degradation_accuracy": null,
+        "seen_accuracy": 1.0,
+        "unseen_accuracy": 0.7142857142857143
+      }
+    },
+    "hard": {
+      "tfidf": {
+        "accuracy": 0.9111111111111111,
+        "macro_f1": 0.9197530864197532,
+        "degradation_accuracy": 0.5,
+        "seen_accuracy": null,
+        "unseen_accuracy": 0.9111111111111111
+      },
+      "embedding-local": {
+        "accuracy": 0.7333333333333333,
+        "macro_f1": 0.741662658329325,
+        "degradation_accuracy": 0.0,
+        "seen_accuracy": null,
+        "unseen_accuracy": 0.7333333333333333
+      },
+      "hybrid-local": {
+        "accuracy": 0.8,
+        "macro_f1": 0.8146785313451981,
+        "degradation_accuracy": 0.5,
+        "seen_accuracy": null,
+        "unseen_accuracy": 0.8
+      }
+    }
+  },
+  "backends": {
+    "tfidf": {
+      "backend": "tfidf",
+      "valid": {
+        "name": "valid",
+        "backend": "tfidf",
+        "sample_count": 31,
+        "metrics": {
+          "sample_count": 31,
+          "accuracy": 0.8387096774193549,
+          "macro_f1": 0.8497354497354497,
+          "degradation_accuracy": null,
+          "seen_accuracy": 1.0,
+          "unseen_accuracy": 0.6666666666666666,
+          "per_label_accuracy": {
+            "code": 0.75,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 0.2,
+            "parameter-extractor": 1.0,
+            "template-transform": 1.0,
+            "tool": 1.0,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 3,
+            "iteration": 1
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 3
+          },
+          "iteration": {
+            "iteration": 3
+          },
+          "llm": {
+            "if-else": 4,
+            "llm": 1
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 3
+          },
+          "template-transform": {
+            "template-transform": 4
+          },
+          "tool": {
+            "tool": 3
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 2
+          }
+        }
+      },
+      "test": {
+        "name": "test",
+        "backend": "tfidf",
+        "sample_count": 33,
+        "metrics": {
+          "sample_count": 33,
+          "accuracy": 0.9393939393939394,
+          "macro_f1": 0.9312169312169313,
+          "degradation_accuracy": null,
+          "seen_accuracy": 1.0,
+          "unseen_accuracy": 0.8571428571428571,
+          "per_label_accuracy": {
+            "code": 0.5,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 1.0,
+            "parameter-extractor": 1.0,
+            "template-transform": 1.0,
+            "tool": 1.0,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 2,
+            "iteration": 1,
+            "parameter-extractor": 1
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 3
+          },
+          "iteration": {
+            "iteration": 3
+          },
+          "llm": {
+            "llm": 5
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 3
+          },
+          "template-transform": {
+            "template-transform": 4
+          },
+          "tool": {
+            "tool": 4
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 3
+          }
+        }
+      },
+      "hard": {
+        "name": "hard",
+        "backend": "tfidf",
+        "sample_count": 45,
+        "metrics": {
+          "sample_count": 45,
+          "accuracy": 0.9111111111111111,
+          "macro_f1": 0.9197530864197532,
+          "degradation_accuracy": 0.5,
+          "seen_accuracy": null,
+          "unseen_accuracy": 0.9111111111111111,
+          "per_label_accuracy": {
+            "code": 0.5,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 1.0,
+            "parameter-extractor": 1.0,
+            "template-transform": 1.0,
+            "tool": 1.0,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 4,
+            "if-else": 1,
+            "iteration": 1,
+            "parameter-extractor": 2
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 4
+          },
+          "iteration": {
+            "iteration": 4
+          },
+          "llm": {
+            "llm": 6
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 5
+          },
+          "template-transform": {
+            "template-transform": 5
+          },
+          "tool": {
+            "tool": 4
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 5
+          }
+        }
+      }
+    },
+    "embedding-local": {
+      "backend": "embedding-local",
+      "valid": {
+        "name": "valid",
+        "backend": "embedding-local",
+        "sample_count": 31,
+        "metrics": {
+          "sample_count": 31,
+          "accuracy": 0.6129032258064516,
+          "macro_f1": 0.645679012345679,
+          "degradation_accuracy": null,
+          "seen_accuracy": 0.9375,
+          "unseen_accuracy": 0.26666666666666666,
+          "per_label_accuracy": {
+            "code": 0.5,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 0.6666666666666666,
+            "llm": 0.2,
+            "parameter-extractor": 1.0,
+            "template-transform": 0.25,
+            "tool": 0.3333333333333333,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 2,
+            "iteration": 1,
+            "llm": 1
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 3
+          },
+          "iteration": {
+            "code": 1,
+            "iteration": 2
+          },
+          "llm": {
+            "if-else": 4,
+            "llm": 1
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 3
+          },
+          "template-transform": {
+            "llm": 3,
+            "template-transform": 1
+          },
+          "tool": {
+            "code": 2,
+            "tool": 1
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 2
+          }
+        }
+      },
+      "test": {
+        "name": "test",
+        "backend": "embedding-local",
+        "sample_count": 33,
+        "metrics": {
+          "sample_count": 33,
+          "accuracy": 0.7575757575757576,
+          "macro_f1": 0.7497354497354497,
+          "degradation_accuracy": null,
+          "seen_accuracy": 0.8421052631578947,
+          "unseen_accuracy": 0.6428571428571429,
+          "per_label_accuracy": {
+            "code": 0.25,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 1.0,
+            "parameter-extractor": 1.0,
+            "template-transform": 0.75,
+            "tool": 0.0,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 1,
+            "iteration": 1,
+            "llm": 2
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 3
+          },
+          "iteration": {
+            "iteration": 3
+          },
+          "llm": {
+            "llm": 5
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 3
+          },
+          "template-transform": {
+            "code": 1,
+            "template-transform": 3
+          },
+          "tool": {
+            "code": 4
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 3
+          }
+        }
+      },
+      "hard": {
+        "name": "hard",
+        "backend": "embedding-local",
+        "sample_count": 45,
+        "metrics": {
+          "sample_count": 45,
+          "accuracy": 0.7333333333333333,
+          "macro_f1": 0.741662658329325,
+          "degradation_accuracy": 0.0,
+          "seen_accuracy": null,
+          "unseen_accuracy": 0.7333333333333333,
+          "per_label_accuracy": {
+            "code": 0.25,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 1.0,
+            "parameter-extractor": 1.0,
+            "template-transform": 0.4,
+            "tool": 0.25,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 2,
+            "if-else": 1,
+            "iteration": 1,
+            "llm": 3,
+            "parameter-extractor": 1
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 4
+          },
+          "iteration": {
+            "iteration": 4
+          },
+          "llm": {
+            "llm": 6
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 5
+          },
+          "template-transform": {
+            "code": 2,
+            "llm": 1,
+            "template-transform": 2
+          },
+          "tool": {
+            "code": 3,
+            "tool": 1
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 5
+          }
+        }
+      }
+    },
+    "hybrid-local": {
+      "backend": "hybrid-local",
+      "valid": {
+        "name": "valid",
+        "backend": "hybrid-local",
+        "sample_count": 31,
+        "metrics": {
+          "sample_count": 31,
+          "accuracy": 0.8387096774193549,
+          "macro_f1": 0.8497354497354497,
+          "degradation_accuracy": null,
+          "seen_accuracy": 1.0,
+          "unseen_accuracy": 0.6666666666666666,
+          "per_label_accuracy": {
+            "code": 0.75,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 0.2,
+            "parameter-extractor": 1.0,
+            "template-transform": 1.0,
+            "tool": 1.0,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 3,
+            "iteration": 1
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 3
+          },
+          "iteration": {
+            "iteration": 3
+          },
+          "llm": {
+            "if-else": 4,
+            "llm": 1
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 3
+          },
+          "template-transform": {
+            "template-transform": 4
+          },
+          "tool": {
+            "tool": 3
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 2
+          }
+        }
+      },
+      "test": {
+        "name": "test",
+        "backend": "hybrid-local",
+        "sample_count": 33,
+        "metrics": {
+          "sample_count": 33,
+          "accuracy": 0.8787878787878788,
+          "macro_f1": 0.8756613756613756,
+          "degradation_accuracy": null,
+          "seen_accuracy": 1.0,
+          "unseen_accuracy": 0.7142857142857143,
+          "per_label_accuracy": {
+            "code": 0.25,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 1.0,
+            "parameter-extractor": 1.0,
+            "template-transform": 0.75,
+            "tool": 1.0,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 1,
+            "iteration": 1,
+            "llm": 2
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 3
+          },
+          "iteration": {
+            "iteration": 3
+          },
+          "llm": {
+            "llm": 5
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 3
+          },
+          "template-transform": {
+            "code": 1,
+            "template-transform": 3
+          },
+          "tool": {
+            "tool": 4
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 3
+          }
+        }
+      },
+      "hard": {
+        "name": "hard",
+        "backend": "hybrid-local",
+        "sample_count": 45,
+        "metrics": {
+          "sample_count": 45,
+          "accuracy": 0.8,
+          "macro_f1": 0.8146785313451981,
+          "degradation_accuracy": 0.5,
+          "seen_accuracy": null,
+          "unseen_accuracy": 0.8,
+          "per_label_accuracy": {
+            "code": 0.375,
+            "http-request": 1.0,
+            "if-else": 1.0,
+            "iteration": 1.0,
+            "llm": 1.0,
+            "parameter-extractor": 1.0,
+            "template-transform": 0.6,
+            "tool": 0.5,
+            "variable-aggregator": 1.0
+          }
+        },
+        "confusion_matrix": {
+          "code": {
+            "code": 3,
+            "if-else": 1,
+            "iteration": 1,
+            "llm": 2,
+            "parameter-extractor": 1
+          },
+          "http-request": {
+            "http-request": 4
+          },
+          "if-else": {
+            "if-else": 4
+          },
+          "iteration": {
+            "iteration": 4
+          },
+          "llm": {
+            "llm": 6
+          },
+          "parameter-extractor": {
+            "parameter-extractor": 5
+          },
+          "template-transform": {
+            "code": 1,
+            "llm": 1,
+            "template-transform": 3
+          },
+          "tool": {
+            "code": 2,
+            "tool": 2
+          },
+          "variable-aggregator": {
+            "variable-aggregator": 5
+          }
+        }
+      }
+    }
+  }
+}

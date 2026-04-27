@@ -1,109 +1,159 @@
-# 统一任务表示 (UTR) 与工作流骨架规划系统
+# UTR Workflow Compiler
 
-本项目旨在将用户的自然语言任务描述，通过分析和提取转化为**统一任务表示 (UTR)**，并以此为基础自动生成**工作流骨架 (Skeleton)**。系统遵循模块化、职责分离和数据持久化的原则进行设计。
+本项目用于把自然语言任务或已有 Dify DSL 数据转化为可验证、可评测的工作流表示。当前主链路是：
 
-## 架构设计
-
-系统核心架构分为三大主要模块：
-
-1. **UTR 生成模块 (`src/utr_generation`)**
-   负责解析用户的自然语言需求，仅提取与后续流程相关的**基础元数据**（不涉及复杂的控制流逻辑）。
-   核心类：`UTRGenerator`
-   - 解析任务目标
-   - 提取核心动作 (`core_actions`)
-   - 提取涉及的关键资源和变量 (`core_resources`, `core_variables`)
-   - 分析自然语言中的潜在依赖关系 (`implicit_dependencies`)
-
-2. **骨架规划模块 (`src/skeleton_planning`)**
-   根据 UTR 模块提供的基础元数据，通过拓扑排序和逻辑分析构建出实际的**执行骨架 (Skeleton Tree)**。
-   核心类：`SkeletonPlanner`
-   - 接收 `UTR` 对象作为输入
-   - 依据 `implicit_dependencies` 构建依赖图
-   - 生成由顺序 (`Sequential`) 和并行 (`Parallel`) 块组成的树状工作流结构
-
-3. **通用核心模块 (`src/core`)**
-   提供全局共享的数据结构、配置管理和基础工具。
-   - `schema.py`: 定义所有模块交互的 Pydantic 数据模型 (如 `UTR`, `Action`, `Block` 等)
-   - `llm_client.py`: 大模型 API 客户端
-   - `utils.py`: 数据持久化、JSON 格式化等通用函数
-
-## 核心数据流设计 (Schema)
-
-为保证模块职责清晰，避免 UTR 抢占骨架规划的职责，UTR 数据结构设计为仅包含参考性元数据的轻量级载体：
-
-```python
-class UTRMetadata(BaseModel):
-    task_goal: str 
-    core_actions: list[Action] 
-    core_resources: list[Resource] 
-    core_variables: list[Variable] 
-    implicit_dependencies: list[dict[str, str]] # 形如: [{"from": "act_1", "to": "act_2", "reason": "..."}]
-
-class UTR(BaseModel):
-    task_id: str 
-    task_desc: str 
-    metadata: UTRMetadata 
-    create_time: str 
+```text
+dataset/instruction -> UTR -> Skeleton -> Dify Workflow DSL -> Evaluation
 ```
 
-## 数据持久化规范
+它不是单个脚本项目，而是一个分阶段的工作流编译系统：前两阶段负责抽取任务语义与规划结构，第三阶段负责映射 Dify 节点并生成 workflow graph，评测链路负责量化 UTR 与节点映射质量。当前重点已推进到第三阶段 DSL 可落地性：业务节点输入会按 Skeleton 上游绑定，条件和并行通过 join 汇合，循环会生成 iteration 容器、iteration-start 内部起点和 loop join，Dify 节点数据结构按外部样本持续对齐。
 
-为支持测试及多阶段流程的历史数据复用，所有生成的数据必须持久化至 `generated_data/` 目录中，格式为 `JSONL` (JSON Lines)，每行代表一个完整记录。
+## 项目结构
 
-- **UTR 数据存储**: `generated_data/utr_generation/utrs.jsonl`
-- **骨架数据存储**: `generated_data/skeleton_planning/iter<N>/skeletons.jsonl`
-
-### 核心流程图
-
-```plantuml
-@startuml
-skinparam componentStyle uml2
-
-package "UTR 生成阶段 (UTR Generation)" {
-  [动作抽取] --> [依赖解析]
-  [依赖解析] --> [元数据封装]
-}
-
-package "骨架规划阶段 (Skeleton Planning)" {
-  [元数据封装] --> [DAG 构建]
-  [DAG 构建] --> [拓扑排序与分块]
-  [拓扑排序与分块] --> [LLM 条件校验]
-  [LLM 条件校验] --> [AST 生成]
-}
-
-package "量化评估阶段 (Evaluation)" {
-  [元数据封装] --> [纯净度 M_pur]
-  [DAG 构建] --> [依赖度 M_dep]
-}
-@enduml
+```text
+api.py                         FastAPI 服务入口
+main.py                        单条自然语言任务的 CLI 入口
+dataset/                       原始样本，包含 instruction 与 Dify DSL
+src/core/                      全局配置、LLM 客户端、Pydantic Schema
+src/utr_generation/            自然语言 -> UTR
+src/skeleton_planning/         UTR -> Skeleton
+src/dsl_generation/            UTR + Skeleton -> Dify Workflow DSL
+scripts/                       批处理、评测、外部数据集构造脚本
+tests/                         单元测试与链路测试
+generated_data/                批处理输出与评测产物
+docs/                          稳定开发文档
 ```
 
-## 二、 快速使用指南
+## 快速开始
 
-### 1. 生成 UTR
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+copy .env.example .env
+```
 
-使用 `scripts/01_generate_utrs.py` 从数据集中随机抽取任务生成 UTR，并保存至持久化目录：
+如需调用 LLM 生成真实 UTR，在 `.env` 中配置：
+
+```env
+DEEPSEEK_API_KEY=your_key
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
+```
+
+不配置 API key 时，UTR 生成会走测试 fallback，适合本地测试结构链路。
+
+## 主链路命令
+
+1. 生成 UTR：
 
 ```bash
 python scripts/01_generate_utrs.py
 ```
 
-### 2. 生成骨架规划
+默认输出：
 
-使用 `scripts/02_test_skeleton_planner.py` 读取上一步生成的 UTR 数据，进行骨架构建：
-
-```bash
-python scripts/02_test_skeleton_planner.py
+```text
+generated_data/utr_generation/utrs.jsonl
+generated_data/utr_generation/run_<timestamp>/utrs.jsonl
 ```
 
-### 3. **运行测试用例**
+2. 规划 Skeleton：
+
+```bash
+python scripts/02_plan_skeletons.py
+```
+
+默认读取 `generated_data/utr_generation/utrs.jsonl`，输出：
+
+```text
+generated_data/skeleton_planning/iter2/skeletons.jsonl
+generated_data/skeleton_planning/iter2/errors.json
+```
+
+3. 编译 Dify Workflow：
+
+```bash
+python scripts/03_compile_dify_workflows.py
+```
+
+默认读取 UTR 与 Skeleton，输出：
+
+```text
+generated_data/dsl_generation/dsls.jsonl
+generated_data/dsl_generation/errors.json
+```
+
+当前第三阶段验证基线：`generated_data/skeleton_planning/iter2/skeletons.jsonl` 中 31 条样本应编译为 `Success: 31, Errors: 0`。临时验证请把输出写入 `$env:TEMP`，避免覆盖稳定产物。
+
+4. 构建 UTR 真值并评测：
+
+```bash
+python scripts/04_build_utr_ground_truth.py
+python scripts/05_evaluate_utrs.py
+```
+
+5. 节点映射评测：
+
+```bash
+python scripts/07_prepare_node_mapping_eval_data.py
+python scripts/08_evaluate_node_mapping_generalization.py
+```
+
+6. 外部 Dify 数据集链路：
+
+```bash
+python scripts/13_build_dify_external_dataset.py
+python scripts/14_prepare_dify_external_eval_from_dataset.py
+python scripts/12_evaluate_dify_external_node_mapping.py
+python scripts/15_analyze_dify_external_dataset.py
+```
+
+## 服务入口
+
+启动 API：
+
+```bash
+uvicorn api:app --reload
+```
+
+接口：
+
+```text
+GET  /health
+POST /utr/generate
+```
+
+单条 CLI：
+
+```bash
+python main.py --text "读取文章并生成摘要" --pretty
+```
+
+## 测试
 
 ```bash
 python -m pytest tests/
 ```
 
-## 改进反思与未来规划
+测试覆盖 UTR 依赖归一化、Skeleton 拓扑规划、DSL 输入校验、结构归一化、Dify 编译、节点映射、语义检索与外部数据集工具。
 
-- **功能边界明确**：重构后的 UTR 仅作为需求分析的结果输出，不再承担构建条件分支、循环等控制逻辑的任务。这些任务交由专门的骨架规划模块处理，使得模块职责更加单一。
-- **大模型辅助校验 (LLM-Assisted Validation)**：为解决全程使用大模型生成导致的“黑盒”问题和创新度不足，骨架规划模块采用了**“算法主导 + 大模型辅助”**的架构。首先由算法（拓扑排序）基于 `implicit_dependencies` 构建出确定性的基础骨架，随后调用大模型作为“校验者”，基于任务描述敏锐捕捉“批量”、“如果”等关键词，向骨架中注入缺失的复杂控制流（如 Conditional 分支和 Loop 循环）。这既保证了生成结果的可控性，又兼顾了对自然语言复杂逻辑的理解能力。
-- **扩展性**：未来骨架规划模块可进一步结合规则引擎，形成更加严密的 AST（抽象语法树）校验。
+涉及 `src/dsl_generation/` 的改动还应运行：
+
+```powershell
+python scripts/03_compile_dify_workflows.py `
+  --output-file "$env:TEMP\utr_smoke_dsls.jsonl" `
+  --error-file "$env:TEMP\utr_smoke_errors.json"
+```
+
+## 文档索引
+
+- [架构与链路](docs/ARCHITECTURE.md)
+- [模块开发指南](docs/MODULE_GUIDE.md)
+- [开发与运行手册](docs/DEVELOPMENT.md)
+- [项目规则](docs/PROJECT_RULES.md)
+- [Dify DSL 参考](docs/dify-dsl-spec-codex.md)
+
+## 维护原则
+
+项目默认采用 Schema-first 的分阶段设计。UTR 只描述任务元数据，Skeleton 只负责执行结构，DSL 模块只处理 Dify 适配与节点映射。阶段性汇报和一次性分析不要放入 `docs/` 根目录；可复现的评测结果放在 `generated_data/`，稳定结论沉淀到 `docs/`。

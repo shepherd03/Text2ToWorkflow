@@ -1,0 +1,12 @@
+{
+  "dataset_path": "generated_data\\dify_external_dataset\\dataset.jsonl",
+  "source_split_dir": "generated_data\\dsl_generation\\dify_external_node_mapping_eval_from_dataset",
+  "target_eval_dir": "generated_data\\dsl_generation\\dify_external_node_mapping_eval",
+  "counts": {
+    "train": 348,
+    "valid": 118,
+    "test": 121
+  },
+  "external_eval_sample_count": 587,
+  "external_eval_mode": "full_external_pool"
+}

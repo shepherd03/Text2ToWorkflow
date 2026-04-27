@@ -1,0 +1,50 @@
+{
+  "train_count": 86,
+  "valid_count": 31,
+  "test_count": 33,
+  "hard_count": 45,
+  "train_distribution": {
+    "code": 12,
+    "http-request": 10,
+    "if-else": 8,
+    "iteration": 8,
+    "llm": 14,
+    "parameter-extractor": 8,
+    "template-transform": 10,
+    "tool": 9,
+    "variable-aggregator": 7
+  },
+  "valid_distribution": {
+    "code": 4,
+    "http-request": 4,
+    "if-else": 3,
+    "iteration": 3,
+    "llm": 5,
+    "parameter-extractor": 3,
+    "template-transform": 4,
+    "tool": 3,
+    "variable-aggregator": 2
+  },
+  "test_distribution": {
+    "code": 4,
+    "http-request": 4,
+    "if-else": 3,
+    "iteration": 3,
+    "llm": 5,
+    "parameter-extractor": 3,
+    "template-transform": 4,
+    "tool": 4,
+    "variable-aggregator": 3
+  },
+  "hard_distribution": {
+    "code": 8,
+    "http-request": 4,
+    "if-else": 4,
+    "iteration": 4,
+    "llm": 6,
+    "parameter-extractor": 5,
+    "template-transform": 5,
+    "tool": 4,
+    "variable-aggregator": 5
+  }
+}

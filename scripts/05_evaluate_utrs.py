@@ -18,8 +18,8 @@ from core.config import load_settings
 settings = load_settings()
 llm_client = DeepSeekClient(settings)
 
-GT_FILE = os.path.join("generated_data", "utr_generation", "utr_ground_truth.jsonl")
-PRED_FILE = os.path.join("generated_data", "utr_generation", "utrs.jsonl")
+GT_FILE = os.getenv("UTR_GT_FILE", os.path.join("generated_data", "utr_generation", "utr_ground_truth.jsonl"))
+PRED_FILE = os.getenv("UTR_PRED_FILE", os.path.join("generated_data", "utr_generation", "utrs.jsonl"))
 
 # 控制流词汇黑名单 (已扩充，增加严苛度)
 CTRL_BLACKLIST = [
