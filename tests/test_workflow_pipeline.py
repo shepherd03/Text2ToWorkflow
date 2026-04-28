@@ -27,6 +27,8 @@ def test_workflow_build_pipeline_runs_to_dsl_without_llm_key():
     assert output.success is True
     assert output.stage == "dsl"
     assert output.utr_output.report.passed is True
+    assert output.utr_output.meta["generation_source"] == "fallback"
+    assert output.meta["llm_enabled"] is False
     assert output.skeleton is not None
     assert output.dsl_output is not None
     assert output.dsl_output.compile_report.success is True

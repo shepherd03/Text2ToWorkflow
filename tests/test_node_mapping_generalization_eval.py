@@ -50,6 +50,7 @@ def _prediction(
     seen_in_train: bool,
     expected_degraded: bool = False,
     predicted_degraded: bool = False,
+    confidence_score: float = 0.8,
 ) -> NodeMappingEvalPrediction:
     return NodeMappingEvalPrediction(
         sample_id="sample",
@@ -58,6 +59,7 @@ def _prediction(
         correct=expected == predicted,
         expected_degraded=expected_degraded,
         predicted_degraded=predicted_degraded,
+        confidence_score=confidence_score,
         seen_in_train=seen_in_train,
     )
 
@@ -125,6 +127,9 @@ def test_compute_metrics_exposes_seen_unseen_and_degradation():
     assert metrics.degradation_accuracy == 1.0
     assert metrics.degradation_detection_accuracy == 1.0
     assert metrics.degradation_type_accuracy == 1.0
+    assert metrics.confidence_ece is not None
+    assert metrics.confidence_brier is not None
+    assert metrics.confidence_bucket_accuracy
     assert metrics.seen_accuracy == 0.5
     assert metrics.unseen_accuracy == 1.0
     assert "llm" in metrics.per_label_accuracy
@@ -153,6 +158,22 @@ def test_compute_metrics_separates_degradation_detection_from_type_accuracy():
     assert metrics.degradation_accuracy == 0.0
     assert metrics.degradation_detection_accuracy == 0.5
     assert metrics.degradation_type_accuracy == 0.5
+
+
+def test_confidence_calibration_penalizes_overconfident_errors():
+    calibrated = [
+        _prediction(DifyNodeType.llm, DifyNodeType.llm, False, confidence_score=0.9),
+        _prediction(DifyNodeType.code, DifyNodeType.llm, False, confidence_score=0.1),
+    ]
+    overconfident = [
+        _prediction(DifyNodeType.llm, DifyNodeType.llm, False, confidence_score=0.9),
+        _prediction(DifyNodeType.code, DifyNodeType.llm, False, confidence_score=0.9),
+    ]
+
+    calibrated_metrics = eval_module.compute_confidence_calibration(calibrated)
+    overconfident_metrics = eval_module.compute_confidence_calibration(overconfident)
+
+    assert overconfident_metrics["confidence_brier"] > calibrated_metrics["confidence_brier"]
 
 
 def test_build_summary_contains_confusion_matrix():

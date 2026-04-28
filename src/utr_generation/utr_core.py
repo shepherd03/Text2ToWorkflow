@@ -10,6 +10,7 @@ class UTRGenerator:
     def __init__(self, settings: Settings | None = None):
         self.settings = settings or load_settings()
         self.llm_client = DeepSeekClient(self.settings) if self.settings.llm_enabled else None
+        self.last_generation_meta: dict[str, Any] = {}
 
     def generate_utr(self, task_desc: str) -> UTR:
         """
@@ -63,6 +64,13 @@ class UTRGenerator:
     def _extract_core_elements(self, task_desc: str) -> UTRMetadata:
         if not self.llm_client:
             # Fallback mock for testing without LLM
+            self.last_generation_meta = {
+                "generation_source": "fallback",
+                "llm_enabled": False,
+                "llm_call_count": 0,
+                "llm_model": "",
+                "llm_usage": {},
+            }
             return UTRMetadata(
                 task_goal="mock task",
                 core_actions=[Action(action_id="act_1", action_name="mock_action", description="mock")],
@@ -111,6 +119,13 @@ class UTRGenerator:
             resources = [Resource(**res) for res in result.get("core_resources", [])]
             variables = [Variable(**var) for var in result.get("core_variables", [])]
             deps = self._normalize_dependencies(actions, result.get("implicit_dependencies", []))
+            self.last_generation_meta = {
+                "generation_source": "llm",
+                "llm_enabled": True,
+                "llm_call_count": self.llm_client.call_count if self.llm_client else 0,
+                "llm_model": self.llm_client.last_model if self.llm_client else "",
+                "llm_usage": self.llm_client.last_usage if self.llm_client else {},
+            }
 
             return UTRMetadata(
                 task_goal=result.get("task_goal", ""),

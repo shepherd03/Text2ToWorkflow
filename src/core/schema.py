@@ -93,7 +93,7 @@ class UTRValidationReport(BaseModel):
 class PipelineOutput(BaseModel):
     utr: UTR
     report: UTRValidationReport
-    meta: dict[str, str | bool]
+    meta: dict[str, Any]
 
 
 class Block(BaseModel):
@@ -204,6 +204,8 @@ class NodeMappingEvalPrediction(BaseModel):
     expected_degraded: bool = False
     predicted_degraded: bool = False
     confidence: MappingConfidence = MappingConfidence.low
+    confidence_score: float = 0.0
+    confidence_margin: float = 0.0
     chosen_score: float = 0.0
     runner_up_score: float = 0.0
     seen_in_train: bool = False
@@ -218,6 +220,9 @@ class NodeMappingEvalMetrics(BaseModel):
     degradation_accuracy: Optional[float] = None
     degradation_detection_accuracy: Optional[float] = None
     degradation_type_accuracy: Optional[float] = None
+    confidence_ece: Optional[float] = None
+    confidence_brier: Optional[float] = None
+    confidence_bucket_accuracy: dict[str, dict[str, float | int]] = Field(default_factory=dict)
     seen_accuracy: Optional[float] = None
     unseen_accuracy: Optional[float] = None
     per_label_accuracy: dict[str, float] = Field(default_factory=dict)

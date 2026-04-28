@@ -38,3 +38,13 @@ def test_normalize_dependencies_filters_self_loops_duplicates_and_unknown_refs()
     assert normalized == [
         {"from": "act_1", "to": "act_2", "reason": "valid edge"},
     ]
+
+
+def test_fallback_generation_meta_records_no_llm_call():
+    generator = UTRGenerator(_build_settings())
+
+    utr = generator.generate_utr("读取文章并生成摘要")
+
+    assert utr.metadata.task_goal == "mock task"
+    assert generator.last_generation_meta["generation_source"] == "fallback"
+    assert generator.last_generation_meta["llm_call_count"] == 0

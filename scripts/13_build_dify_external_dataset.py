@@ -2,6 +2,7 @@ import json
 import os
 import re
 import sys
+import argparse
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 
@@ -74,6 +75,21 @@ INSTRUCTION_SYSTEM_PROMPT = """
 - 我想把中文翻译成英文，先翻译一遍，再润色得更自然。
 - 我想做个能自动生成完整教程的流程，只要输入主题就行。
 """.strip()
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Build an external Dify DSL dataset with LLM-generated instructions.")
+    parser.add_argument("--output-dir", default=str(OUTPUT_DIR), help="Output dataset directory.")
+    parser.add_argument("--target-count", type=int, default=TARGET_WORKFLOW_COUNT)
+    parser.add_argument("--max-issues", type=int, default=MAX_ISSUES)
+    parser.add_argument("--max-gists", type=int, default=MAX_GISTS)
+    parser.add_argument("--max-repo-files", type=int, default=MAX_REPO_FILES)
+    parser.add_argument(
+        "--novel-ratio-threshold",
+        type=float,
+        default=WORKFLOW_NOVEL_RATIO_THRESHOLD,
+    )
+    return parser.parse_args(argv)
 
 
 def reset_outputs() -> None:
@@ -334,6 +350,19 @@ def collect_repo_workflows(
 
 
 def main() -> None:
+    args = parse_args()
+    global OUTPUT_DIR, OUTPUT_DATASET_PATH, SUMMARY_PATH, MANIFEST_PATH
+    global ISSUE_CACHE_DIR, GIST_CACHE_DIR, GIST_RAW_CACHE_DIR, REPO_TREE_CACHE_DIR
+
+    OUTPUT_DIR = Path(args.output_dir)
+    OUTPUT_DATASET_PATH = OUTPUT_DIR / "dataset.jsonl"
+    SUMMARY_PATH = OUTPUT_DIR / "summary.json"
+    MANIFEST_PATH = OUTPUT_DIR / "manifest.json"
+    ISSUE_CACHE_DIR = OUTPUT_DIR / "cache" / "issues"
+    GIST_CACHE_DIR = OUTPUT_DIR / "cache" / "gists"
+    GIST_RAW_CACHE_DIR = OUTPUT_DIR / "cache" / "gist_raw"
+    REPO_TREE_CACHE_DIR = OUTPUT_DIR / "cache" / "repo_trees"
+
     reset_outputs()
 
     settings = load_settings()
@@ -345,15 +374,15 @@ def main() -> None:
 
     gist_workflows = collect_gist_workflows(
         dataset_overlap_keys=dataset_overlap_keys,
-        max_gists=MAX_GISTS,
+        max_gists=args.max_gists,
     )
     repo_workflows = collect_repo_workflows(
         dataset_overlap_keys=dataset_overlap_keys,
-        max_repo_files=MAX_REPO_FILES,
+        max_repo_files=args.max_repo_files,
     )
     issue_workflows = collect_issue_workflows(
         dataset_overlap_keys=dataset_overlap_keys,
-        max_issues=MAX_ISSUES,
+        max_issues=args.max_issues,
     )
     candidates = sorted(
         repo_workflows + gist_workflows + issue_workflows,
@@ -374,7 +403,7 @@ def main() -> None:
     }
 
     for index, item in enumerate(candidates, start=1):
-        if len(records) >= TARGET_WORKFLOW_COUNT:
+        if len(records) >= args.target_count:
             break
 
         record_id = f"dify_ext_{index:04d}"
@@ -419,7 +448,12 @@ def main() -> None:
     summary = {
         "output_dataset_path": str(OUTPUT_DATASET_PATH),
         "workflow_count": len(records),
-        "target_workflow_count": TARGET_WORKFLOW_COUNT,
+        "target_workflow_count": args.target_count,
+        "llm_instruction_generation": {
+            "enabled": True,
+            "model": settings.deepseek_model,
+            "base_url": settings.deepseek_base_url,
+        },
         "sources": {
             "github_issue": sum(1 for record in records if record["metadata"]["source"] == "github_issue"),
             "gist_raw": sum(1 for record in records if record["metadata"]["source"] == "gist_raw"),

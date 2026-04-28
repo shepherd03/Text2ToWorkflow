@@ -88,6 +88,7 @@ def evaluate_samples(
             parent_block_type=sample.parent_block_type,
             available_resources=sample.available_resources,
         )
+        confidence_score = mapper.confidence_probability(result)
         prediction = NodeMappingEvalPrediction(
             sample_id=sample.sample_id,
             workflow_id=sample.workflow_id,
@@ -100,6 +101,8 @@ def evaluate_samples(
             expected_degraded=sample.expected_degraded,
             predicted_degraded=result.degraded,
             confidence=result.confidence,
+            confidence_score=confidence_score,
+            confidence_margin=result.chosen_score - result.runner_up_score,
             chosen_score=result.chosen_score,
             runner_up_score=result.runner_up_score,
             seen_in_train=sample.text_signature in seen_signatures,
@@ -153,6 +156,56 @@ def compute_macro_f1(predictions: list[NodeMappingEvalPrediction]) -> float:
     return sum(f1_scores) / len(f1_scores)
 
 
+def compute_confidence_calibration(
+    predictions: list[NodeMappingEvalPrediction],
+) -> dict[str, float | dict[str, dict[str, float | int]]]:
+    if not predictions:
+        return {
+            "confidence_ece": 0.0,
+            "confidence_brier": 0.0,
+            "confidence_bucket_accuracy": {},
+        }
+
+    buckets = [
+        ("0.00-0.50", 0.0, 0.50),
+        ("0.50-0.70", 0.50, 0.70),
+        ("0.70-0.85", 0.70, 0.85),
+        ("0.85-1.00", 0.85, 1.000001),
+    ]
+    bucket_accuracy: dict[str, dict[str, float | int]] = {}
+    ece = 0.0
+    brier = 0.0
+    total = len(predictions)
+
+    for prediction in predictions:
+        target = 1.0 if prediction.correct else 0.0
+        score = min(max(prediction.confidence_score, 0.0), 1.0)
+        brier += (score - target) ** 2
+
+    for name, lower, upper in buckets:
+        bucket_items = [
+            prediction
+            for prediction in predictions
+            if lower <= prediction.confidence_score < upper
+        ]
+        if not bucket_items:
+            continue
+        accuracy = sum(1 for item in bucket_items if item.correct) / len(bucket_items)
+        avg_confidence = sum(item.confidence_score for item in bucket_items) / len(bucket_items)
+        ece += (len(bucket_items) / total) * abs(accuracy - avg_confidence)
+        bucket_accuracy[name] = {
+            "sample_count": len(bucket_items),
+            "accuracy": accuracy,
+            "avg_confidence": avg_confidence,
+        }
+
+    return {
+        "confidence_ece": ece,
+        "confidence_brier": brier / total,
+        "confidence_bucket_accuracy": bucket_accuracy,
+    }
+
+
 def build_confusion_matrix(
     predictions: list[NodeMappingEvalPrediction],
 ) -> dict[str, dict[str, int]]:
@@ -172,6 +225,7 @@ def compute_metrics(predictions: list[NodeMappingEvalPrediction]) -> NodeMapping
     sample_count = len(predictions)
     accuracy = sum(1 for item in predictions if item.correct) / sample_count
     macro_f1 = compute_macro_f1(predictions)
+    calibration = compute_confidence_calibration(predictions)
 
     degrade_subset = [item for item in predictions if item.expected_degraded]
     degradation_accuracy = None
@@ -216,6 +270,9 @@ def compute_metrics(predictions: list[NodeMappingEvalPrediction]) -> NodeMapping
         degradation_accuracy=degradation_accuracy,
         degradation_detection_accuracy=degradation_detection_accuracy,
         degradation_type_accuracy=degradation_type_accuracy,
+        confidence_ece=calibration["confidence_ece"],
+        confidence_brier=calibration["confidence_brier"],
+        confidence_bucket_accuracy=calibration["confidence_bucket_accuracy"],
         seen_accuracy=seen_accuracy,
         unseen_accuracy=unseen_accuracy,
         per_label_accuracy=per_label_accuracy,
@@ -281,6 +338,8 @@ def build_comparison_table(summary_by_backend: dict[str, dict]) -> dict[str, dic
                     "degradation_detection_accuracy"
                 ),
                 "degradation_type_accuracy": metrics.get("degradation_type_accuracy"),
+                "confidence_ece": metrics.get("confidence_ece"),
+                "confidence_brier": metrics.get("confidence_brier"),
                 "seen_accuracy": metrics["seen_accuracy"],
                 "unseen_accuracy": metrics["unseen_accuracy"],
             }

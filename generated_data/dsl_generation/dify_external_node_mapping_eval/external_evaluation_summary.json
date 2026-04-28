@@ -7,6 +7,30 @@
   "degradation_accuracy": 0.0,
   "degradation_detection_accuracy": 0.75,
   "degradation_type_accuracy": 0.25,
+  "confidence_ece": 0.032303407155020086,
+  "confidence_brier": 0.018696975826234922,
+  "confidence_bucket_accuracy": {
+    "0.00-0.50": {
+      "sample_count": 24,
+      "accuracy": 0.75,
+      "avg_confidence": 0.43785833333333324
+    },
+    "0.50-0.70": {
+      "sample_count": 2,
+      "accuracy": 1.0,
+      "avg_confidence": 0.50255
+    },
+    "0.70-0.85": {
+      "sample_count": 46,
+      "accuracy": 0.9130434782608695,
+      "avg_confidence": 0.7974108695652176
+    },
+    "0.85-1.00": {
+      "sample_count": 515,
+      "accuracy": 1.0,
+      "avg_confidence": 0.9899869902912684
+    }
+  },
   "per_label_accuracy": {
     "code": 1.0,
     "http-request": 0.9583333333333334,

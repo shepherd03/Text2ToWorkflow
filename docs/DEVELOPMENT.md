@@ -162,6 +162,23 @@ generated_data/project_health/latest.json
 
 `quality_gates.passed` 为 `true` 时，本轮结果才可作为稳定基线。每次较大改动后，应把 healthcheck 结果和关键观察写入 `docs/EXPERIMENT_LOG.md`。
 
+## 真实 LLM 研究批处理
+
+默认测试允许无 API key fallback，但研究推进必须定期跑真实 LLM 批处理：
+
+```powershell
+python scripts/17_run_llm_workflow_research_batch.py --max-records 6 --stage dsl
+```
+
+输出：
+
+```text
+generated_data/llm_workflow_research/latest/records.jsonl
+generated_data/llm_workflow_research/latest/manifest.json
+```
+
+`manifest.json` 中 `used_real_llm` 必须为 `true`，`llm_call_count` 必须大于 0，才能证明本轮使用了真实大模型链路。
+
 ## UTR 评测
 
 构建真值：
@@ -228,6 +245,30 @@ generated_data/dify_external_dataset/
 - `degradation_accuracy`：降级样本同时满足节点类型正确和预测降级。
 - `degradation_detection_accuracy`：降级样本中预测为降级的比例。
 - `degradation_type_accuracy`：降级样本中节点类型仍映射正确的比例。
+
+可信度指标口径：
+
+- `confidence_score`：单条节点映射的数值置信度，来自离散置信标签、候选分差、得分和降级惩罚。
+- `confidence_ece`：置信度校准误差，越低越好。
+- `confidence_brier`：概率预测误差，越低越好。
+- `confidence_bucket_accuracy`：不同置信区间的样本数、平均置信度和真实准确率。
+
+## 新增研究数据构造
+
+快速构造一批不覆盖稳定基线的新数据：
+
+```powershell
+python scripts/18_build_research_dataset_from_existing_dsl.py --max-records 8
+```
+
+输出：
+
+```text
+generated_data/dify_external_dataset_research/latest/dataset.jsonl
+generated_data/dify_external_dataset_research/latest/manifest.json
+```
+
+该脚本从已有外部 Dify DSL 池中选择新颖样本，并用真实 LLM 生成中文 instruction。若需要重新联网搜索更多 DSL，可使用 `scripts/13_build_dify_external_dataset.py --output-dir generated_data/dify_external_dataset_research/<run>`，但该路径较重，不适合每轮快速迭代。
 
 ## 测试
 

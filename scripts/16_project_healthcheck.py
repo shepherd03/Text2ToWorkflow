@@ -21,6 +21,8 @@ DEFAULT_THRESHOLDS: dict[str, int | float] = {
     "min_external_supported_nodes": 1,
     "min_internal_test_accuracy": 0.90,
     "min_external_accuracy": 0.95,
+    "max_internal_confidence_ece": 0.25,
+    "max_external_confidence_ece": 0.25,
     "max_smoke_errors": 0,
 }
 
@@ -109,6 +111,7 @@ def collect_artifacts() -> dict[str, Any]:
         "node_mapping_train": ROOT / "generated_data/dsl_generation/node_mapping_eval/train_samples.jsonl",
         "node_mapping_valid": ROOT / "generated_data/dsl_generation/node_mapping_eval/valid_samples.jsonl",
         "node_mapping_test": ROOT / "generated_data/dsl_generation/node_mapping_eval/test_samples.jsonl",
+        "llm_research_records": ROOT / "generated_data/llm_workflow_research/latest/records.jsonl",
     }
     return {
         name: {
@@ -136,6 +139,8 @@ def extract_node_mapping_summary(payload: dict[str, Any] | None) -> dict[str, An
                     "degradation_detection_accuracy"
                 ),
                 "degradation_type_accuracy": metrics.get("degradation_type_accuracy"),
+                "confidence_ece": metrics.get("confidence_ece"),
+                "confidence_brier": metrics.get("confidence_brier"),
                 "seen_accuracy": metrics.get("seen_accuracy"),
                 "unseen_accuracy": metrics.get("unseen_accuracy"),
             }
@@ -150,12 +155,14 @@ def collect_metrics() -> dict[str, Any]:
         ROOT / "generated_data/dsl_generation/dify_external_node_mapping_eval/external_evaluation_summary.json"
     )
     external_dataset = read_json(ROOT / "generated_data/dify_external_dataset/analysis.json")
+    llm_research = read_json(ROOT / "generated_data/llm_workflow_research/latest/manifest.json")
     return {
         "node_mapping_internal": extract_node_mapping_summary(
             internal_summary if isinstance(internal_summary, dict) else None
         ),
         "node_mapping_external": external_summary if isinstance(external_summary, dict) else {"available": False},
         "external_dify_dataset": external_dataset if isinstance(external_dataset, dict) else {"available": False},
+        "llm_workflow_research": llm_research if isinstance(llm_research, dict) else {"available": False},
     }
 
 
@@ -253,6 +260,26 @@ def build_quality_gates(payload: dict[str, Any]) -> dict[str, Any]:
         f">= {thresholds['min_external_accuracy']}",
         external_accuracy is not None and external_accuracy >= thresholds["min_external_accuracy"],
     )
+
+    internal_ece = _metric_value(
+        payload, ["metrics", "node_mapping_internal", "test", "confidence_ece"]
+    )
+    if internal_ece is not None:
+        add_check(
+            "internal_node_mapping_confidence_ece",
+            internal_ece,
+            f"<= {thresholds['max_internal_confidence_ece']}",
+            internal_ece <= thresholds["max_internal_confidence_ece"],
+        )
+
+    external_ece = _metric_value(payload, ["metrics", "node_mapping_external", "confidence_ece"])
+    if external_ece is not None:
+        add_check(
+            "external_node_mapping_confidence_ece",
+            external_ece,
+            f"<= {thresholds['max_external_confidence_ece']}",
+            external_ece <= thresholds["max_external_confidence_ece"],
+        )
 
     commands = payload.get("commands", {})
     if "tests" in commands:

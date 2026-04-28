@@ -173,6 +173,31 @@ def test_dify_external_degradation_metrics_split_strict_detection_and_type():
     assert metrics["degradation_type_accuracy"] == 2 / 3
 
 
+def test_dify_external_confidence_calibration_exposes_buckets():
+    predictions = [
+        eval_module.NodeMappingEvalPrediction(
+            sample_id="ok",
+            expected_node_type=DifyNodeType.llm,
+            predicted_node_type=DifyNodeType.llm,
+            correct=True,
+            confidence_score=0.9,
+        ),
+        eval_module.NodeMappingEvalPrediction(
+            sample_id="bad",
+            expected_node_type=DifyNodeType.code,
+            predicted_node_type=DifyNodeType.llm,
+            correct=False,
+            confidence_score=0.9,
+        ),
+    ]
+
+    metrics = eval_module.compute_confidence_calibration(predictions)
+
+    assert metrics["confidence_ece"] >= 0.0
+    assert metrics["confidence_brier"] >= 0.0
+    assert "0.85-1.00" in metrics["confidence_bucket_accuracy"]
+
+
 def test_summary_payload_shape_is_json_serializable():
     payload = {
         "backend": "tfidf",

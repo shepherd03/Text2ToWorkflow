@@ -67,3 +67,57 @@ python -m pytest tests/test_project_healthcheck.py tests/test_node_mapping_gener
 下一步假设：
 
 - 先不要盲目提高 `degradation_accuracy`，应把外部样本的 expected degraded 标注规则和内部 hard set 口径对齐，再决定 mapper 是否需要改变。
+
+## 2026-04-29：可信度校准与真实 LLM 链路
+
+目标：
+
+- 让节点映射不只报告 accuracy，还报告置信度是否可信。
+- 证明项目能够使用已配置的 DeepSeek API 跑真实 UTR/Skeleton/DSL 链路。
+- 构造一批新的研究数据，避免只依赖旧基线。
+
+改动：
+
+- `NodeMappingEvalPrediction` 增加 `confidence_score` 与 `confidence_margin`。
+- 内部、外部节点映射评测增加 `confidence_ece`、`confidence_brier`、`confidence_bucket_accuracy`。
+- `UTRGenerationPipeline` 的 meta 记录 `generation_source`、`llm_call_count`、`llm_model` 和 `llm_usage`。
+- 新增 `scripts/17_run_llm_workflow_research_batch.py`，强制使用真实 LLM 端到端生成。
+- 新增 `scripts/18_build_research_dataset_from_existing_dsl.py`，从外部 DSL 样本池构造新的 LLM instruction 数据。
+
+验证：
+
+```text
+python -m pytest tests/ -q
+156 passed
+```
+
+```text
+python scripts/03_compile_dify_workflows.py --output-file "$env:TEMP\utr_healthcheck_dsls.jsonl" --error-file "$env:TEMP\utr_healthcheck_errors.json"
+Success: 31, Errors: 0
+```
+
+真实 LLM 链路：
+
+```text
+python scripts/17_run_llm_workflow_research_batch.py --max-records 6 --stage dsl
+success_count=6, error_count=0, llm_call_count=21, used_real_llm=true
+```
+
+新增研究数据：
+
+```text
+python scripts/18_build_research_dataset_from_existing_dsl.py --max-records 8 --min-novel-ratio 0.10
+workflow_count=8, error_count=0, llm_call_count=8, used_real_llm=true
+```
+
+当前观察：
+
+- 内部 tfidf test accuracy 为 1.0，confidence ECE 为 0.0228，Brier 为 0.0031。
+- 外部 587 节点 accuracy 为 0.9830，confidence ECE 为 0.0323，Brier 为 0.0187。
+- 外部高置信桶 `0.85-1.00` 有 515 条，准确率 1.0，平均置信度 0.9900。
+- 外部低置信桶 `0.00-0.50` 有 24 条，准确率 0.75，说明后续主动学习应优先采样低置信节点。
+- 重联网搜索外部 DSL 的 `scripts/13_build_dify_external_dataset.py` 仍偏重，快速迭代应先用 `18` 脚本；后续需要把 `13` 拆成候选抓取和 LLM instruction 生成两个可断点阶段。
+
+下一步假设：
+
+- 以低置信桶和 degraded 样本为主动学习池，补 hard set，比盲目扩大普通样本更能提升可信度。

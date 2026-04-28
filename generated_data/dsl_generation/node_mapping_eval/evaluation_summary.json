@@ -11,6 +11,20 @@
       "degradation_accuracy": null,
       "degradation_detection_accuracy": null,
       "degradation_type_accuracy": null,
+      "confidence_ece": 0.09144193548387133,
+      "confidence_brier": 0.07236750612903241,
+      "confidence_bucket_accuracy": {
+        "0.70-0.85": {
+          "sample_count": 6,
+          "accuracy": 0.3333333333333333,
+          "avg_confidence": 0.7641166666666667
+        },
+        "0.85-1.00": {
+          "sample_count": 25,
+          "accuracy": 1.0,
+          "avg_confidence": 0.9899999999999995
+        }
+      },
       "seen_accuracy": 1.0,
       "unseen_accuracy": 0.7333333333333333,
       "per_label_accuracy": {
@@ -67,6 +81,20 @@
       "degradation_accuracy": null,
       "degradation_detection_accuracy": null,
       "degradation_type_accuracy": null,
+      "confidence_ece": 0.02280000000000064,
+      "confidence_brier": 0.003104529090909093,
+      "confidence_bucket_accuracy": {
+        "0.70-0.85": {
+          "sample_count": 2,
+          "accuracy": 1.0,
+          "avg_confidence": 0.7787999999999999
+        },
+        "0.85-1.00": {
+          "sample_count": 31,
+          "accuracy": 1.0,
+          "avg_confidence": 0.9899999999999993
+        }
+      },
       "seen_accuracy": 1.0,
       "unseen_accuracy": 1.0,
       "per_label_accuracy": {
@@ -122,6 +150,25 @@
       "degradation_accuracy": 0.5,
       "degradation_detection_accuracy": 0.5,
       "degradation_type_accuracy": 0.5,
+      "confidence_ece": 0.05849333333333308,
+      "confidence_brier": 0.06124029822222224,
+      "confidence_bucket_accuracy": {
+        "0.00-0.50": {
+          "sample_count": 3,
+          "accuracy": 1.0,
+          "avg_confidence": 0.4155333333333333
+        },
+        "0.70-0.85": {
+          "sample_count": 6,
+          "accuracy": 0.8333333333333334,
+          "avg_confidence": 0.7935333333333333
+        },
+        "0.85-1.00": {
+          "sample_count": 36,
+          "accuracy": 0.9722222222222222,
+          "avg_confidence": 0.9899999999999997
+        }
+      },
       "seen_accuracy": null,
       "unseen_accuracy": 0.9555555555555556,
       "per_label_accuracy": {

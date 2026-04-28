@@ -98,6 +98,8 @@ LLM 是辅助能力，不是结构正确性的唯一来源。
 规则：
 
 - 没有 API key 时，测试链路必须可运行。
+- 研究批处理必须记录 `generation_source`、`llm_call_count`、`llm_model` 或等价 manifest 字段。
+- 声称“真实生成”的实验必须有 `used_real_llm=true` 且 `llm_call_count > 0`。
 - LLM 输出必须经过 Schema 或 JSON 解析。
 - UTR 依赖边必须归一化。
 - Skeleton 控制流注入失败时应降级为基础动作节点。
@@ -114,6 +116,8 @@ NodeMapper 必须输出可解释结果。
 - `chosen_score`
 - `runner_up_score`
 - `confidence`
+- `confidence_score`
+- `confidence_margin`
 - `trace`
 - `degraded`
 - `degrade_reason`
@@ -160,6 +164,7 @@ python scripts/16_project_healthcheck.py --run-tests --run-smoke
 - Skeleton 变更跑 `tests/test_skeleton_planner.py`。
 - DSL 变更跑 `tests/test_dsl_input_validator.py` 与 `tests/test_dsl_compiler.py`。
 - 节点映射变更跑 `tests/test_node_mapper.py` 与节点映射评测工具测试。
+- 修改节点映射可信度后，必须重跑 `scripts/08_evaluate_node_mapping_generalization.py` 和 `scripts/12_evaluate_dify_external_node_mapping.py`，并检查 `confidence_ece`。
 
 ## 9. 命名规则
 

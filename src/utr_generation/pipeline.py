@@ -28,7 +28,8 @@ class UTRGenerationPipeline:
             report=report,
             meta={
                 "llm_enabled": self.settings.llm_enabled,
-                "version": "refactored_metadata_only"
+                "version": "refactored_metadata_only",
+                **self.generator.last_generation_meta,
             },
         )
 

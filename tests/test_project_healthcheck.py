@@ -64,10 +64,11 @@ def test_healthcheck_quality_gates_fail_on_missing_artifacts():
                 "total_supported_nodes": 0,
             },
             "node_mapping_internal": {
-                "test": {"accuracy": 0.0},
+                "test": {"accuracy": 0.0, "confidence_ece": 0.4},
             },
             "node_mapping_external": {
                 "accuracy": 0.0,
+                "confidence_ece": 0.4,
             },
         },
         "commands": {},
@@ -77,3 +78,5 @@ def test_healthcheck_quality_gates_fail_on_missing_artifacts():
 
     assert gates["passed"] is False
     assert "utr_records_available" in gates["failed_checks"]
+    assert "internal_node_mapping_confidence_ece" in gates["failed_checks"]
+    assert "external_node_mapping_confidence_ece" in gates["failed_checks"]

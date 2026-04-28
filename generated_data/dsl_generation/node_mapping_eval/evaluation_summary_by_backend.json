@@ -7,6 +7,8 @@
         "degradation_accuracy": null,
         "degradation_detection_accuracy": null,
         "degradation_type_accuracy": null,
+        "confidence_ece": 0.09144193548387133,
+        "confidence_brier": 0.07236750612903241,
         "seen_accuracy": 1.0,
         "unseen_accuracy": 0.7333333333333333
       },
@@ -16,6 +18,8 @@
         "degradation_accuracy": null,
         "degradation_detection_accuracy": null,
         "degradation_type_accuracy": null,
+        "confidence_ece": 0.13152258064516126,
+        "confidence_brier": 0.14949440193548388,
         "seen_accuracy": 0.9375,
         "unseen_accuracy": 0.5333333333333333
       },
@@ -25,6 +29,8 @@
         "degradation_accuracy": null,
         "degradation_detection_accuracy": null,
         "degradation_type_accuracy": null,
+        "confidence_ece": 0.07807419354838735,
+        "confidence_brier": 0.08244285129032271,
         "seen_accuracy": 1.0,
         "unseen_accuracy": 0.7333333333333333
       }
@@ -36,6 +42,8 @@
         "degradation_accuracy": null,
         "degradation_detection_accuracy": null,
         "degradation_type_accuracy": null,
+        "confidence_ece": 0.02280000000000064,
+        "confidence_brier": 0.003104529090909093,
         "seen_accuracy": 1.0,
         "unseen_accuracy": 1.0
       },
@@ -45,6 +53,8 @@
         "degradation_accuracy": null,
         "degradation_detection_accuracy": null,
         "degradation_type_accuracy": null,
+        "confidence_ece": 0.05720909090909142,
+        "confidence_brier": 0.03435075060606061,
         "seen_accuracy": 1.0,
         "unseen_accuracy": 0.9285714285714286
       },
@@ -54,6 +64,8 @@
         "degradation_accuracy": null,
         "degradation_detection_accuracy": null,
         "degradation_type_accuracy": null,
+        "confidence_ece": 0.036918181818182336,
+        "confidence_brier": 0.00984901242424242,
         "seen_accuracy": 1.0,
         "unseen_accuracy": 0.9285714285714286
       }
@@ -65,6 +77,8 @@
         "degradation_accuracy": 0.5,
         "degradation_detection_accuracy": 0.5,
         "degradation_type_accuracy": 0.5,
+        "confidence_ece": 0.05849333333333308,
+        "confidence_brier": 0.06124029822222224,
         "seen_accuracy": null,
         "unseen_accuracy": 0.9555555555555556
       },
@@ -74,6 +88,8 @@
         "degradation_accuracy": 0.0,
         "degradation_detection_accuracy": 0.0,
         "degradation_type_accuracy": 0.25,
+        "confidence_ece": 0.038168888888888516,
+        "confidence_brier": 0.08089108266666667,
         "seen_accuracy": null,
         "unseen_accuracy": 0.8666666666666667
       },
@@ -83,6 +99,8 @@
         "degradation_accuracy": 0.5,
         "degradation_detection_accuracy": 0.5,
         "degradation_type_accuracy": 0.5,
+        "confidence_ece": 0.040875555555555276,
+        "confidence_brier": 0.0678393857777778,
         "seen_accuracy": null,
         "unseen_accuracy": 0.9111111111111111
       }
@@ -102,6 +120,20 @@
           "degradation_accuracy": null,
           "degradation_detection_accuracy": null,
           "degradation_type_accuracy": null,
+          "confidence_ece": 0.09144193548387133,
+          "confidence_brier": 0.07236750612903241,
+          "confidence_bucket_accuracy": {
+            "0.70-0.85": {
+              "sample_count": 6,
+              "accuracy": 0.3333333333333333,
+              "avg_confidence": 0.7641166666666667
+            },
+            "0.85-1.00": {
+              "sample_count": 25,
+              "accuracy": 1.0,
+              "avg_confidence": 0.9899999999999995
+            }
+          },
           "seen_accuracy": 1.0,
           "unseen_accuracy": 0.7333333333333333,
           "per_label_accuracy": {
@@ -158,6 +190,20 @@
           "degradation_accuracy": null,
           "degradation_detection_accuracy": null,
           "degradation_type_accuracy": null,
+          "confidence_ece": 0.02280000000000064,
+          "confidence_brier": 0.003104529090909093,
+          "confidence_bucket_accuracy": {
+            "0.70-0.85": {
+              "sample_count": 2,
+              "accuracy": 1.0,
+              "avg_confidence": 0.7787999999999999
+            },
+            "0.85-1.00": {
+              "sample_count": 31,
+              "accuracy": 1.0,
+              "avg_confidence": 0.9899999999999993
+            }
+          },
           "seen_accuracy": 1.0,
           "unseen_accuracy": 1.0,
           "per_label_accuracy": {
@@ -213,6 +259,25 @@
           "degradation_accuracy": 0.5,
           "degradation_detection_accuracy": 0.5,
           "degradation_type_accuracy": 0.5,
+          "confidence_ece": 0.05849333333333308,
+          "confidence_brier": 0.06124029822222224,
+          "confidence_bucket_accuracy": {
+            "0.00-0.50": {
+              "sample_count": 3,
+              "accuracy": 1.0,
+              "avg_confidence": 0.4155333333333333
+            },
+            "0.70-0.85": {
+              "sample_count": 6,
+              "accuracy": 0.8333333333333334,
+              "avg_confidence": 0.7935333333333333
+            },
+            "0.85-1.00": {
+              "sample_count": 36,
+              "accuracy": 0.9722222222222222,
+              "avg_confidence": 0.9899999999999997
+            }
+          },
           "seen_accuracy": null,
           "unseen_accuracy": 0.9555555555555556,
           "per_label_accuracy": {
@@ -273,6 +338,25 @@
           "degradation_accuracy": null,
           "degradation_detection_accuracy": null,
           "degradation_type_accuracy": null,
+          "confidence_ece": 0.13152258064516126,
+          "confidence_brier": 0.14949440193548388,
+          "confidence_bucket_accuracy": {
+            "0.00-0.50": {
+              "sample_count": 3,
+              "accuracy": 0.3333333333333333,
+              "avg_confidence": 0.4861
+            },
+            "0.70-0.85": {
+              "sample_count": 9,
+              "accuracy": 0.4444444444444444,
+              "avg_confidence": 0.7607777777777778
+            },
+            "0.85-1.00": {
+              "sample_count": 19,
+              "accuracy": 0.9473684210526315,
+              "avg_confidence": 0.9879947368421051
+            }
+          },
           "seen_accuracy": 0.9375,
           "unseen_accuracy": 0.5333333333333333,
           "per_label_accuracy": {
@@ -331,6 +415,25 @@
           "degradation_accuracy": null,
           "degradation_detection_accuracy": null,
           "degradation_type_accuracy": null,
+          "confidence_ece": 0.05720909090909142,
+          "confidence_brier": 0.03435075060606061,
+          "confidence_bucket_accuracy": {
+            "0.00-0.50": {
+              "sample_count": 2,
+              "accuracy": 1.0,
+              "avg_confidence": 0.4867
+            },
+            "0.70-0.85": {
+              "sample_count": 2,
+              "accuracy": 0.5,
+              "avg_confidence": 0.7434499999999999
+            },
+            "0.85-1.00": {
+              "sample_count": 29,
+              "accuracy": 1.0,
+              "avg_confidence": 0.9870896551724132
+            }
+          },
           "seen_accuracy": 1.0,
           "unseen_accuracy": 0.9285714285714286,
           "per_label_accuracy": {
@@ -387,6 +490,25 @@
           "degradation_accuracy": 0.0,
           "degradation_detection_accuracy": 0.0,
           "degradation_type_accuracy": 0.25,
+          "confidence_ece": 0.038168888888888516,
+          "confidence_brier": 0.08089108266666667,
+          "confidence_bucket_accuracy": {
+            "0.00-0.50": {
+              "sample_count": 7,
+              "accuracy": 0.42857142857142855,
+              "avg_confidence": 0.47395714285714285
+            },
+            "0.70-0.85": {
+              "sample_count": 7,
+              "accuracy": 0.8571428571428571,
+              "avg_confidence": 0.7487857142857143
+            },
+            "0.85-1.00": {
+              "sample_count": 31,
+              "accuracy": 0.967741935483871,
+              "avg_confidence": 0.9884322580645156
+            }
+          },
           "seen_accuracy": null,
           "unseen_accuracy": 0.8666666666666667,
           "per_label_accuracy": {
@@ -450,6 +572,20 @@
           "degradation_accuracy": null,
           "degradation_detection_accuracy": null,
           "degradation_type_accuracy": null,
+          "confidence_ece": 0.07807419354838735,
+          "confidence_brier": 0.08244285129032271,
+          "confidence_bucket_accuracy": {
+            "0.70-0.85": {
+              "sample_count": 8,
+              "accuracy": 0.5,
+              "avg_confidence": 0.773575
+            },
+            "0.85-1.00": {
+              "sample_count": 23,
+              "accuracy": 1.0,
+              "avg_confidence": 0.9899260869565214
+            }
+          },
           "seen_accuracy": 1.0,
           "unseen_accuracy": 0.7333333333333333,
           "per_label_accuracy": {
@@ -506,6 +642,25 @@
           "degradation_accuracy": null,
           "degradation_detection_accuracy": null,
           "degradation_type_accuracy": null,
+          "confidence_ece": 0.036918181818182336,
+          "confidence_brier": 0.00984901242424242,
+          "confidence_bucket_accuracy": {
+            "0.00-0.50": {
+              "sample_count": 1,
+              "accuracy": 0.0,
+              "avg_confidence": 0.4706
+            },
+            "0.70-0.85": {
+              "sample_count": 2,
+              "accuracy": 1.0,
+              "avg_confidence": 0.77615
+            },
+            "0.85-1.00": {
+              "sample_count": 30,
+              "accuracy": 1.0,
+              "avg_confidence": 0.9899999999999994
+            }
+          },
           "seen_accuracy": 1.0,
           "unseen_accuracy": 0.9285714285714286,
           "per_label_accuracy": {
@@ -562,6 +717,25 @@
           "degradation_accuracy": 0.5,
           "degradation_detection_accuracy": 0.5,
           "degradation_type_accuracy": 0.5,
+          "confidence_ece": 0.040875555555555276,
+          "confidence_brier": 0.0678393857777778,
+          "confidence_bucket_accuracy": {
+            "0.00-0.50": {
+              "sample_count": 6,
+              "accuracy": 0.5,
+              "avg_confidence": 0.4151500000000001
+            },
+            "0.70-0.85": {
+              "sample_count": 3,
+              "accuracy": 1.0,
+              "avg_confidence": 0.7699000000000001
+            },
+            "0.85-1.00": {
+              "sample_count": 36,
+              "accuracy": 0.9722222222222222,
+              "avg_confidence": 0.9899999999999997
+            }
+          },
           "seen_accuracy": null,
           "unseen_accuracy": 0.9111111111111111,
           "per_label_accuracy": {

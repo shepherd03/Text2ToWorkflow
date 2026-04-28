@@ -14,6 +14,32 @@ def test_map_start_node():
     assert result.confidence == MappingConfidence.high
 
 
+def test_confidence_probability_is_numeric_and_penalizes_degradation():
+    mapper = NodeMapper()
+    good = mapper.map_action(
+        Action(
+            action_id="act_good",
+            action_name="summarize_document",
+            description="summarize the document",
+            inputs=["document_text"],
+            outputs=["summary"],
+        )
+    )
+    degraded = mapper.map_action(
+        Action(
+            action_id="act_bad",
+            action_name="request_external_api",
+            description="request external api",
+            inputs=["payload"],
+            outputs=["result"],
+        )
+    )
+
+    assert 0.0 < mapper.confidence_probability(good) <= 1.0
+    assert 0.0 < mapper.confidence_probability(degraded) <= 1.0
+    assert mapper.confidence_probability(good) > mapper.confidence_probability(degraded)
+
+
 def test_map_end_node():
     mapper = NodeMapper()
     action = Action(action_id="end_node", action_name="end")

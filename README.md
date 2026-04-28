@@ -129,6 +129,22 @@ generated_data/project_health/latest.json
 
 健康检查会输出 `quality_gates`。只有 `quality_gates.passed=true` 时，本轮测试、smoke、产物和指标才作为稳定实验基线。
 
+8. 真实 LLM 研究批处理：
+
+```powershell
+python scripts/17_run_llm_workflow_research_batch.py --max-records 6 --stage dsl
+```
+
+该脚本强制要求 `DEEPSEEK_API_KEY`，输出 manifest 会记录 `used_real_llm`、`llm_call_count`、模型和成功数。
+
+9. 新增研究数据构造：
+
+```powershell
+python scripts/18_build_research_dataset_from_existing_dsl.py --max-records 8
+```
+
+该脚本从外部 Dify DSL 样本池中抽取新样本，并用真实 LLM 重新生成中文 instruction。
+
 ## 服务入口
 
 启动 API：

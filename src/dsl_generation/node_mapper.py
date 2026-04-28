@@ -206,6 +206,20 @@ class NodeMapper:
             candidate_scores=scored_candidates,
         )
 
+    def confidence_probability(self, result: NodeMappingResult) -> float:
+        margin = max(0.0, result.chosen_score - result.runner_up_score)
+        base = {
+            MappingConfidence.high: 0.86,
+            MappingConfidence.medium: 0.66,
+            MappingConfidence.low: 0.42,
+        }[result.confidence]
+        score_adjustment = min(max(result.chosen_score, 0.0), 1.0) * 0.10
+        margin_adjustment = min(margin, 0.35) * 0.35
+        degraded_penalty = 0.18 if result.degraded else 0.0
+        candidate_penalty = 0.04 if len(result.candidate_node_types) <= 1 else 0.0
+        probability = base + score_adjustment + margin_adjustment - degraded_penalty - candidate_penalty
+        return round(min(max(probability, 0.05), 0.99), 4)
+
     def _collect_rule_candidates(self, text: str) -> tuple[list[DifyNodeType], list[str]]:
         candidates: list[DifyNodeType] = []
         matched_keywords: list[str] = []
