@@ -6,13 +6,15 @@
     "sample_count": 31,
     "metrics": {
       "sample_count": 31,
-      "accuracy": 0.8387096774193549,
-      "macro_f1": 0.8497354497354497,
+      "accuracy": 0.8709677419354839,
+      "macro_f1": 0.8814814814814815,
       "degradation_accuracy": null,
+      "degradation_detection_accuracy": null,
+      "degradation_type_accuracy": null,
       "seen_accuracy": 1.0,
-      "unseen_accuracy": 0.6666666666666666,
+      "unseen_accuracy": 0.7333333333333333,
       "per_label_accuracy": {
-        "code": 0.75,
+        "code": 1.0,
         "http-request": 1.0,
         "if-else": 1.0,
         "iteration": 1.0,
@@ -25,8 +27,7 @@
     },
     "confusion_matrix": {
       "code": {
-        "code": 3,
-        "iteration": 1
+        "code": 4
       },
       "http-request": {
         "http-request": 4
@@ -61,13 +62,15 @@
     "sample_count": 33,
     "metrics": {
       "sample_count": 33,
-      "accuracy": 0.9393939393939394,
-      "macro_f1": 0.9312169312169313,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
       "degradation_accuracy": null,
+      "degradation_detection_accuracy": null,
+      "degradation_type_accuracy": null,
       "seen_accuracy": 1.0,
-      "unseen_accuracy": 0.8571428571428571,
+      "unseen_accuracy": 1.0,
       "per_label_accuracy": {
-        "code": 0.5,
+        "code": 1.0,
         "http-request": 1.0,
         "if-else": 1.0,
         "iteration": 1.0,
@@ -80,9 +83,7 @@
     },
     "confusion_matrix": {
       "code": {
-        "code": 2,
-        "iteration": 1,
-        "parameter-extractor": 1
+        "code": 4
       },
       "http-request": {
         "http-request": 4
@@ -116,13 +117,15 @@
     "sample_count": 45,
     "metrics": {
       "sample_count": 45,
-      "accuracy": 0.9111111111111111,
-      "macro_f1": 0.9197530864197532,
+      "accuracy": 0.9555555555555556,
+      "macro_f1": 0.9616802950136284,
       "degradation_accuracy": 0.5,
+      "degradation_detection_accuracy": 0.5,
+      "degradation_type_accuracy": 0.5,
       "seen_accuracy": null,
-      "unseen_accuracy": 0.9111111111111111,
+      "unseen_accuracy": 0.9555555555555556,
       "per_label_accuracy": {
-        "code": 0.5,
+        "code": 0.75,
         "http-request": 1.0,
         "if-else": 1.0,
         "iteration": 1.0,
@@ -135,10 +138,9 @@
     },
     "confusion_matrix": {
       "code": {
-        "code": 4,
+        "code": 6,
         "if-else": 1,
-        "iteration": 1,
-        "parameter-extractor": 2
+        "parameter-extractor": 1
       },
       "http-request": {
         "http-request": 4

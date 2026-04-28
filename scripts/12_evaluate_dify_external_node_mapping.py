@@ -89,6 +89,31 @@ def build_confusion_matrix(predictions: list[NodeMappingEvalPrediction]) -> dict
     }
 
 
+def compute_degradation_metrics(
+    predictions: list[NodeMappingEvalPrediction],
+) -> dict[str, float | int | None]:
+    degraded = [prediction for prediction in predictions if prediction.expected_degraded]
+    if not degraded:
+        return {
+            "degraded_sample_count": 0,
+            "degradation_accuracy": None,
+            "degradation_detection_accuracy": None,
+            "degradation_type_accuracy": None,
+        }
+
+    detected_count = sum(1 for prediction in degraded if prediction.predicted_degraded)
+    type_correct_count = sum(1 for prediction in degraded if prediction.correct)
+    strict_count = sum(
+        1 for prediction in degraded if prediction.predicted_degraded and prediction.correct
+    )
+    return {
+        "degraded_sample_count": len(degraded),
+        "degradation_accuracy": strict_count / len(degraded),
+        "degradation_detection_accuracy": detected_count / len(degraded),
+        "degradation_type_accuracy": type_correct_count / len(degraded),
+    }
+
+
 def evaluate(samples: list[NodeMappingEvalSample]) -> tuple[list[NodeMappingEvalPrediction], dict]:
     for key, value in BACKEND_CONFIG.items():
         os.environ[key] = value
@@ -135,25 +160,20 @@ def evaluate(samples: list[NodeMappingEvalSample]) -> tuple[list[NodeMappingEval
 
     per_label_total: dict[str, int] = {}
     per_label_correct: dict[str, int] = {}
-    degraded_total = 0
-    degraded_correct = 0
     for prediction in predictions:
         label = prediction.expected_node_type.value
         per_label_total[label] = per_label_total.get(label, 0) + 1
         if prediction.correct:
             per_label_correct[label] = per_label_correct.get(label, 0) + 1
-        if prediction.expected_degraded:
-            degraded_total += 1
-            if prediction.correct and prediction.predicted_degraded:
-                degraded_correct += 1
 
     accuracy = sum(1 for item in predictions if item.correct) / len(predictions) if predictions else 0.0
+    degradation_metrics = compute_degradation_metrics(predictions)
     summary = {
         "backend": "tfidf",
         "sample_count": len(predictions),
         "accuracy": accuracy,
         "macro_f1": compute_macro_f1(predictions),
-        "degradation_accuracy": degraded_correct / degraded_total if degraded_total else None,
+        **degradation_metrics,
         "per_label_accuracy": {
             label: per_label_correct.get(label, 0) / total
             for label, total in sorted(per_label_total.items())

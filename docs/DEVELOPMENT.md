@@ -47,6 +47,18 @@ UTR_STRICT_COMPLETENESS=false
 python main.py --text "读取文章并生成摘要" --pretty
 ```
 
+调试完整链路：
+
+```bash
+python main.py --text "读取文章并生成摘要" --stage dsl --pretty
+```
+
+`--stage` 支持：
+
+- `utr`：只生成统一任务表示。
+- `skeleton`：生成 UTR 与执行骨架。
+- `dsl`：生成 UTR、Skeleton 与 Dify workflow payload。
+
 启动 API：
 
 ```bash
@@ -59,6 +71,14 @@ uvicorn api:app --reload
 curl -X POST http://127.0.0.1:8000/utr/generate ^
   -H "Content-Type: application/json" ^
   -d "{\"text\":\"读取文章并生成摘要\"}"
+```
+
+端到端接口：
+
+```bash
+curl -X POST http://127.0.0.1:8000/workflow/build ^
+  -H "Content-Type: application/json" ^
+  -d "{\"text\":\"读取文章并生成摘要\",\"stage\":\"dsl\"}"
 ```
 
 ## 主链路批处理
@@ -120,6 +140,28 @@ python scripts/03_compile_dify_workflows.py `
 - `scripts/03_compile_dify_workflows.py` 对 `generated_data/skeleton_planning/iter2/skeletons.jsonl` 的 31 条样本应输出 `Success: 31, Errors: 0`。
 - 若修改 DSL 编译器或 validator，至少检查 selector 是否存在、控制流 join 是否绑定、if-else 出边 handle 是否为 `case_id`、`false` 或普通 `source`。
 
+## 项目健康检查
+
+轻量收集当前产物、评测摘要和链路状态：
+
+```bash
+python scripts/16_project_healthcheck.py
+```
+
+完整健康检查：
+
+```powershell
+python scripts/16_project_healthcheck.py --run-tests --run-smoke
+```
+
+输出：
+
+```text
+generated_data/project_health/latest.json
+```
+
+`quality_gates.passed` 为 `true` 时，本轮结果才可作为稳定基线。每次较大改动后，应把 healthcheck 结果和关键观察写入 `docs/EXPERIMENT_LOG.md`。
+
 ## UTR 评测
 
 构建真值：
@@ -180,6 +222,12 @@ generated_data/dsl_generation/node_mapping_eval/
 generated_data/dsl_generation/dify_external_node_mapping_eval/
 generated_data/dify_external_dataset/
 ```
+
+降级指标口径：
+
+- `degradation_accuracy`：降级样本同时满足节点类型正确和预测降级。
+- `degradation_detection_accuracy`：降级样本中预测为降级的比例。
+- `degradation_type_accuracy`：降级样本中节点类型仍映射正确的比例。
 
 ## 测试
 

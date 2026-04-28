@@ -175,12 +175,17 @@ def compute_metrics(predictions: list[NodeMappingEvalPrediction]) -> NodeMapping
 
     degrade_subset = [item for item in predictions if item.expected_degraded]
     degradation_accuracy = None
+    degradation_detection_accuracy = None
+    degradation_type_accuracy = None
     if degrade_subset:
-        degradation_accuracy = sum(
-            1
-            for item in degrade_subset
-            if item.predicted_degraded and item.correct
-        ) / len(degrade_subset)
+        detected_count = sum(1 for item in degrade_subset if item.predicted_degraded)
+        type_correct_count = sum(1 for item in degrade_subset if item.correct)
+        strict_count = sum(
+            1 for item in degrade_subset if item.predicted_degraded and item.correct
+        )
+        degradation_detection_accuracy = detected_count / len(degrade_subset)
+        degradation_type_accuracy = type_correct_count / len(degrade_subset)
+        degradation_accuracy = strict_count / len(degrade_subset)
 
     seen_subset = [item for item in predictions if item.seen_in_train]
     unseen_subset = [item for item in predictions if not item.seen_in_train]
@@ -209,6 +214,8 @@ def compute_metrics(predictions: list[NodeMappingEvalPrediction]) -> NodeMapping
         accuracy=accuracy,
         macro_f1=macro_f1,
         degradation_accuracy=degradation_accuracy,
+        degradation_detection_accuracy=degradation_detection_accuracy,
+        degradation_type_accuracy=degradation_type_accuracy,
         seen_accuracy=seen_accuracy,
         unseen_accuracy=unseen_accuracy,
         per_label_accuracy=per_label_accuracy,
@@ -270,6 +277,10 @@ def build_comparison_table(summary_by_backend: dict[str, dict]) -> dict[str, dic
                 "accuracy": metrics["accuracy"],
                 "macro_f1": metrics["macro_f1"],
                 "degradation_accuracy": metrics["degradation_accuracy"],
+                "degradation_detection_accuracy": metrics.get(
+                    "degradation_detection_accuracy"
+                ),
+                "degradation_type_accuracy": metrics.get("degradation_type_accuracy"),
                 "seen_accuracy": metrics["seen_accuracy"],
                 "unseen_accuracy": metrics["unseen_accuracy"],
             }

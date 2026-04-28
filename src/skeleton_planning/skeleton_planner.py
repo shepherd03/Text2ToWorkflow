@@ -133,7 +133,6 @@ class SkeletonPlanner:
         
         try:
             result_dict = self.llm_client.chat_json(system_prompt, user_prompt)
-            print(f"\n[LLM Decision for {action.action_id}]: {json.dumps(result_dict, ensure_ascii=False)}")
             
             is_cond = result_dict.get("is_conditional", False)
             cond_expr = result_dict.get("condition_expr", "")

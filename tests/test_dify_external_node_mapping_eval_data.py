@@ -137,6 +137,42 @@ def test_dify_external_eval_confusion_matrix():
     assert matrix["llm"]["code"] == 1
 
 
+def test_dify_external_degradation_metrics_split_strict_detection_and_type():
+    predictions = [
+        eval_module.NodeMappingEvalPrediction(
+            sample_id="strict",
+            expected_node_type=DifyNodeType.code,
+            predicted_node_type=DifyNodeType.code,
+            correct=True,
+            expected_degraded=True,
+            predicted_degraded=True,
+        ),
+        eval_module.NodeMappingEvalPrediction(
+            sample_id="type_only",
+            expected_node_type=DifyNodeType.parameter_extractor,
+            predicted_node_type=DifyNodeType.parameter_extractor,
+            correct=True,
+            expected_degraded=True,
+            predicted_degraded=False,
+        ),
+        eval_module.NodeMappingEvalPrediction(
+            sample_id="detect_only",
+            expected_node_type=DifyNodeType.http_request,
+            predicted_node_type=DifyNodeType.code,
+            correct=False,
+            expected_degraded=True,
+            predicted_degraded=True,
+        ),
+    ]
+
+    metrics = eval_module.compute_degradation_metrics(predictions)
+
+    assert metrics["degraded_sample_count"] == 3
+    assert metrics["degradation_accuracy"] == 1 / 3
+    assert metrics["degradation_detection_accuracy"] == 2 / 3
+    assert metrics["degradation_type_accuracy"] == 2 / 3
+
+
 def test_summary_payload_shape_is_json_serializable():
     payload = {
         "backend": "tfidf",

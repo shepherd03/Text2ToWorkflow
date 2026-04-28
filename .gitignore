@@ -161,6 +161,7 @@ cython_debug/
 generated_data/semantic_cache/
 generated_data/dify_external_dataset/cache/
 generated_data/utr_generation/run_*/
+generated_data/project_health/
 
 # One-off local patch helpers
 generated_data/dsl_generation/patch_*.py

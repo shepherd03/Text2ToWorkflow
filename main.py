@@ -1,15 +1,22 @@
 import argparse
 import json
+import sys
 
-from src.utr_generation.pipeline import UTRGenerationPipeline
+from src.workflow_pipeline import WorkflowBuildPipeline
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="UTR生成模块")
+    parser = argparse.ArgumentParser(description="自然语言任务到 UTR/Skeleton/Dify DSL 的单条链路入口")
     parser.add_argument(
         "--text",
         required=True,
         help="自然语言任务描述",
+    )
+    parser.add_argument(
+        "--stage",
+        choices=["utr", "skeleton", "dsl"],
+        default="utr",
+        help="输出到哪个阶段。默认仅输出 UTR；使用 dsl 可跑完整链路。",
     )
     parser.add_argument(
         "--pretty",
@@ -20,14 +27,12 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     args = parse_args()
-    pipeline = UTRGenerationPipeline()
-    output = pipeline.run(args.text)
-    payload = {
-        "UTR": output.utr.model_dump(),
-        "validation_report": output.report.model_dump(),
-        "meta": output.meta,
-    }
+    pipeline = WorkflowBuildPipeline()
+    output = pipeline.run(args.text, stage=args.stage)
+    payload = output.model_dump()
     if args.pretty:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:

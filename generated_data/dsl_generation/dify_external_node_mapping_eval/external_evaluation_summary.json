@@ -3,7 +3,10 @@
   "sample_count": 587,
   "accuracy": 0.9829642248722317,
   "macro_f1": 0.9728741620701857,
+  "degraded_sample_count": 4,
   "degradation_accuracy": 0.0,
+  "degradation_detection_accuracy": 0.75,
+  "degradation_type_accuracy": 0.25,
   "per_label_accuracy": {
     "code": 1.0,
     "http-request": 0.9583333333333334,

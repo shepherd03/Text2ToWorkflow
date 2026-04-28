@@ -109,6 +109,26 @@ python scripts/12_evaluate_dify_external_node_mapping.py
 python scripts/15_analyze_dify_external_dataset.py
 ```
 
+7. 项目健康检查：
+
+```bash
+python scripts/16_project_healthcheck.py
+```
+
+如需同时运行测试和第三阶段 smoke：
+
+```powershell
+python scripts/16_project_healthcheck.py --run-tests --run-smoke
+```
+
+默认输出：
+
+```text
+generated_data/project_health/latest.json
+```
+
+健康检查会输出 `quality_gates`。只有 `quality_gates.passed=true` 时，本轮测试、smoke、产物和指标才作为稳定实验基线。
+
 ## 服务入口
 
 启动 API：
@@ -122,6 +142,7 @@ uvicorn api:app --reload
 ```text
 GET  /health
 POST /utr/generate
+POST /workflow/build
 ```
 
 单条 CLI：
@@ -129,6 +150,14 @@ POST /utr/generate
 ```bash
 python main.py --text "读取文章并生成摘要" --pretty
 ```
+
+单条端到端 DSL 编译：
+
+```bash
+python main.py --text "读取文章并生成摘要" --stage dsl --pretty
+```
+
+`--stage` 可选 `utr`、`skeleton`、`dsl`，用于调试单条任务在不同阶段的产物。
 
 ## 测试
 
@@ -152,6 +181,8 @@ python scripts/03_compile_dify_workflows.py `
 - [模块开发指南](docs/MODULE_GUIDE.md)
 - [开发与运行手册](docs/DEVELOPMENT.md)
 - [项目规则](docs/PROJECT_RULES.md)
+- [研究推进计划](docs/RESEARCH_PLAN.md)
+- [实验记录](docs/EXPERIMENT_LOG.md)
 - [Dify DSL 参考](docs/dify-dsl-spec-codex.md)
 
 ## 维护原则

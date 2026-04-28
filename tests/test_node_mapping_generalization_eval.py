@@ -123,9 +123,36 @@ def test_compute_metrics_exposes_seen_unseen_and_degradation():
     assert metrics.accuracy == 0.75
     assert metrics.macro_f1 >= 0.0
     assert metrics.degradation_accuracy == 1.0
+    assert metrics.degradation_detection_accuracy == 1.0
+    assert metrics.degradation_type_accuracy == 1.0
     assert metrics.seen_accuracy == 0.5
     assert metrics.unseen_accuracy == 1.0
     assert "llm" in metrics.per_label_accuracy
+
+
+def test_compute_metrics_separates_degradation_detection_from_type_accuracy():
+    predictions = [
+        _prediction(
+            DifyNodeType.http_request,
+            DifyNodeType.code,
+            False,
+            expected_degraded=True,
+            predicted_degraded=True,
+        ),
+        _prediction(
+            DifyNodeType.parameter_extractor,
+            DifyNodeType.parameter_extractor,
+            False,
+            expected_degraded=True,
+            predicted_degraded=False,
+        ),
+    ]
+
+    metrics = eval_module.compute_metrics(predictions)
+
+    assert metrics.degradation_accuracy == 0.0
+    assert metrics.degradation_detection_accuracy == 0.5
+    assert metrics.degradation_type_accuracy == 0.5
 
 
 def test_build_summary_contains_confusion_matrix():

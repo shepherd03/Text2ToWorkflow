@@ -50,6 +50,7 @@ DSL 阶段：
 04-05  UTR 真值与评测
 07-12  节点映射评测
 13-15  外部 Dify 数据集
+16     项目健康检查
 ```
 
 规则：
@@ -59,6 +60,7 @@ DSL 阶段：
 - 一次性报告生成脚本不放在 `scripts/` 根目录。
 - 脚本不应在 import 时执行批处理逻辑。
 - 可被测试复用的逻辑应拆成函数。
+- 科研推进脚本必须输出机器可读 JSON，方便追踪实验变化。
 
 ## 4. 文档规则
 
@@ -143,6 +145,14 @@ DSL 编译规则：
 ```bash
 python -m pytest tests/
 ```
+
+大改动后运行：
+
+```bash
+python scripts/16_project_healthcheck.py --run-tests --run-smoke
+```
+
+`quality_gates.passed` 必须为 `true`，否则不得把本轮结果写成稳定实验结论。
 
 最小测试要求：
 

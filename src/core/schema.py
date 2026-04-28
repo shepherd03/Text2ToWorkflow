@@ -216,6 +216,8 @@ class NodeMappingEvalMetrics(BaseModel):
     accuracy: float = 0.0
     macro_f1: float = 0.0
     degradation_accuracy: Optional[float] = None
+    degradation_detection_accuracy: Optional[float] = None
+    degradation_type_accuracy: Optional[float] = None
     seen_accuracy: Optional[float] = None
     unseen_accuracy: Optional[float] = None
     per_label_accuracy: dict[str, float] = Field(default_factory=dict)
@@ -384,3 +386,14 @@ class DSLCompileOutput(BaseModel):
     node_mappings: list[NodeMappingResult] = Field(default_factory=list)
     compiled_graph: Optional[DSLCompiledGraph] = None
     workflow: Optional[DSLCompiledWorkflow] = None
+
+
+class WorkflowBuildOutput(BaseModel):
+    utr_output: PipelineOutput
+    skeleton: Optional[SequentialBlock] = None
+    dsl_output: Optional[DSLCompileOutput] = None
+    success: bool = True
+    stage: str = "dsl"
+    errors: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+    meta: dict[str, Any] = Field(default_factory=dict)

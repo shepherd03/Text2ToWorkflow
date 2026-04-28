@@ -2,71 +2,89 @@
   "comparison": {
     "valid": {
       "tfidf": {
-        "accuracy": 0.8387096774193549,
-        "macro_f1": 0.8497354497354497,
+        "accuracy": 0.8709677419354839,
+        "macro_f1": 0.8814814814814815,
         "degradation_accuracy": null,
+        "degradation_detection_accuracy": null,
+        "degradation_type_accuracy": null,
         "seen_accuracy": 1.0,
-        "unseen_accuracy": 0.6666666666666666
+        "unseen_accuracy": 0.7333333333333333
       },
       "embedding-local": {
-        "accuracy": 0.6129032258064516,
-        "macro_f1": 0.645679012345679,
+        "accuracy": 0.7419354838709677,
+        "macro_f1": 0.7679012345679013,
         "degradation_accuracy": null,
+        "degradation_detection_accuracy": null,
+        "degradation_type_accuracy": null,
         "seen_accuracy": 0.9375,
-        "unseen_accuracy": 0.26666666666666666
+        "unseen_accuracy": 0.5333333333333333
       },
       "hybrid-local": {
-        "accuracy": 0.8387096774193549,
-        "macro_f1": 0.8497354497354497,
+        "accuracy": 0.8709677419354839,
+        "macro_f1": 0.8814814814814815,
         "degradation_accuracy": null,
+        "degradation_detection_accuracy": null,
+        "degradation_type_accuracy": null,
         "seen_accuracy": 1.0,
-        "unseen_accuracy": 0.6666666666666666
+        "unseen_accuracy": 0.7333333333333333
       }
     },
     "test": {
       "tfidf": {
-        "accuracy": 0.9393939393939394,
-        "macro_f1": 0.9312169312169313,
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
         "degradation_accuracy": null,
+        "degradation_detection_accuracy": null,
+        "degradation_type_accuracy": null,
         "seen_accuracy": 1.0,
-        "unseen_accuracy": 0.8571428571428571
+        "unseen_accuracy": 1.0
       },
       "embedding-local": {
-        "accuracy": 0.7575757575757576,
-        "macro_f1": 0.7497354497354497,
+        "accuracy": 0.9696969696969697,
+        "macro_f1": 0.9717813051146386,
         "degradation_accuracy": null,
-        "seen_accuracy": 0.8421052631578947,
-        "unseen_accuracy": 0.6428571428571429
+        "degradation_detection_accuracy": null,
+        "degradation_type_accuracy": null,
+        "seen_accuracy": 1.0,
+        "unseen_accuracy": 0.9285714285714286
       },
       "hybrid-local": {
-        "accuracy": 0.8787878787878788,
-        "macro_f1": 0.8756613756613756,
+        "accuracy": 0.9696969696969697,
+        "macro_f1": 0.9717813051146386,
         "degradation_accuracy": null,
+        "degradation_detection_accuracy": null,
+        "degradation_type_accuracy": null,
         "seen_accuracy": 1.0,
-        "unseen_accuracy": 0.7142857142857143
+        "unseen_accuracy": 0.9285714285714286
       }
     },
     "hard": {
       "tfidf": {
-        "accuracy": 0.9111111111111111,
-        "macro_f1": 0.9197530864197532,
+        "accuracy": 0.9555555555555556,
+        "macro_f1": 0.9616802950136284,
         "degradation_accuracy": 0.5,
+        "degradation_detection_accuracy": 0.5,
+        "degradation_type_accuracy": 0.5,
         "seen_accuracy": null,
-        "unseen_accuracy": 0.9111111111111111
+        "unseen_accuracy": 0.9555555555555556
       },
       "embedding-local": {
-        "accuracy": 0.7333333333333333,
-        "macro_f1": 0.741662658329325,
+        "accuracy": 0.8666666666666667,
+        "macro_f1": 0.8770242103575436,
         "degradation_accuracy": 0.0,
+        "degradation_detection_accuracy": 0.0,
+        "degradation_type_accuracy": 0.25,
         "seen_accuracy": null,
-        "unseen_accuracy": 0.7333333333333333
+        "unseen_accuracy": 0.8666666666666667
       },
       "hybrid-local": {
-        "accuracy": 0.8,
-        "macro_f1": 0.8146785313451981,
+        "accuracy": 0.9111111111111111,
+        "macro_f1": 0.9190063023396355,
         "degradation_accuracy": 0.5,
+        "degradation_detection_accuracy": 0.5,
+        "degradation_type_accuracy": 0.5,
         "seen_accuracy": null,
-        "unseen_accuracy": 0.8
+        "unseen_accuracy": 0.9111111111111111
       }
     }
   },
@@ -79,13 +97,15 @@
         "sample_count": 31,
         "metrics": {
           "sample_count": 31,
-          "accuracy": 0.8387096774193549,
-          "macro_f1": 0.8497354497354497,
+          "accuracy": 0.8709677419354839,
+          "macro_f1": 0.8814814814814815,
           "degradation_accuracy": null,
+          "degradation_detection_accuracy": null,
+          "degradation_type_accuracy": null,
           "seen_accuracy": 1.0,
-          "unseen_accuracy": 0.6666666666666666,
+          "unseen_accuracy": 0.7333333333333333,
           "per_label_accuracy": {
-            "code": 0.75,
+            "code": 1.0,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
@@ -98,8 +118,7 @@
         },
         "confusion_matrix": {
           "code": {
-            "code": 3,
-            "iteration": 1
+            "code": 4
           },
           "http-request": {
             "http-request": 4
@@ -134,13 +153,15 @@
         "sample_count": 33,
         "metrics": {
           "sample_count": 33,
-          "accuracy": 0.9393939393939394,
-          "macro_f1": 0.9312169312169313,
+          "accuracy": 1.0,
+          "macro_f1": 1.0,
           "degradation_accuracy": null,
+          "degradation_detection_accuracy": null,
+          "degradation_type_accuracy": null,
           "seen_accuracy": 1.0,
-          "unseen_accuracy": 0.8571428571428571,
+          "unseen_accuracy": 1.0,
           "per_label_accuracy": {
-            "code": 0.5,
+            "code": 1.0,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
@@ -153,9 +174,7 @@
         },
         "confusion_matrix": {
           "code": {
-            "code": 2,
-            "iteration": 1,
-            "parameter-extractor": 1
+            "code": 4
           },
           "http-request": {
             "http-request": 4
@@ -189,13 +208,15 @@
         "sample_count": 45,
         "metrics": {
           "sample_count": 45,
-          "accuracy": 0.9111111111111111,
-          "macro_f1": 0.9197530864197532,
+          "accuracy": 0.9555555555555556,
+          "macro_f1": 0.9616802950136284,
           "degradation_accuracy": 0.5,
+          "degradation_detection_accuracy": 0.5,
+          "degradation_type_accuracy": 0.5,
           "seen_accuracy": null,
-          "unseen_accuracy": 0.9111111111111111,
+          "unseen_accuracy": 0.9555555555555556,
           "per_label_accuracy": {
-            "code": 0.5,
+            "code": 0.75,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
@@ -208,10 +229,9 @@
         },
         "confusion_matrix": {
           "code": {
-            "code": 4,
+            "code": 6,
             "if-else": 1,
-            "iteration": 1,
-            "parameter-extractor": 2
+            "parameter-extractor": 1
           },
           "http-request": {
             "http-request": 4
@@ -248,28 +268,28 @@
         "sample_count": 31,
         "metrics": {
           "sample_count": 31,
-          "accuracy": 0.6129032258064516,
-          "macro_f1": 0.645679012345679,
+          "accuracy": 0.7419354838709677,
+          "macro_f1": 0.7679012345679013,
           "degradation_accuracy": null,
+          "degradation_detection_accuracy": null,
+          "degradation_type_accuracy": null,
           "seen_accuracy": 0.9375,
-          "unseen_accuracy": 0.26666666666666666,
+          "unseen_accuracy": 0.5333333333333333,
           "per_label_accuracy": {
-            "code": 0.5,
+            "code": 1.0,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 0.6666666666666666,
             "llm": 0.2,
             "parameter-extractor": 1.0,
             "template-transform": 0.25,
-            "tool": 0.3333333333333333,
+            "tool": 1.0,
             "variable-aggregator": 1.0
           }
         },
         "confusion_matrix": {
           "code": {
-            "code": 2,
-            "iteration": 1,
-            "llm": 1
+            "code": 4
           },
           "http-request": {
             "http-request": 4
@@ -293,8 +313,7 @@
             "template-transform": 1
           },
           "tool": {
-            "code": 2,
-            "tool": 1
+            "tool": 3
           },
           "variable-aggregator": {
             "variable-aggregator": 2
@@ -307,28 +326,28 @@
         "sample_count": 33,
         "metrics": {
           "sample_count": 33,
-          "accuracy": 0.7575757575757576,
-          "macro_f1": 0.7497354497354497,
+          "accuracy": 0.9696969696969697,
+          "macro_f1": 0.9717813051146386,
           "degradation_accuracy": null,
-          "seen_accuracy": 0.8421052631578947,
-          "unseen_accuracy": 0.6428571428571429,
+          "degradation_detection_accuracy": null,
+          "degradation_type_accuracy": null,
+          "seen_accuracy": 1.0,
+          "unseen_accuracy": 0.9285714285714286,
           "per_label_accuracy": {
-            "code": 0.25,
+            "code": 1.0,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
             "llm": 1.0,
             "parameter-extractor": 1.0,
             "template-transform": 0.75,
-            "tool": 0.0,
+            "tool": 1.0,
             "variable-aggregator": 1.0
           }
         },
         "confusion_matrix": {
           "code": {
-            "code": 1,
-            "iteration": 1,
-            "llm": 2
+            "code": 4
           },
           "http-request": {
             "http-request": 4
@@ -350,7 +369,7 @@
             "template-transform": 3
           },
           "tool": {
-            "code": 4
+            "tool": 4
           },
           "variable-aggregator": {
             "variable-aggregator": 3
@@ -363,29 +382,30 @@
         "sample_count": 45,
         "metrics": {
           "sample_count": 45,
-          "accuracy": 0.7333333333333333,
-          "macro_f1": 0.741662658329325,
+          "accuracy": 0.8666666666666667,
+          "macro_f1": 0.8770242103575436,
           "degradation_accuracy": 0.0,
+          "degradation_detection_accuracy": 0.0,
+          "degradation_type_accuracy": 0.25,
           "seen_accuracy": null,
-          "unseen_accuracy": 0.7333333333333333,
+          "unseen_accuracy": 0.8666666666666667,
           "per_label_accuracy": {
-            "code": 0.25,
+            "code": 0.625,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
             "llm": 1.0,
             "parameter-extractor": 1.0,
             "template-transform": 0.4,
-            "tool": 0.25,
+            "tool": 1.0,
             "variable-aggregator": 1.0
           }
         },
         "confusion_matrix": {
           "code": {
-            "code": 2,
+            "code": 5,
             "if-else": 1,
-            "iteration": 1,
-            "llm": 3,
+            "llm": 1,
             "parameter-extractor": 1
           },
           "http-request": {
@@ -409,8 +429,7 @@
             "template-transform": 2
           },
           "tool": {
-            "code": 3,
-            "tool": 1
+            "tool": 4
           },
           "variable-aggregator": {
             "variable-aggregator": 5
@@ -426,13 +445,15 @@
         "sample_count": 31,
         "metrics": {
           "sample_count": 31,
-          "accuracy": 0.8387096774193549,
-          "macro_f1": 0.8497354497354497,
+          "accuracy": 0.8709677419354839,
+          "macro_f1": 0.8814814814814815,
           "degradation_accuracy": null,
+          "degradation_detection_accuracy": null,
+          "degradation_type_accuracy": null,
           "seen_accuracy": 1.0,
-          "unseen_accuracy": 0.6666666666666666,
+          "unseen_accuracy": 0.7333333333333333,
           "per_label_accuracy": {
-            "code": 0.75,
+            "code": 1.0,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
@@ -445,8 +466,7 @@
         },
         "confusion_matrix": {
           "code": {
-            "code": 3,
-            "iteration": 1
+            "code": 4
           },
           "http-request": {
             "http-request": 4
@@ -481,13 +501,15 @@
         "sample_count": 33,
         "metrics": {
           "sample_count": 33,
-          "accuracy": 0.8787878787878788,
-          "macro_f1": 0.8756613756613756,
+          "accuracy": 0.9696969696969697,
+          "macro_f1": 0.9717813051146386,
           "degradation_accuracy": null,
+          "degradation_detection_accuracy": null,
+          "degradation_type_accuracy": null,
           "seen_accuracy": 1.0,
-          "unseen_accuracy": 0.7142857142857143,
+          "unseen_accuracy": 0.9285714285714286,
           "per_label_accuracy": {
-            "code": 0.25,
+            "code": 1.0,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
@@ -500,9 +522,7 @@
         },
         "confusion_matrix": {
           "code": {
-            "code": 1,
-            "iteration": 1,
-            "llm": 2
+            "code": 4
           },
           "http-request": {
             "http-request": 4
@@ -537,29 +557,29 @@
         "sample_count": 45,
         "metrics": {
           "sample_count": 45,
-          "accuracy": 0.8,
-          "macro_f1": 0.8146785313451981,
+          "accuracy": 0.9111111111111111,
+          "macro_f1": 0.9190063023396355,
           "degradation_accuracy": 0.5,
+          "degradation_detection_accuracy": 0.5,
+          "degradation_type_accuracy": 0.5,
           "seen_accuracy": null,
-          "unseen_accuracy": 0.8,
+          "unseen_accuracy": 0.9111111111111111,
           "per_label_accuracy": {
-            "code": 0.375,
+            "code": 0.75,
             "http-request": 1.0,
             "if-else": 1.0,
             "iteration": 1.0,
             "llm": 1.0,
             "parameter-extractor": 1.0,
             "template-transform": 0.6,
-            "tool": 0.5,
+            "tool": 1.0,
             "variable-aggregator": 1.0
           }
         },
         "confusion_matrix": {
           "code": {
-            "code": 3,
+            "code": 6,
             "if-else": 1,
-            "iteration": 1,
-            "llm": 2,
             "parameter-extractor": 1
           },
           "http-request": {
@@ -583,8 +603,7 @@
             "template-transform": 3
           },
           "tool": {
-            "code": 2,
-            "tool": 2
+            "tool": 4
           },
           "variable-aggregator": {
             "variable-aggregator": 5

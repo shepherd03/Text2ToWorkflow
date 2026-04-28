@@ -143,6 +143,30 @@ src/dsl_generation/
 - 节点映射：`tests/test_node_mapper.py`
 - 语义检索：`tests/test_semantic_retriever.py`
 
+## workflow_pipeline
+
+路径：
+
+```text
+src/workflow_pipeline.py
+```
+
+职责：
+
+- 编排单条自然语言任务的端到端链路。
+- 按 `utr`、`skeleton`、`dsl` 三个阶段返回中间产物。
+- 为 `main.py --stage` 和 `POST /workflow/build` 提供统一入口。
+
+开发规则：
+
+- 只负责阶段编排，不把 UTR、Skeleton 或 DSL 的内部逻辑写进该模块。
+- 新增端到端输出字段时先更新 `WorkflowBuildOutput`。
+- 无 API key 的 fallback 场景必须能跑通到 DSL，保证本地调试可用。
+
+测试要求：
+
+- 修改编排行为时更新 `tests/test_workflow_pipeline.py`。
+
 ## scripts
 
 路径：
@@ -157,6 +181,7 @@ scripts/
 - `04` 到 `05`：UTR 真值与评测。
 - `07` 到 `12`：节点映射样本和评测。
 - `13` 到 `15`：外部 Dify 数据集构造、转评测、分析。
+- `16`：项目健康检查与科研推进基线。
 
 开发规则：
 
@@ -164,6 +189,7 @@ scripts/
 - 默认输入输出必须写在 README 或本文件中。
 - 新增脚本必须说明属于哪条链路。
 - 一次性报告生成脚本不要放在 `scripts/` 根目录。
+- 每轮大改动至少运行 `16_project_healthcheck.py`；涉及 DSL 编译器时加 `--run-smoke`，发布前加 `--run-tests`。
 
 ## tests
 

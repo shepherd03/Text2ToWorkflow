@@ -24,6 +24,8 @@ flowchart LR
 3. `src/skeleton_planning` 把 UTR 中的动作和依赖规划成执行骨架。
 4. `src/dsl_generation` 把 UTR + Skeleton 编译为 Dify workflow graph。
 
+单条任务端到端入口由 `src/workflow_pipeline.py` 编排，负责按阶段调用上述模块，但不改变各阶段职责边界。
+
 ## 阶段一：UTR Generation
 
 入口：
@@ -129,6 +131,25 @@ flowchart LR
 - DSL 模块不得修改 UTR 或 Skeleton 的语义定义。
 - 节点类型映射必须保留 trace、confidence、degraded 信息，便于评测和排查。
 
+## 单条端到端入口
+
+入口：
+
+- `main.py --stage utr|skeleton|dsl`
+- `POST /workflow/build`
+- `src/workflow_pipeline.py`
+
+职责：
+
+- 串联 `UTRGenerationPipeline`、`SkeletonPlanner` 和 `DSLGenerationPipeline`。
+- 支持在 `utr`、`skeleton`、`dsl` 任一阶段停止，方便调试单条任务。
+- 返回 `WorkflowBuildOutput`，其中包含 UTR 结果、可选 Skeleton、可选 DSL 编译结果和统一 success/errors。
+
+边界：
+
+- 端到端入口只做编排，不直接实现抽取、规划、编译或校验逻辑。
+- 批处理脚本仍是大规模样本生成与评测入口；单条入口用于开发调试和 API 调用。
+
 ## 评测链路
 
 UTR 评测：
@@ -151,6 +172,11 @@ UTR 评测：
 - `scripts/14_prepare_dify_external_eval_from_dataset.py`
 - `scripts/15_analyze_dify_external_dataset.py`
 
+健康检查：
+
+- `scripts/16_project_healthcheck.py`
+- 汇总关键产物、已有评测摘要、可选测试命令和第三阶段 smoke，输出 `generated_data/project_health/latest.json`。
+
 ## 核心数据产物
 
 ```text
@@ -161,6 +187,7 @@ generated_data/dsl_generation/dsls.jsonl
 generated_data/dsl_generation/node_mapping_eval/
 generated_data/dsl_generation/dify_external_node_mapping_eval/
 generated_data/dify_external_dataset/
+generated_data/project_health/latest.json
 ```
 
 `generated_data/` 下的文件是可复现实验产物。稳定结论应沉淀为文档，临时实验结果不应进入 `docs/` 根目录。
